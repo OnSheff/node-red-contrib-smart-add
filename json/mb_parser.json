@@ -34,7 +34,7 @@
                 "type": "str",
                 "value": "1byte",
                 "ui": {
-                    "icon": "font-awesome/fa-cog",
+                    "icon": "font-awesome/fa-reorder",
                     "label": {
                         "ru": "Type"
                     },
@@ -157,16 +157,33 @@
                 "type": "bool",
                 "value": "false",
                 "ui": {
+                    "icon": "font-awesome/fa-random",
                     "label": {
                         "ru": "Invers byte (Max Min)"
                     },
                     "type": "checkbox"
                 }
+            },
+            {
+                "name": "RATE",
+                "type": "num",
+                "value": "50",
+                "ui": {
+                    "icon": "font-awesome/fa-bar-chart-o",
+                    "label": {
+                        "ru": "Rate in ms."
+                    },
+                    "type": "spinner",
+                    "opts": {
+                        "min": 1,
+                        "max": 10000
+                    }
+                }
             }
         ],
         "meta": {
 			"type": "Modbus response parser",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "author": "Anton Shefov <a.shefov@gmail.com>",
             "desc": "Converts the MB response to the required data format",
             "keywords": "node-red",
@@ -174,6 +191,16 @@
         },
         "color": "#7FC7FF",
         "icon": "modbus.png",
+		"status": {
+            "x": 1040,
+            "y": 300,
+            "wires": [
+                {
+                    "id": "532d724ce6a2bda7",
+                    "port": 0
+                }
+            ]
+        },
 		"flow" : [
 		{
         "id": "55c3bfe877a559b8",
@@ -263,14 +290,14 @@
         "pauseType": "rate",
         "timeout": "5",
         "timeoutUnits": "seconds",
-        "rate": "20",
+        "rate": "1",
         "nbRateUnits": "1",
         "rateUnits": "second",
         "randomFirst": "1",
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "allowrate": false,
+        "allowrate": true,
         "outputs": 1,
         "x": 795,
         "y": 180,
@@ -711,6 +738,84 @@
             [
                 "118a17df3c841bef"
             ]
+        ],
+        "l": false
+    },
+    {
+        "id": "49fe5019ce12172c",
+        "type": "inject",
+        "z": "5d29c8da36bd8aa6",
+        "name": "Set RATE",
+        "props": [
+            {
+                "p": "rate",
+                "v": "RATE",
+                "vt": "env"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 700,
+        "y": 40,
+        "wires": [
+            [
+                "e0b4185d7fce4870"
+            ]
+        ]
+    },
+    {
+        "id": "90c8f370c5622b2d",
+        "type": "status",
+        "z": "5d29c8da36bd8aa6",
+        "name": "",
+        "scope": [
+            "e0b4185d7fce4870"
+        ],
+        "x": 820,
+        "y": 300,
+        "wires": [
+            [
+                "532d724ce6a2bda7"
+            ]
+        ]
+    },
+    {
+        "id": "532d724ce6a2bda7",
+        "type": "change",
+        "z": "5d29c8da36bd8aa6",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "status",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "delete",
+                "p": "source",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "status",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 955,
+        "y": 300,
+        "wires": [
+            []
         ],
         "l": false
     }
