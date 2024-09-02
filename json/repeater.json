@@ -1,4 +1,4 @@
-[
+
     {
         "id": "c3d6cda7c6a9224e",
         "type": "subflow",
@@ -107,9 +107,9 @@
                     "port": 0
                 }
             ]
-        }
-    },
-    {
+        },
+		"flow" : [
+		{
         "id": "e22e5e6e3456265e",
         "type": "trigger",
         "z": "c3d6cda7c6a9224e",
@@ -262,16 +262,6 @@
             ]
         ],
         "l": false
-    },
-    {
-        "id": "68ea6cf00f4d520c",
-        "type": "subflow:c3d6cda7c6a9224e",
-        "z": "e08b949893cff699",
-        "name": "",
-        "x": 240,
-        "y": 340,
-        "wires": [
-            []
-        ]
     }
-]
+		]
+    }

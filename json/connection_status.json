@@ -1,4 +1,4 @@
-[
+
     {
         "id": "10e1fc48c2918ddb",
         "type": "subflow",
@@ -133,9 +133,9 @@
                     "port": 0
                 }
             ]
-        }
-    },
-    {
+        },
+		"flows" : [
+		{
         "id": "ca48e3156c901cc5",
         "type": "trigger",
         "z": "10e1fc48c2918ddb",
@@ -781,17 +781,6 @@
             []
         ],
         "l": false
-    },
-    {
-        "id": "5b8f080e52a9935a",
-        "type": "subflow:10e1fc48c2918ddb",
-        "z": "e08b949893cff699",
-        "name": "",
-        "x": 270,
-        "y": 400,
-        "wires": [
-            [],
-            []
-        ]
     }
-]
+		]
+    }
