@@ -113,6 +113,7 @@
             }
         ],
         "meta": {
+			"type": "Connection status",
             "version": "1.1.2",
             "author": "Anton Shefov <a.shefov@gmail.com.ru>",
             "desc": "Checks the connection to the hosts",
@@ -134,7 +135,7 @@
                 }
             ]
         },
-		"flows" : [
+		"flow" : [
 		{
         "id": "ca48e3156c901cc5",
         "type": "trigger",
