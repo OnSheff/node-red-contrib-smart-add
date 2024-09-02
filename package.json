@@ -1,0 +1,27 @@
+{
+  "name": "red-su-subflow",
+  "version": "1.1.1",
+  "description": "Node package for connecting to SmartUnity",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "SmartUnity",
+    "SU"
+  ],
+  "author": "@on_sheff Anton Shefov <a.shefov@gmail.com>",
+  "license": "ISC",
+  "node-red": {
+		"nodes": {
+			"Repeater" : "repeater.js",
+			"Connection_status": "connection_status.js"
+		},
+	    "dependencies": [
+			"node-red-contrib-binary"
+	    ]
+	},
+	"dependencies": {
+	    "node-red-contrib-binary": "0.1.3"
+	}
+}
