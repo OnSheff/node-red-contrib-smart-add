@@ -1,6 +1,6 @@
 {
   "name": "@on_sheff/node-red-contrib-smart-add",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Easy add-ons for Node-red",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,8 @@
 			"Connection_status": "connection_status.js",
 			"MB former" : "mb_former.js",
 			"MB parser": "mb_parser.js",
-			"OR" : "or.js"
+			"OR" : "or.js",
+			"WB parser": "wb_parser.js"
 		}
 	},
   "bugs": {
