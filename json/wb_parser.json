@@ -1,0 +1,682 @@
+
+    {
+        "id": "2fb1a805d6b22420",
+        "type": "subflow",
+        "name": "WB parser",
+        "info": "Parser for Wirenboard nodes.",
+        "category": "Smart add",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "170a61bb80e322c5"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 880,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "723aec878a5c6ab4",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "TO_NUMBER",
+                "type": "bool",
+                "value": "false",
+                "ui": {
+                    "label": {
+                        "ru": "Conver to number"
+                    },
+                    "type": "checkbox"
+                }
+            }
+        ],
+        "meta": {
+            "type": "WB parser",
+            "version": "1.0.1",
+            "author": "Anton Shefov <a.shefov@gmail.com>",
+            "desc": "Parser for Wirenboard nodes.",
+			"keywords": "node-red",
+            "license": "MIT"
+        },
+        "color": "#7FC7FF",
+        "status": {
+            "x": 880,
+            "y": 260,
+            "wires": [
+                {
+                    "id": "3fbcd86f83b397ff",
+                    "port": 0
+                },
+                {
+                    "id": "a715da3fd49eb1e9",
+                    "port": 0
+                }
+            ]
+        },
+		"flow" : [
+		{
+        "id": "2fbb9ef9672a3709",
+        "type": "split",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "topic",
+        "x": 275,
+        "y": 180,
+        "wires": [
+            [
+                "3c6fdba4dd8c7f35"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "3c6fdba4dd8c7f35",
+        "type": "switch",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 375,
+        "y": 180,
+        "wires": [
+            [
+                "59aa78c07489ad12"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "e01fa64c2770b004",
+        "type": "switch",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "property": "TO_NUMBER",
+        "propertyType": "env",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 575,
+        "y": 140,
+        "wires": [
+            [
+                "e46d4865aef7b512"
+            ],
+            [
+                "723aec878a5c6ab4"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "e46d4865aef7b512",
+        "type": "change",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$number(msg.payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 705,
+        "y": 100,
+        "wires": [
+            [
+                "723aec878a5c6ab4"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "170a61bb80e322c5",
+        "type": "switch",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "string",
+                "vt": "string"
+            },
+            {
+                "t": "istype",
+                "v": "object",
+                "vt": "object"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 165,
+        "y": 140,
+        "wires": [
+            [
+                "de853d1374eb8e9e"
+            ],
+            [
+                "2fbb9ef9672a3709"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "84c8b64c0b5e09de",
+        "type": "change",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "change",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "meta",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "elementId",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "control_name",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "device_name",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "device_friendly_name",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 475,
+        "y": 100,
+        "wires": [
+            [
+                "e01fa64c2770b004"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "de853d1374eb8e9e",
+        "type": "switch",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 275,
+        "y": 100,
+        "wires": [
+            [
+                "84c8b64c0b5e09de"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "59aa78c07489ad12",
+        "type": "change",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "data_array",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "math",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "event",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "parts",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload_in",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 475,
+        "y": 180,
+        "wires": [
+            [
+                "e01fa64c2770b004"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "78509439e218db26",
+        "type": "change",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "$split(msg.topic, \"/\")[4]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 575,
+        "y": 260,
+        "wires": [
+            [
+                "a715da3fd49eb1e9"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "a715da3fd49eb1e9",
+        "type": "template",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "{\n    \"fill\": \"green\",\n    \"shape\": \"dot\",\n    \"text\": \"{{topic}}: {{payload}}\"\n}",
+        "output": "json",
+        "x": 675,
+        "y": 260,
+        "wires": [
+            [
+                "3fbcd86f83b397ff"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "3fbcd86f83b397ff",
+        "type": "trigger",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "op1": "",
+        "op2": "{ \"fill\": \"grey\", \"shape\": \"ring\", \"text\": \"waiting\" }",
+        "op1type": "pay",
+        "op2type": "json",
+        "duration": "1",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 775,
+        "y": 320,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "874fe18e91f01e0f",
+        "type": "delay",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "3",
+        "nbRateUnits": "2",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 475,
+        "y": 260,
+        "wires": [
+            [
+                "78509439e218db26"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "20e5d46b6f44663c",
+        "type": "status",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "scope": [
+            "874fe18e91f01e0f"
+        ],
+        "x": 340,
+        "y": 440,
+        "wires": [
+            [
+                "1b5dd330b2fc7af3"
+            ]
+        ]
+    },
+    {
+        "id": "fc2f770140888466",
+        "type": "switch",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "property": "send_status",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 375,
+        "y": 260,
+        "wires": [
+            [
+                "874fe18e91f01e0f"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "c1dffbea873c4426",
+        "type": "inject",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 575,
+        "y": 320,
+        "wires": [
+            [
+                "c06c57190c7125c3"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "c06c57190c7125c3",
+        "type": "change",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "send_status",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 675,
+        "y": 320,
+        "wires": [
+            [
+                "3fbcd86f83b397ff"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "1b5dd330b2fc7af3",
+        "type": "change",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "status.text",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "delete",
+                "p": "source",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "status",
+                "pt": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$number(msg.payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 475,
+        "y": 440,
+        "wires": [
+            [
+                "289041ad41bbd770"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "289041ad41bbd770",
+        "type": "switch",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "30",
+                "vt": "num"
+            },
+            {
+                "t": "lte",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 575,
+        "y": 440,
+        "wires": [
+            [
+                "151562024dc86169"
+            ],
+            [
+                "edc48968fd31003e"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "77e52cb535fc2985",
+        "type": "change",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "send_status",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 775,
+        "y": 480,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "151562024dc86169",
+        "type": "change",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "send_status",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 775,
+        "y": 400,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "edc48968fd31003e",
+        "type": "trigger",
+        "z": "2fb1a805d6b22420",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "nul",
+        "op2type": "payl",
+        "duration": "2",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 675,
+        "y": 480,
+        "wires": [
+            [
+                "77e52cb535fc2985"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "723aec878a5c6ab4",
+        "type": "junction",
+        "z": "2fb1a805d6b22420",
+        "x": 780,
+        "y": 140,
+        "wires": [
+            [
+                "fc2f770140888466"
+            ]
+        ]
+    }
+		]
+    }

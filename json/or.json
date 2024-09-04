@@ -59,36 +59,40 @@
             {
                 "name": "RATE",
                 "type": "num",
-                "value": "50",
+                "value": "1",
                 "ui": {
                     "icon": "font-awesome/fa-bar-chart",
                     "label": {
-                        "ru": "Rate in ms."
+                        "ru": "Rate in sec."
                     },
                     "type": "spinner",
                     "opts": {
-                        "min": 1,
-                        "max": 10000
+                        "min": 0,
+                        "max": 3600
                     }
                 }
             }
         ],
         "meta": {
 			"type": "Logical OR",
-            "version": "1.0.1",
+            "version": "1.0.2",
 			"author": "Anton Shefov <a.shefov@gmail.com>",
             "desc": "Logical OR",
 			"keywords": "node-red",
             "license": "MIT"
         },
         "color": "#7FC7FF",
-        "icon": "node-red/switch.svg",
+        "icon": "font-awesome/fa-code-fork",
         "status": {
             "x": 940,
             "y": 180,
             "wires": [
                 {
                     "id": "ade5c4b456f06909",
+                    "port": 0
+                },
+                {
+                    "id": "bfbad6308f9b448b",
                     "port": 0
                 }
             ]
@@ -99,11 +103,11 @@
         "type": "function",
         "z": "f0e76c36111fc593",
         "name": "OR",
-        "func": "var values_dict = context.get(\"values_dict\");\nvar or_value = false;\n\nif (msg.reset === true){\n    context.set(\"values_dict\", {});\n    return null;\n}\n\nif (msg.topic !== null && msg.topic !== \"get_values\"){\n    values_dict[msg.topic] = msg.payload;\n}\n\nfor (let key in values_dict){\n    if (values_dict[key]) { or_value = true;}\n}\n\nreturn {\"payload\" : or_value};",
-        "outputs": 1,
+        "func": "var values_dict = context.get(\"values_dict\");\nvar or_value = context.get(\"or_value\");\n\nif (msg.reset === true){\n    context.set(\"values_dict\", {});\n    context.set(\"or_value\", null);\n    return [null, {\"payload\": true }];\n}\n\nif (msg.topic !== null && msg.topic !== \"get_value\"){\n    values_dict[msg.topic] = msg.payload;\n    or_value = false;\n    for (let key in values_dict){\n        if (values_dict[key]) { or_value = true;}\n    }\n    context.set(\"or_value\", or_value);\n}\n\nif (or_value !== null) {\n    return [{ \"payload\": or_value }, null];\n} else {\n    return [null, {\"payload\": true }];\n}",
+        "outputs": 2,
         "timeout": "",
         "noerr": 0,
-        "initialize": "// Добавленный здесь код будет исполняться\n// однократно при развертывании узла.\ncontext.set(\"values_dict\", {});",
+        "initialize": "// Добавленный здесь код будет исполняться\n// однократно при развертывании узла.\ncontext.set(\"values_dict\", {});\ncontext.set(\"or_value\", null);",
         "finalize": "",
         "libs": [],
         "x": 410,
@@ -111,6 +115,9 @@
         "wires": [
             [
                 "1443680d28fd9b62"
+            ],
+            [
+                "bfbad6308f9b448b"
             ]
         ]
     },
@@ -129,7 +136,7 @@
                 "t": "false"
             }
         ],
-        "checkall": "true",
+        "checkall": "false",
         "repair": false,
         "outputs": 2,
         "x": 535,
@@ -216,10 +223,10 @@
         "randomFirst": "1",
         "randomLast": "5",
         "randomUnits": "seconds",
-        "drop": false,
+        "drop": true,
         "allowrate": true,
         "outputs": 1,
-        "x": 275,
+        "x": 295,
         "y": 100,
         "wires": [
             [
@@ -238,7 +245,7 @@
         "rules": [
             {
                 "t": "eq",
-                "v": "get_values",
+                "v": "get_value",
                 "vt": "str"
             },
             {
@@ -252,7 +259,7 @@
         "y": 140,
         "wires": [
             [
-                "6f5ec43f77d1a8c8"
+                "4a54428e593cab98"
             ],
             [
                 "d4e2d977d1e9741b"
@@ -289,15 +296,59 @@
         "l": false
     },
     {
-        "id": "1a734f26f22bdde3",
+        "id": "4a54428e593cab98",
+        "type": "change",
+        "z": "f0e76c36111fc593",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "rate",
+                "pt": "msg",
+                "to": "$number($env('RATE')) * 1000\t",
+                "tot": "jsonata",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 235,
+        "y": 100,
+        "wires": [
+            [
+                "6f5ec43f77d1a8c8"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "bfbad6308f9b448b",
+        "type": "template",
+        "z": "f0e76c36111fc593",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "{\n    \"fill\": \"grey\",\n    \"shape\": \"ring\",\n    \"text\": \"no values\"\n}",
+        "output": "json",
+        "x": 580,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eaf9daf1849d0a16",
         "type": "inject",
         "z": "f0e76c36111fc593",
-        "name": "Set RATE",
+        "name": "",
         "props": [
             {
-                "p": "rate",
-                "v": "RATE",
-                "vt": "env"
+                "p": "payload"
             }
         ],
         "repeat": "",
@@ -305,11 +356,13 @@
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 120,
-        "y": 60,
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 410,
+        "y": 240,
         "wires": [
             [
-                "6f5ec43f77d1a8c8"
+                "bfbad6308f9b448b"
             ]
         ]
     },
