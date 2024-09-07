@@ -1,21 +1,22 @@
 {
-  "name": "@on_sheff/node-red-contrib-smart-add",
-  "version": "1.0.6",
-  "description": "Easy add-ons for Node-red",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/OnSheff/node-red-contrib-smart-add.git"
-  },
-  "keywords": [
-    "node-red"
-  ],
-  "author": "Anton Shefov <a.shefov@gmail.com>",
-  "license": "MIT",
-  "node-red": {
+	"name": "@on_sheff/node-red-contrib-smart-add",
+	"version": "1.0.7",
+	"description": "Easy add-ons for Node-red",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/OnSheff/node-red-contrib-smart-add.git"
+	},
+	"keywords": [
+		"node-red"
+	],
+	"author": "Anton Shefov <a.shefov@gmail.com>",
+	"license": "MIT",
+	"node-red": {
+		"version": ">=2.0.0",
 		"nodes": {
 			"Repeater" : "repeater.js",
 			"Connection_status": "connection_status.js",
@@ -25,8 +26,11 @@
 			"WB parser": "wb_parser.js"
 		}
 	},
-  "bugs": {
-    "url": "https://github.com/OnSheff/node-red-contrib-smart-add/issues"
-  },
-  "homepage": "https://github.com/OnSheff/node-red-contrib-smart-add#readme"
+	"engines": {
+		"node": ">=14.0.0"
+	},
+	"bugs": {
+		"url": "https://github.com/OnSheff/node-red-contrib-smart-add/issues"
+	},
+	"homepage": "https://github.com/OnSheff/node-red-contrib-smart-add#readme"
 }
