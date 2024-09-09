@@ -75,7 +75,7 @@
         ],
         "meta": {
 			"type": "Logical OR",
-            "version": "1.0.2",
+            "version": "1.0.3",
 			"author": "Anton Shefov <a.shefov@gmail.com>",
             "desc": "Logical OR",
 			"keywords": "node-red",
@@ -103,7 +103,7 @@
         "type": "function",
         "z": "f0e76c36111fc593",
         "name": "OR",
-        "func": "var values_dict = context.get(\"values_dict\");\nvar or_value = context.get(\"or_value\");\n\nif (msg.reset === true){\n    context.set(\"values_dict\", {});\n    context.set(\"or_value\", null);\n    return [null, {\"payload\": true }];\n}\n\nif (msg.topic !== null && msg.topic !== \"get_value\"){\n    values_dict[msg.topic] = msg.payload;\n    or_value = false;\n    for (let key in values_dict){\n        if (values_dict[key]) { or_value = true;}\n    }\n    context.set(\"or_value\", or_value);\n}\n\nif (or_value !== null) {\n    return [{ \"payload\": or_value }, null];\n} else {\n    return [null, {\"payload\": true }];\n}",
+        "func": "var values_dict = context.get(\"values_dict\");\nvar or_value = context.get(\"or_value\");\n\nif (msg.reset === true){\n    context.set(\"values_dict\", {});\n    context.set(\"or_value\", null);\n    return [null, {\"payload\": true }];\n}\n\nif (msg.topic != null && msg.topic !== \"get_value\"){\n    values_dict[msg.topic] = msg.payload;\n    or_value = false;\n    for (let key in values_dict){\n        if (values_dict[key]) { or_value = true;}\n    }\n    context.set(\"or_value\", or_value);\n}\n\nif (or_value != null) {\n    return [{ \"payload\": or_value }, null];\n} else {\n    return [null, {\"payload\": true }];\n}",
         "outputs": 2,
         "timeout": "",
         "noerr": 0,
