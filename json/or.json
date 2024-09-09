@@ -75,7 +75,7 @@
         ],
         "meta": {
 			"type": "Logical OR",
-            "version": "1.0.3",
+            "version": "1.1.1",
 			"author": "Anton Shefov <a.shefov@gmail.com>",
             "desc": "Logical OR",
 			"keywords": "node-red",
@@ -103,21 +103,18 @@
         "type": "function",
         "z": "f0e76c36111fc593",
         "name": "OR",
-        "func": "var values_dict = context.get(\"values_dict\");\nvar or_value = context.get(\"or_value\");\n\nif (msg.reset === true){\n    context.set(\"values_dict\", {});\n    context.set(\"or_value\", null);\n    return [null, {\"payload\": true }];\n}\n\nif (msg.topic != null && msg.topic !== \"get_value\"){\n    values_dict[msg.topic] = msg.payload;\n    or_value = false;\n    for (let key in values_dict){\n        if (values_dict[key]) { or_value = true;}\n    }\n    context.set(\"or_value\", or_value);\n}\n\nif (or_value != null) {\n    return [{ \"payload\": or_value }, null];\n} else {\n    return [null, {\"payload\": true }];\n}",
-        "outputs": 2,
+        "func": "var values_dict = flow.get(\"values_dict\");\nvar or_value = flow.get(\"or_value\");\n\n\nif (msg.topic != null){\n    values_dict[String(msg.topic)] = Boolean(msg.payload);\n    or_value = false;\n    for (let key in values_dict){\n        if (values_dict[key]) { or_value = true;}\n    }\n    flow.set(\"or_value\", or_value);\n    flow.set(\"values_dict\", values_dict);\n}\n\nif (or_value != null) {\n    return { \"payload\": or_value };\n}",
+        "outputs": 1,
         "timeout": "",
         "noerr": 0,
-        "initialize": "// Добавленный здесь код будет исполняться\n// однократно при развертывании узла.\ncontext.set(\"values_dict\", {});\ncontext.set(\"or_value\", null);",
+        "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
-        "y": 140,
+        "x": 310,
+        "y": 180,
         "wires": [
             [
                 "1443680d28fd9b62"
-            ],
-            [
-                "bfbad6308f9b448b"
             ]
         ]
     },
@@ -139,8 +136,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 535,
-        "y": 140,
+        "x": 455,
+        "y": 180,
         "wires": [
             [
                 "821698c641957bfd"
@@ -217,7 +214,7 @@
         "pauseType": "rate",
         "timeout": "5",
         "timeoutUnits": "seconds",
-        "rate": "1",
+        "rate": "10",
         "nbRateUnits": "5",
         "rateUnits": "second",
         "randomFirst": "1",
@@ -226,11 +223,11 @@
         "drop": true,
         "allowrate": true,
         "outputs": 1,
-        "x": 295,
-        "y": 100,
+        "x": 355,
+        "y": 120,
         "wires": [
             [
-                "d4e2d977d1e9741b"
+                "1443680d28fd9b62"
             ]
         ],
         "l": false
@@ -245,6 +242,11 @@
         "rules": [
             {
                 "t": "eq",
+                "v": "get_dict",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
                 "v": "get_value",
                 "vt": "str"
             },
@@ -254,10 +256,13 @@
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 2,
-        "x": 165,
+        "outputs": 3,
+        "x": 155,
         "y": 140,
         "wires": [
+            [
+                "8bef47a0ce52ab82"
+            ],
             [
                 "4a54428e593cab98"
             ],
@@ -286,8 +291,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 615,
-        "y": 100,
+        "x": 535,
+        "y": 140,
         "wires": [
             [
                 "c47cb5c0090236ff"
@@ -308,6 +313,14 @@
                 "to": "$number($env('RATE')) * 1000\t",
                 "tot": "jsonata",
                 "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "or_value",
+                "tot": "flow",
+                "dc": true
             }
         ],
         "action": "",
@@ -315,8 +328,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 235,
-        "y": 100,
+        "x": 275,
+        "y": 120,
         "wires": [
             [
                 "6f5ec43f77d1a8c8"
@@ -335,8 +348,8 @@
         "syntax": "mustache",
         "template": "{\n    \"fill\": \"grey\",\n    \"shape\": \"ring\",\n    \"text\": \"no values\"\n}",
         "output": "json",
-        "x": 580,
-        "y": 200,
+        "x": 740,
+        "y": 240,
         "wires": [
             []
         ]
@@ -358,13 +371,146 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 410,
+        "x": 170,
+        "y": 300,
+        "wires": [
+            [
+                "da5941d7d76d5196"
+            ]
+        ]
+    },
+    {
+        "id": "da5941d7d76d5196",
+        "type": "function",
+        "z": "f0e76c36111fc593",
+        "name": "function 1",
+        "func": "flow.set(\"values_dict\", {});\nflow.set(\"or_value\", null);\n\nreturn {\"payload\" : true};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 240,
+        "wires": [
+            [
+                "c661be97c8589b34"
+            ]
+        ]
+    },
+    {
+        "id": "8000f51d15975831",
+        "type": "switch",
+        "z": "f0e76c36111fc593",
+        "name": "",
+        "property": "reset",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 155,
+        "y": 240,
+        "wires": [
+            [
+                "da5941d7d76d5196"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "8bef47a0ce52ab82",
+        "type": "change",
+        "z": "f0e76c36111fc593",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "rate",
+                "pt": "msg",
+                "to": "$number($env('RATE')) * 1000\t",
+                "tot": "jsonata",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "values_dict",
+                "tot": "flow",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 275,
+        "y": 60,
+        "wires": [
+            [
+                "0612d9088e372761"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "0612d9088e372761",
+        "type": "delay",
+        "z": "f0e76c36111fc593",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "10",
+        "nbRateUnits": "5",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": true,
+        "outputs": 1,
+        "x": 355,
+        "y": 60,
+        "wires": [
+            [
+                "c47cb5c0090236ff"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "c661be97c8589b34",
+        "type": "delay",
+        "z": "f0e76c36111fc593",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 455,
         "y": 240,
         "wires": [
             [
                 "bfbad6308f9b448b"
             ]
-        ]
+        ],
+        "l": false
     },
     {
         "id": "ade5c4b456f06909",
