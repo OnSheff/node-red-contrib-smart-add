@@ -1,268 +1,267 @@
-
-    {
-        "id": "c3d6cda7c6a9224e",
-        "type": "subflow",
-        "name": "Repeater",
-        "info": "Sends the value by change or after a period of time.\r\n\r\n\r\n\r\n\r\nIf `msg.force` = **true** is received, the values are sent without filtering and delay.\r\n\r\n\r\n### Configuration\r\n\r\n**Block unless value changes**\r\n\r\n - **true**\r\n \r\n The value is sent only if it has changed. The sending is repeated after a specified period of time.\r\n\r\n - **false**\r\n\r\nThe value is sent immediately and then repeated after a specified period of time.\r\n\r\n`Default:` **true**\r\n\r\n---\r\n**Delay hours**\r\n\r\nDelay in hours _(0-47)_\r\n\r\n`Default:` **0**\r\n\r\n---\r\n**Delay minutes**\r\n\r\nDelay in minutes _(0-59)_\r\n\r\n`Default:` **10**\r\n\r\n---\r\n**Delay seconds**\r\n\r\nDelay in seconds _(0-59)_\r\n\r\n`Default:` **0**",
-        "category": "Smart add",
-        "in": [
-            {
-                "x": 60,
-                "y": 140,
-                "wires": [
-                    {
-                        "id": "54bfd1590a54c84d"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 780,
-                "y": 140,
-                "wires": [
-                    {
-                        "id": "e22e5e6e3456265e",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [
-            {
-                "name": "FILTER",
-                "type": "bool",
-                "value": "true",
-                "ui": {
-                    "icon": "font-awesome/fa-filter",
-                    "label": {
-                        "ru": "Block unless value changes"
-                    },
-                    "type": "checkbox"
-                }
-            },
-            {
-                "name": "DELAY_HOUR",
-                "type": "num",
-                "value": "0",
-                "ui": {
-                    "icon": "font-awesome/fa-clock-o",
-                    "label": {
-                        "ru": "Delay hours"
-                    },
-                    "type": "spinner",
-                    "opts": {
-                        "min": 0,
-                        "max": 48
-                    }
-                }
-            },
-            {
-                "name": "DELAY_MIN",
-                "type": "num",
-                "value": "10",
-                "ui": {
-                    "icon": "font-awesome/fa-clock-o",
-                    "label": {
-                        "ru": "Delay minutes"
-                    },
-                    "type": "spinner",
-                    "opts": {
-                        "min": 0,
-                        "max": 59
-                    }
-                }
-            },
-            {
-                "name": "DELAY_SEC",
-                "type": "num",
-                "value": "0",
-                "ui": {
-                    "icon": "font-awesome/fa-clock-o",
-                    "label": {
-                        "ru": "Delay seconds"
-                    },
-                    "type": "spinner",
-                    "opts": {
-                        "min": 0,
-                        "max": 59
-                    }
-                }
-            }
-        ],
-        "meta": {
-			"type": "Repeater",
-            "version": "1.1.3",
-            "author": "Anton Shefov <a.shefov@gmail.com>",
-            "desc": "Sends the value by change or after a period of time",
-            "license": "MIT"
-        },
-        "color": "#7FC7FF",
-        "icon": "font-awesome/fa-clock-o",
-        "status": {
-            "x": 780,
-            "y": 200,
+{
+    "id": "c3d6cda7c6a9224e",
+    "type": "subflow",
+    "name": "Repeater",
+    "info": "Sends the value by change or after a period of time.\r\n\r\n\r\n\r\n\r\nIf `msg.force` = **true** is received, the values are sent without filtering and delay.\r\n\r\n\r\n### Configuration\r\n\r\n**Block unless value changes**\r\n\r\n - **true**\r\n \r\n The value is sent only if it has changed. The sending is repeated after a specified period of time.\r\n\r\n - **false**\r\n\r\nThe value is sent immediately and then repeated after a specified period of time.\r\n\r\n`Default:` **true**\r\n\r\n---\r\n**Delay hours**\r\n\r\nDelay in hours _(0-47)_\r\n\r\n`Default:` **0**\r\n\r\n---\r\n**Delay minutes**\r\n\r\nDelay in minutes _(0-59)_\r\n\r\n`Default:` **10**\r\n\r\n---\r\n**Delay seconds**\r\n\r\nDelay in seconds _(0-59)_\r\n\r\n`Default:` **0**",
+    "category": "Smart add",
+    "in": [
+        {
+            "x": 60,
+            "y": 140,
             "wires": [
                 {
-                    "id": "20371b2bee086371",
+                    "id": "54bfd1590a54c84d"
+                }
+            ]
+        }
+    ],
+    "out": [
+        {
+            "x": 780,
+            "y": 140,
+            "wires": [
+                {
+                    "id": "e22e5e6e3456265e",
                     "port": 0
                 }
             ]
+        }
+    ],
+    "env": [
+        {
+            "name": "FILTER",
+            "type": "bool",
+            "value": "true",
+            "ui": {
+                "icon": "font-awesome/fa-filter",
+                "label": {
+                    "ru": "Block unless value changes"
+                },
+                "type": "checkbox"
+            }
         },
-		"flow" : [
-		{
-        "id": "e22e5e6e3456265e",
-        "type": "trigger",
-        "z": "c3d6cda7c6a9224e",
-        "name": "",
-        "op1": "",
-        "op2": "0",
-        "op1type": "pay",
-        "op2type": "str",
-        "duration": "-1",
-        "extend": false,
-        "overrideDelay": true,
-        "units": "hr",
-        "reset": "",
-        "bytopic": "topic",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 555,
-        "y": 140,
-        "wires": [
-            [
-                "20371b2bee086371"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "23523dd8d65b3f20",
-        "type": "rbe",
-        "z": "c3d6cda7c6a9224e",
-        "name": "",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "septopics": true,
-        "property": "payload",
-        "topi": "topic",
-        "x": 355,
-        "y": 220,
-        "wires": [
-            [
-                "e4c54f82c71dfe67"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "e4c54f82c71dfe67",
-        "type": "change",
-        "z": "c3d6cda7c6a9224e",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "delay",
-                "pt": "msg",
-                "to": "($env('DELAY_HOUR') * 3600000) + ($env('DELAY_MIN') * 60000) + ($env('DELAY_SEC') * 1000)",
-                "tot": "jsonata",
-                "dc": true
+        {
+            "name": "DELAY_HOUR",
+            "type": "num",
+            "value": "0",
+            "ui": {
+                "icon": "font-awesome/fa-clock-o",
+                "label": {
+                    "ru": "Delay hours"
+                },
+                "type": "spinner",
+                "opts": {
+                    "min": 0,
+                    "max": 48
+                }
             }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 455,
-        "y": 140,
-        "wires": [
-            [
-                "e22e5e6e3456265e"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "398de719a581bca5",
-        "type": "switch",
-        "z": "c3d6cda7c6a9224e",
-        "name": "",
-        "property": "force",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "true"
-            },
-            {
-                "t": "else"
+        },
+        {
+            "name": "DELAY_MIN",
+            "type": "num",
+            "value": "10",
+            "ui": {
+                "icon": "font-awesome/fa-clock-o",
+                "label": {
+                    "ru": "Delay minutes"
+                },
+                "type": "spinner",
+                "opts": {
+                    "min": 0,
+                    "max": 59
+                }
             }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 255,
-        "y": 180,
-        "wires": [
-            [
-                "e4c54f82c71dfe67"
-            ],
-            [
-                "23523dd8d65b3f20"
-            ]
-        ],
-        "l": false
+        },
+        {
+            "name": "DELAY_SEC",
+            "type": "num",
+            "value": "0",
+            "ui": {
+                "icon": "font-awesome/fa-clock-o",
+                "label": {
+                    "ru": "Delay seconds"
+                },
+                "type": "spinner",
+                "opts": {
+                    "min": 0,
+                    "max": 59
+                }
+            }
+        }
+    ],
+    "meta": {
+        "type": "Repeater",
+        "version": "1.1.3",
+        "author": "Anton Shefov <a.shefov@gmail.com>",
+        "desc": "Sends the value by change or after a period of time",
+        "license": "MIT"
     },
-    {
-        "id": "20371b2bee086371",
-        "type": "template",
-        "z": "c3d6cda7c6a9224e",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "{{topic}}: {{payload}}",
-        "output": "str",
-        "x": 675,
+    "color": "#7FC7FF",
+    "icon": "font-awesome/fa-clock-o",
+    "status": {
+        "x": 780,
         "y": 200,
         "wires": [
-            []
-        ],
-        "l": false
-    },
-    {
-        "id": "54bfd1590a54c84d",
-        "type": "switch",
-        "z": "c3d6cda7c6a9224e",
-        "name": "",
-        "property": "FILTER",
-        "propertyType": "env",
-        "rules": [
             {
-                "t": "false"
-            },
-            {
-                "t": "true"
+                "id": "20371b2bee086371",
+                "port": 0
             }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 155,
-        "y": 140,
-        "wires": [
-            [
-                "e4c54f82c71dfe67"
+        ]
+    },
+    "flow": [
+        {
+            "id": "e22e5e6e3456265e",
+            "type": "trigger",
+            "z": "c3d6cda7c6a9224e",
+            "name": "",
+            "op1": "",
+            "op2": "0",
+            "op1type": "pay",
+            "op2type": "str",
+            "duration": "-1",
+            "extend": false,
+            "overrideDelay": true,
+            "units": "hr",
+            "reset": "",
+            "bytopic": "topic",
+            "topic": "topic",
+            "outputs": 1,
+            "x": 555,
+            "y": 140,
+            "wires": [
+                [
+                    "20371b2bee086371"
+                ]
             ],
-            [
-                "398de719a581bca5"
-            ]
-        ],
-        "l": false
-    }
-		]
-    }
+            "l": false
+        },
+        {
+            "id": "23523dd8d65b3f20",
+            "type": "rbe",
+            "z": "c3d6cda7c6a9224e",
+            "name": "",
+            "func": "rbe",
+            "gap": "",
+            "start": "",
+            "inout": "out",
+            "septopics": true,
+            "property": "payload",
+            "topi": "topic",
+            "x": 355,
+            "y": 220,
+            "wires": [
+                [
+                    "e4c54f82c71dfe67"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "e4c54f82c71dfe67",
+            "type": "change",
+            "z": "c3d6cda7c6a9224e",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "delay",
+                    "pt": "msg",
+                    "to": "($env('DELAY_HOUR') * 3600000) + ($env('DELAY_MIN') * 60000) + ($env('DELAY_SEC') * 1000)",
+                    "tot": "jsonata",
+                    "dc": true
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 455,
+            "y": 140,
+            "wires": [
+                [
+                    "e22e5e6e3456265e"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "398de719a581bca5",
+            "type": "switch",
+            "z": "c3d6cda7c6a9224e",
+            "name": "",
+            "property": "force",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "true"
+                },
+                {
+                    "t": "else"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 255,
+            "y": 180,
+            "wires": [
+                [
+                    "e4c54f82c71dfe67"
+                ],
+                [
+                    "23523dd8d65b3f20"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "20371b2bee086371",
+            "type": "template",
+            "z": "c3d6cda7c6a9224e",
+            "name": "",
+            "field": "payload",
+            "fieldType": "msg",
+            "format": "handlebars",
+            "syntax": "mustache",
+            "template": "{{topic}}: {{payload}}",
+            "output": "str",
+            "x": 675,
+            "y": 200,
+            "wires": [
+                []
+            ],
+            "l": false
+        },
+        {
+            "id": "54bfd1590a54c84d",
+            "type": "switch",
+            "z": "c3d6cda7c6a9224e",
+            "name": "",
+            "property": "FILTER",
+            "propertyType": "env",
+            "rules": [
+                {
+                    "t": "false"
+                },
+                {
+                    "t": "true"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 155,
+            "y": 140,
+            "wires": [
+                [
+                    "e4c54f82c71dfe67"
+                ],
+                [
+                    "398de719a581bca5"
+                ]
+            ],
+            "l": false
+        }
+    ]
+}

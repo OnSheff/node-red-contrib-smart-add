@@ -1,439 +1,438 @@
-
-    {
-        "id": "23fc1f7d493d4f28",
-        "type": "subflow",
-        "name": "MB former",
-        "info": "Generates a Modbus request.",
-        "category": "Smart add",
-        "in": [
-            {
-                "x": 120,
-                "y": 180,
-                "wires": [
-                    {
-                        "id": "1460f4eba165e20c"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 1110,
-                "y": 180,
-                "wires": [
-                    {
-                        "id": "2fec2789cbf8be82",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [
-            {
-                "name": "MODBUS_FUNC",
-                "type": "str",
-                "value": "1",
-                "ui": {
-                    "label": {
-                        "ru": "Modbus function"
-                    },
-                    "type": "select",
-                    "opts": {
-                        "opts": [
-                            {
-                                "l": {
-                                    "ru": "FC 1: Read coil status"
-                                },
-                                "v": "1"
-                            },
-                            {
-                                "l": {
-                                    "ru": "FC 2: Read input status"
-                                },
-                                "v": "2"
-                            },
-                            {
-                                "l": {
-                                    "ru": "FC 3: Read holding registers"
-                                },
-                                "v": "3"
-                            },
-                            {
-                                "l": {
-                                    "ru": "FC 4: Read input registers"
-                                },
-                                "v": "4"
-                            },
-                            {
-                                "l": {
-                                    "ru": "FC 5: Force single coil"
-                                },
-                                "v": "5"
-                            },
-                            {
-                                "l": {
-                                    "ru": "FC 6: Preset single register"
-                                },
-                                "v": "6"
-                            },
-                            {
-                                "l": {
-                                    "ru": "FC 15: Force multiple coils"
-                                },
-                                "v": "15"
-                            },
-                            {
-                                "l": {
-                                    "ru": "FC 16: Preset multiple registers"
-                                },
-                                "v": "16"
-                            }
-                        ]
-                    }
+{
+    "id": "23fc1f7d493d4f28",
+    "type": "subflow",
+    "name": "MB former",
+    "info": "Generates a Modbus request.",
+    "category": "Smart add",
+    "in": [
+        {
+            "x": 120,
+            "y": 180,
+            "wires": [
+                {
+                    "id": "1460f4eba165e20c"
                 }
-            },
-            {
-                "name": "UNIT_ID_FROM",
-                "type": "str",
-                "value": "parameters",
-                "ui": {
-                    "label": {
-                        "ru": "Where get unit ID?"
-                    },
-                    "type": "select",
-                    "opts": {
-                        "opts": [
-                            {
-                                "l": {
-                                    "ru": "From msg.unitId"
-                                },
-                                "v": "msg"
+            ]
+        }
+    ],
+    "out": [
+        {
+            "x": 1110,
+            "y": 180,
+            "wires": [
+                {
+                    "id": "2fec2789cbf8be82",
+                    "port": 0
+                }
+            ]
+        }
+    ],
+    "env": [
+        {
+            "name": "MODBUS_FUNC",
+            "type": "str",
+            "value": "1",
+            "ui": {
+                "label": {
+                    "ru": "Modbus function"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "ru": "FC 1: Read coil status"
                             },
-                            {
-                                "l": {
-                                    "ru": "From parameters"
-                                },
-                                "v": "parameters"
-                            }
-                        ]
-                    }
-                }
-            },
-            {
-                "name": "UNIT_ID",
-                "type": "num",
-                "value": "1",
-                "ui": {
-                    "label": {
-                        "ru": "Unit ID"
-                    },
-                    "type": "spinner",
-                    "opts": {
-                        "min": 1,
-                        "max": 254
-                    }
-                }
-            },
-            {
-                "name": "ADDRESS_FROM",
-                "type": "str",
-                "value": "msg",
-                "ui": {
-                    "label": {
-                        "ru": "Where get address?"
-                    },
-                    "type": "select",
-                    "opts": {
-                        "opts": [
-                            {
-                                "l": {
-                                    "ru": "From msg.topic"
-                                },
-                                "v": "msg"
+                            "v": "1"
+                        },
+                        {
+                            "l": {
+                                "ru": "FC 2: Read input status"
                             },
-                            {
-                                "l": {
-                                    "ru": "From parameters"
-                                },
-                                "v": "parameters"
-                            }
-                        ]
-                    }
-                }
-            },
-            {
-                "name": "ADDRESS",
-                "type": "num",
-                "value": "1",
-                "ui": {
-                    "label": {
-                        "ru": "Address"
-                    },
-                    "type": "spinner",
-                    "opts": {
-                        "min": 1
-                    }
-                }
-            },
-            {
-                "name": "QUANTITY_FROM",
-                "type": "str",
-                "value": "msg",
-                "ui": {
-                    "label": {
-                        "ru": "Where get quantity?"
-                    },
-                    "type": "select",
-                    "opts": {
-                        "opts": [
-                            {
-                                "l": {
-                                    "ru": "From msg.quantity"
-                                },
-                                "v": "msg"
+                            "v": "2"
+                        },
+                        {
+                            "l": {
+                                "ru": "FC 3: Read holding registers"
                             },
-                            {
-                                "l": {
-                                    "ru": "From parameters"
-                                },
-                                "v": "parameters"
-                            }
-                        ]
-                    }
-                }
-            },
-            {
-                "name": "QUANTITY",
-                "type": "num",
-                "value": "1",
-                "ui": {
-                    "label": {
-                        "ru": "Quantity"
-                    },
-                    "type": "spinner",
-                    "opts": {
-                        "min": 1,
-                        "max": 254
-                    }
+                            "v": "3"
+                        },
+                        {
+                            "l": {
+                                "ru": "FC 4: Read input registers"
+                            },
+                            "v": "4"
+                        },
+                        {
+                            "l": {
+                                "ru": "FC 5: Force single coil"
+                            },
+                            "v": "5"
+                        },
+                        {
+                            "l": {
+                                "ru": "FC 6: Preset single register"
+                            },
+                            "v": "6"
+                        },
+                        {
+                            "l": {
+                                "ru": "FC 15: Force multiple coils"
+                            },
+                            "v": "15"
+                        },
+                        {
+                            "l": {
+                                "ru": "FC 16: Preset multiple registers"
+                            },
+                            "v": "16"
+                        }
+                    ]
                 }
             }
-        ],
-        "meta": {
-			"type": "Modbus query former",
-            "version": "1.0.2",
-            "author": "Anton Shefov <a.shefov@gmail.com>",
-            "desc": "Generates a Modbus request",
-            "keywords": "node-red",
-            "license": "MIT"
         },
-        "color": "#7FC7FF",
-        "icon": "modbus.png",
-		"flow" : [
-		{
-        "id": "2fec2789cbf8be82",
-        "type": "function",
-        "z": "23fc1f7d493d4f28",
-        "name": "",
-        "func": "const modbus_func = Number(env.get('MODBUS_FUNC'));\nconst unit_id = Number(msg.unitId);\nconst address = Number(msg.topic);\nvar quantity = Number(msg.quantity);\n\nif (modbus_func == 5 || modbus_func == 6) {\n    quantity = 1;\n}\n\nvar new_payload = { value: msg.payload, 'fc': modbus_func, 'unitid': unit_id, 'address': address, 'quantity': quantity };\n\nif (msg.force == true) {\n    return { \"payload\": new_payload, \"force\": true };\n}\nelse {\n    return { \"payload\": new_payload };\n}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 950,
-        "y": 180,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "a822878b77e9db07",
-        "type": "switch",
-        "z": "23fc1f7d493d4f28",
-        "name": "",
-        "property": "ADDRESS_FROM",
-        "propertyType": "env",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "msg",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "parameters",
-                "vt": "str"
+        {
+            "name": "UNIT_ID_FROM",
+            "type": "str",
+            "value": "parameters",
+            "ui": {
+                "label": {
+                    "ru": "Where get unit ID?"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "ru": "From msg.unitId"
+                            },
+                            "v": "msg"
+                        },
+                        {
+                            "l": {
+                                "ru": "From parameters"
+                            },
+                            "v": "parameters"
+                        }
+                    ]
+                }
             }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 445,
-        "y": 180,
-        "wires": [
-            [
-                "bda7cafbfe434a2e"
+        },
+        {
+            "name": "UNIT_ID",
+            "type": "num",
+            "value": "1",
+            "ui": {
+                "label": {
+                    "ru": "Unit ID"
+                },
+                "type": "spinner",
+                "opts": {
+                    "min": 1,
+                    "max": 254
+                }
+            }
+        },
+        {
+            "name": "ADDRESS_FROM",
+            "type": "str",
+            "value": "msg",
+            "ui": {
+                "label": {
+                    "ru": "Where get address?"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "ru": "From msg.topic"
+                            },
+                            "v": "msg"
+                        },
+                        {
+                            "l": {
+                                "ru": "From parameters"
+                            },
+                            "v": "parameters"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "ADDRESS",
+            "type": "num",
+            "value": "1",
+            "ui": {
+                "label": {
+                    "ru": "Address"
+                },
+                "type": "spinner",
+                "opts": {
+                    "min": 1
+                }
+            }
+        },
+        {
+            "name": "QUANTITY_FROM",
+            "type": "str",
+            "value": "msg",
+            "ui": {
+                "label": {
+                    "ru": "Where get quantity?"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "ru": "From msg.quantity"
+                            },
+                            "v": "msg"
+                        },
+                        {
+                            "l": {
+                                "ru": "From parameters"
+                            },
+                            "v": "parameters"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "QUANTITY",
+            "type": "num",
+            "value": "1",
+            "ui": {
+                "label": {
+                    "ru": "Quantity"
+                },
+                "type": "spinner",
+                "opts": {
+                    "min": 1,
+                    "max": 254
+                }
+            }
+        }
+    ],
+    "meta": {
+        "type": "Modbus query former",
+        "version": "1.0.2",
+        "author": "Anton Shefov <a.shefov@gmail.com>",
+        "desc": "Generates a Modbus request",
+        "keywords": "node-red",
+        "license": "MIT"
+    },
+    "color": "#7FC7FF",
+    "icon": "modbus.png",
+    "flow": [
+        {
+            "id": "2fec2789cbf8be82",
+            "type": "function",
+            "z": "23fc1f7d493d4f28",
+            "name": "",
+            "func": "const modbus_func = Number(env.get('MODBUS_FUNC'));\nconst unit_id = Number(msg.unitId);\nconst address = Number(msg.topic);\nvar quantity = Number(msg.quantity);\n\nif (modbus_func == 5 || modbus_func == 6) {\n    quantity = 1;\n}\n\nvar new_payload = { value: msg.payload, 'fc': modbus_func, 'unitid': unit_id, 'address': address, 'quantity': quantity };\n\nif (msg.force == true) {\n    return { \"payload\": new_payload, \"force\": true };\n}\nelse {\n    return { \"payload\": new_payload };\n}\n",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 950,
+            "y": 180,
+            "wires": [
+                []
+            ]
+        },
+        {
+            "id": "a822878b77e9db07",
+            "type": "switch",
+            "z": "23fc1f7d493d4f28",
+            "name": "",
+            "property": "ADDRESS_FROM",
+            "propertyType": "env",
+            "rules": [
+                {
+                    "t": "eq",
+                    "v": "msg",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "parameters",
+                    "vt": "str"
+                }
             ],
-            [
-                "3a7a2d29ec371cdc"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "bda7cafbfe434a2e",
-        "type": "switch",
-        "z": "23fc1f7d493d4f28",
-        "name": "",
-        "property": "QUANTITY_FROM",
-        "propertyType": "env",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "msg",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "parameters",
-                "vt": "str"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 665,
-        "y": 180,
-        "wires": [
-            [
-                "2fec2789cbf8be82"
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 445,
+            "y": 180,
+            "wires": [
+                [
+                    "bda7cafbfe434a2e"
+                ],
+                [
+                    "3a7a2d29ec371cdc"
+                ]
             ],
-            [
-                "6e1c23cf35392dbc"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "3a7a2d29ec371cdc",
-        "type": "change",
-        "z": "23fc1f7d493d4f28",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "ADDRESS",
-                "tot": "env",
-                "dc": true
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 555,
-        "y": 220,
-        "wires": [
-            [
-                "bda7cafbfe434a2e"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "6e1c23cf35392dbc",
-        "type": "change",
-        "z": "23fc1f7d493d4f28",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "quantity",
-                "pt": "msg",
-                "to": "QUANTITY",
-                "tot": "env",
-                "dc": true
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 785,
-        "y": 220,
-        "wires": [
-            [
-                "2fec2789cbf8be82"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "1460f4eba165e20c",
-        "type": "switch",
-        "z": "23fc1f7d493d4f28",
-        "name": "",
-        "property": "UNIT_ID_FROM",
-        "propertyType": "env",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "msg",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "parameters",
-                "vt": "str"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 235,
-        "y": 180,
-        "wires": [
-            [
-                "a822878b77e9db07"
+            "l": false
+        },
+        {
+            "id": "bda7cafbfe434a2e",
+            "type": "switch",
+            "z": "23fc1f7d493d4f28",
+            "name": "",
+            "property": "QUANTITY_FROM",
+            "propertyType": "env",
+            "rules": [
+                {
+                    "t": "eq",
+                    "v": "msg",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "parameters",
+                    "vt": "str"
+                }
             ],
-            [
-                "ce104c780bb47308"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "ce104c780bb47308",
-        "type": "change",
-        "z": "23fc1f7d493d4f28",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "unitId",
-                "pt": "msg",
-                "to": "UNIT_ID",
-                "tot": "env",
-                "dc": true
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 345,
-        "y": 220,
-        "wires": [
-            [
-                "a822878b77e9db07"
-            ]
-        ],
-        "l": false
-    }
-		]
-    }
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 665,
+            "y": 180,
+            "wires": [
+                [
+                    "2fec2789cbf8be82"
+                ],
+                [
+                    "6e1c23cf35392dbc"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "3a7a2d29ec371cdc",
+            "type": "change",
+            "z": "23fc1f7d493d4f28",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "ADDRESS",
+                    "tot": "env",
+                    "dc": true
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 555,
+            "y": 220,
+            "wires": [
+                [
+                    "bda7cafbfe434a2e"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "6e1c23cf35392dbc",
+            "type": "change",
+            "z": "23fc1f7d493d4f28",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "quantity",
+                    "pt": "msg",
+                    "to": "QUANTITY",
+                    "tot": "env",
+                    "dc": true
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 785,
+            "y": 220,
+            "wires": [
+                [
+                    "2fec2789cbf8be82"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "1460f4eba165e20c",
+            "type": "switch",
+            "z": "23fc1f7d493d4f28",
+            "name": "",
+            "property": "UNIT_ID_FROM",
+            "propertyType": "env",
+            "rules": [
+                {
+                    "t": "eq",
+                    "v": "msg",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "parameters",
+                    "vt": "str"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 235,
+            "y": 180,
+            "wires": [
+                [
+                    "a822878b77e9db07"
+                ],
+                [
+                    "ce104c780bb47308"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "ce104c780bb47308",
+            "type": "change",
+            "z": "23fc1f7d493d4f28",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "unitId",
+                    "pt": "msg",
+                    "to": "UNIT_ID",
+                    "tot": "env",
+                    "dc": true
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 345,
+            "y": 220,
+            "wires": [
+                [
+                    "a822878b77e9db07"
+                ]
+            ],
+            "l": false
+        }
+    ]
+}

@@ -1,526 +1,525 @@
-
-    {
-        "id": "f0e76c36111fc593",
-        "type": "subflow",
-        "name": "OR",
-        "info": "Logical OR",
-        "category": "Smart add",
-        "in": [
-            {
-                "x": 60,
-                "y": 140,
-                "wires": [
-                    {
-                        "id": "a8e3fa3858e87386"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 940,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "ade5c4b456f06909",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [
-            {
-                "name": "INVERSE",
-                "type": "bool",
-                "value": "false",
-                "ui": {
-                    "label": {
-                        "ru": "Inverse output"
-                    },
-                    "type": "checkbox"
+{
+    "id": "f0e76c36111fc593",
+    "type": "subflow",
+    "name": "OR",
+    "info": "Logical OR",
+    "category": "Smart add",
+    "in": [
+        {
+            "x": 60,
+            "y": 140,
+            "wires": [
+                {
+                    "id": "a8e3fa3858e87386"
                 }
-            },
-            {
-                "name": "TOPIC",
-                "type": "str",
-                "value": "",
-                "ui": {
-                    "label": {
-                        "ru": "Set msg.topic"
-                    },
-                    "type": "input",
-                    "opts": {
-                        "types": [
-                            "str"
-                        ]
-                    }
-                }
-            },
-            {
-                "name": "RATE",
-                "type": "num",
-                "value": "1",
-                "ui": {
-                    "icon": "font-awesome/fa-bar-chart",
-                    "label": {
-                        "ru": "Rate in sec."
-                    },
-                    "type": "spinner",
-                    "opts": {
-                        "min": 0,
-                        "max": 3600
-                    }
-                }
-            }
-        ],
-        "meta": {
-			"type": "Logical OR",
-            "version": "1.1.1",
-			"author": "Anton Shefov <a.shefov@gmail.com>",
-            "desc": "Logical OR",
-			"keywords": "node-red",
-            "license": "MIT"
-        },
-        "color": "#7FC7FF",
-        "icon": "font-awesome/fa-code-fork",
-        "status": {
+            ]
+        }
+    ],
+    "out": [
+        {
             "x": 940,
-            "y": 180,
+            "y": 100,
             "wires": [
                 {
                     "id": "ade5c4b456f06909",
                     "port": 0
-                },
-                {
-                    "id": "bfbad6308f9b448b",
-                    "port": 0
                 }
             ]
+        }
+    ],
+    "env": [
+        {
+            "name": "INVERSE",
+            "type": "bool",
+            "value": "false",
+            "ui": {
+                "label": {
+                    "ru": "Inverse output"
+                },
+                "type": "checkbox"
+            }
         },
-		"flow" : [
-		{
-        "id": "d4e2d977d1e9741b",
-        "type": "function",
-        "z": "f0e76c36111fc593",
-        "name": "OR",
-        "func": "var values_dict = flow.get(\"values_dict\");\nvar or_value = flow.get(\"or_value\");\n\n\nif (msg.topic != null){\n    values_dict[String(msg.topic)] = Boolean(msg.payload);\n    or_value = false;\n    for (let key in values_dict){\n        if (values_dict[key]) { or_value = true;}\n    }\n    flow.set(\"or_value\", or_value);\n    flow.set(\"values_dict\", values_dict);\n}\n\nif (or_value != null) {\n    return { \"payload\": or_value };\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 310,
+        {
+            "name": "TOPIC",
+            "type": "str",
+            "value": "",
+            "ui": {
+                "label": {
+                    "ru": "Set msg.topic"
+                },
+                "type": "input",
+                "opts": {
+                    "types": [
+                        "str"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "RATE",
+            "type": "num",
+            "value": "1",
+            "ui": {
+                "icon": "font-awesome/fa-bar-chart",
+                "label": {
+                    "ru": "Rate in sec."
+                },
+                "type": "spinner",
+                "opts": {
+                    "min": 0,
+                    "max": 3600
+                }
+            }
+        }
+    ],
+    "meta": {
+        "type": "Logical OR",
+        "version": "1.1.1",
+        "author": "Anton Shefov <a.shefov@gmail.com>",
+        "desc": "Logical OR",
+        "keywords": "node-red",
+        "license": "MIT"
+    },
+    "color": "#7FC7FF",
+    "icon": "font-awesome/fa-code-fork",
+    "status": {
+        "x": 940,
         "y": 180,
         "wires": [
-            [
-                "1443680d28fd9b62"
-            ]
-        ]
-    },
-    {
-        "id": "1443680d28fd9b62",
-        "type": "switch",
-        "z": "f0e76c36111fc593",
-        "name": "INVERSE?",
-        "property": "INVERSE",
-        "propertyType": "env",
-        "rules": [
             {
-                "t": "true"
+                "id": "ade5c4b456f06909",
+                "port": 0
             },
             {
-                "t": "false"
+                "id": "bfbad6308f9b448b",
+                "port": 0
             }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 455,
-        "y": 180,
-        "wires": [
-            [
-                "821698c641957bfd"
+        ]
+    },
+    "flow": [
+        {
+            "id": "d4e2d977d1e9741b",
+            "type": "function",
+            "z": "f0e76c36111fc593",
+            "name": "OR",
+            "func": "var values_dict = flow.get(\"values_dict\");\nvar or_value = flow.get(\"or_value\");\n\n\nif (msg.topic != null){\n    values_dict[String(msg.topic)] = Boolean(msg.payload);\n    or_value = false;\n    for (let key in values_dict){\n        if (values_dict[key]) { or_value = true;}\n    }\n    flow.set(\"or_value\", or_value);\n    flow.set(\"values_dict\", values_dict);\n}\n\nif (or_value != null) {\n    return { \"payload\": or_value };\n}",
+            "outputs": 1,
+            "timeout": "",
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 310,
+            "y": 180,
+            "wires": [
+                [
+                    "1443680d28fd9b62"
+                ]
+            ]
+        },
+        {
+            "id": "1443680d28fd9b62",
+            "type": "switch",
+            "z": "f0e76c36111fc593",
+            "name": "INVERSE?",
+            "property": "INVERSE",
+            "propertyType": "env",
+            "rules": [
+                {
+                    "t": "true"
+                },
+                {
+                    "t": "false"
+                }
             ],
-            [
-                "c47cb5c0090236ff"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "c47cb5c0090236ff",
-        "type": "switch",
-        "z": "f0e76c36111fc593",
-        "name": "",
-        "property": "TOPIC",
-        "propertyType": "env",
-        "rules": [
-            {
-                "t": "nnull"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 695,
-        "y": 140,
-        "wires": [
-            [
-                "e2098b594f23a742"
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 455,
+            "y": 180,
+            "wires": [
+                [
+                    "821698c641957bfd"
+                ],
+                [
+                    "c47cb5c0090236ff"
+                ]
             ],
-            [
-                "ade5c4b456f06909"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "e2098b594f23a742",
-        "type": "change",
-        "z": "f0e76c36111fc593",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "TOPIC",
-                "tot": "env"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 775,
-        "y": 100,
-        "wires": [
-            [
-                "ade5c4b456f06909"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "6f5ec43f77d1a8c8",
-        "type": "delay",
-        "z": "f0e76c36111fc593",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "10",
-        "nbRateUnits": "5",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": true,
-        "allowrate": true,
-        "outputs": 1,
-        "x": 355,
-        "y": 120,
-        "wires": [
-            [
-                "1443680d28fd9b62"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "a8e3fa3858e87386",
-        "type": "switch",
-        "z": "f0e76c36111fc593",
-        "name": "",
-        "property": "topic",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "get_dict",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "get_value",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 3,
-        "x": 155,
-        "y": 140,
-        "wires": [
-            [
-                "8bef47a0ce52ab82"
+            "l": false
+        },
+        {
+            "id": "c47cb5c0090236ff",
+            "type": "switch",
+            "z": "f0e76c36111fc593",
+            "name": "",
+            "property": "TOPIC",
+            "propertyType": "env",
+            "rules": [
+                {
+                    "t": "nnull"
+                },
+                {
+                    "t": "else"
+                }
             ],
-            [
-                "4a54428e593cab98"
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 695,
+            "y": 140,
+            "wires": [
+                [
+                    "e2098b594f23a742"
+                ],
+                [
+                    "ade5c4b456f06909"
+                ]
             ],
-            [
-                "d4e2d977d1e9741b"
+            "l": false
+        },
+        {
+            "id": "e2098b594f23a742",
+            "type": "change",
+            "z": "f0e76c36111fc593",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "TOPIC",
+                    "tot": "env"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 775,
+            "y": 100,
+            "wires": [
+                [
+                    "ade5c4b456f06909"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "6f5ec43f77d1a8c8",
+            "type": "delay",
+            "z": "f0e76c36111fc593",
+            "name": "",
+            "pauseType": "rate",
+            "timeout": "5",
+            "timeoutUnits": "seconds",
+            "rate": "10",
+            "nbRateUnits": "5",
+            "rateUnits": "second",
+            "randomFirst": "1",
+            "randomLast": "5",
+            "randomUnits": "seconds",
+            "drop": true,
+            "allowrate": true,
+            "outputs": 1,
+            "x": 355,
+            "y": 120,
+            "wires": [
+                [
+                    "1443680d28fd9b62"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "a8e3fa3858e87386",
+            "type": "switch",
+            "z": "f0e76c36111fc593",
+            "name": "",
+            "property": "topic",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "eq",
+                    "v": "get_dict",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "get_value",
+                    "vt": "str"
+                },
+                {
+                    "t": "else"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 3,
+            "x": 155,
+            "y": 140,
+            "wires": [
+                [
+                    "8bef47a0ce52ab82"
+                ],
+                [
+                    "4a54428e593cab98"
+                ],
+                [
+                    "d4e2d977d1e9741b"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "821698c641957bfd",
+            "type": "change",
+            "z": "f0e76c36111fc593",
+            "name": "NOT",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "payload",
+                    "pt": "msg",
+                    "to": "$not(msg.payload)\t",
+                    "tot": "jsonata"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 535,
+            "y": 140,
+            "wires": [
+                [
+                    "c47cb5c0090236ff"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "4a54428e593cab98",
+            "type": "change",
+            "z": "f0e76c36111fc593",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "rate",
+                    "pt": "msg",
+                    "to": "$number($env('RATE')) * 1000\t",
+                    "tot": "jsonata",
+                    "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "payload",
+                    "pt": "msg",
+                    "to": "or_value",
+                    "tot": "flow",
+                    "dc": true
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 275,
+            "y": 120,
+            "wires": [
+                [
+                    "6f5ec43f77d1a8c8"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "bfbad6308f9b448b",
+            "type": "template",
+            "z": "f0e76c36111fc593",
+            "name": "",
+            "field": "payload",
+            "fieldType": "msg",
+            "format": "json",
+            "syntax": "mustache",
+            "template": "{\n    \"fill\": \"grey\",\n    \"shape\": \"ring\",\n    \"text\": \"no values\"\n}",
+            "output": "json",
+            "x": 740,
+            "y": 240,
+            "wires": [
+                []
             ]
-        ],
-        "l": false
-    },
-    {
-        "id": "821698c641957bfd",
-        "type": "change",
-        "z": "f0e76c36111fc593",
-        "name": "NOT",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "$not(msg.payload)\t",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 535,
-        "y": 140,
-        "wires": [
-            [
-                "c47cb5c0090236ff"
+        },
+        {
+            "id": "eaf9daf1849d0a16",
+            "type": "inject",
+            "z": "f0e76c36111fc593",
+            "name": "",
+            "props": [
+                {
+                    "p": "payload"
+                }
+            ],
+            "repeat": "",
+            "crontab": "",
+            "once": true,
+            "onceDelay": 0.1,
+            "topic": "",
+            "payload": "true",
+            "payloadType": "bool",
+            "x": 170,
+            "y": 300,
+            "wires": [
+                [
+                    "da5941d7d76d5196"
+                ]
             ]
-        ],
-        "l": false
-    },
-    {
-        "id": "4a54428e593cab98",
-        "type": "change",
-        "z": "f0e76c36111fc593",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "rate",
-                "pt": "msg",
-                "to": "$number($env('RATE')) * 1000\t",
-                "tot": "jsonata",
-                "dc": true
-            },
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "or_value",
-                "tot": "flow",
-                "dc": true
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 275,
-        "y": 120,
-        "wires": [
-            [
-                "6f5ec43f77d1a8c8"
+        },
+        {
+            "id": "da5941d7d76d5196",
+            "type": "function",
+            "z": "f0e76c36111fc593",
+            "name": "function 1",
+            "func": "flow.set(\"values_dict\", {});\nflow.set(\"or_value\", null);\n\nreturn {\"payload\" : true};",
+            "outputs": 1,
+            "timeout": 0,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 320,
+            "y": 240,
+            "wires": [
+                [
+                    "c661be97c8589b34"
+                ]
             ]
-        ],
-        "l": false
-    },
-    {
-        "id": "bfbad6308f9b448b",
-        "type": "template",
-        "z": "f0e76c36111fc593",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "json",
-        "syntax": "mustache",
-        "template": "{\n    \"fill\": \"grey\",\n    \"shape\": \"ring\",\n    \"text\": \"no values\"\n}",
-        "output": "json",
-        "x": 740,
-        "y": 240,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "eaf9daf1849d0a16",
-        "type": "inject",
-        "z": "f0e76c36111fc593",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 170,
-        "y": 300,
-        "wires": [
-            [
-                "da5941d7d76d5196"
+        },
+        {
+            "id": "8000f51d15975831",
+            "type": "switch",
+            "z": "f0e76c36111fc593",
+            "name": "",
+            "property": "reset",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "nnull"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 1,
+            "x": 155,
+            "y": 240,
+            "wires": [
+                [
+                    "da5941d7d76d5196"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "8bef47a0ce52ab82",
+            "type": "change",
+            "z": "f0e76c36111fc593",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "rate",
+                    "pt": "msg",
+                    "to": "$number($env('RATE')) * 1000\t",
+                    "tot": "jsonata",
+                    "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "payload",
+                    "pt": "msg",
+                    "to": "values_dict",
+                    "tot": "flow",
+                    "dc": true
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 275,
+            "y": 60,
+            "wires": [
+                [
+                    "0612d9088e372761"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "0612d9088e372761",
+            "type": "delay",
+            "z": "f0e76c36111fc593",
+            "name": "",
+            "pauseType": "rate",
+            "timeout": "5",
+            "timeoutUnits": "seconds",
+            "rate": "10",
+            "nbRateUnits": "5",
+            "rateUnits": "second",
+            "randomFirst": "1",
+            "randomLast": "5",
+            "randomUnits": "seconds",
+            "drop": true,
+            "allowrate": true,
+            "outputs": 1,
+            "x": 355,
+            "y": 60,
+            "wires": [
+                [
+                    "c47cb5c0090236ff"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "c661be97c8589b34",
+            "type": "delay",
+            "z": "f0e76c36111fc593",
+            "name": "",
+            "pauseType": "delay",
+            "timeout": "100",
+            "timeoutUnits": "milliseconds",
+            "rate": "1",
+            "nbRateUnits": "1",
+            "rateUnits": "second",
+            "randomFirst": "1",
+            "randomLast": "5",
+            "randomUnits": "seconds",
+            "drop": false,
+            "allowrate": false,
+            "outputs": 1,
+            "x": 455,
+            "y": 240,
+            "wires": [
+                [
+                    "bfbad6308f9b448b"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "ade5c4b456f06909",
+            "type": "junction",
+            "z": "f0e76c36111fc593",
+            "x": 840,
+            "y": 140,
+            "wires": [
+                []
             ]
-        ]
-    },
-    {
-        "id": "da5941d7d76d5196",
-        "type": "function",
-        "z": "f0e76c36111fc593",
-        "name": "function 1",
-        "func": "flow.set(\"values_dict\", {});\nflow.set(\"or_value\", null);\n\nreturn {\"payload\" : true};",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 320,
-        "y": 240,
-        "wires": [
-            [
-                "c661be97c8589b34"
-            ]
-        ]
-    },
-    {
-        "id": "8000f51d15975831",
-        "type": "switch",
-        "z": "f0e76c36111fc593",
-        "name": "",
-        "property": "reset",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "nnull"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 1,
-        "x": 155,
-        "y": 240,
-        "wires": [
-            [
-                "da5941d7d76d5196"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "8bef47a0ce52ab82",
-        "type": "change",
-        "z": "f0e76c36111fc593",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "rate",
-                "pt": "msg",
-                "to": "$number($env('RATE')) * 1000\t",
-                "tot": "jsonata",
-                "dc": true
-            },
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "values_dict",
-                "tot": "flow",
-                "dc": true
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 275,
-        "y": 60,
-        "wires": [
-            [
-                "0612d9088e372761"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "0612d9088e372761",
-        "type": "delay",
-        "z": "f0e76c36111fc593",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "10",
-        "nbRateUnits": "5",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": true,
-        "allowrate": true,
-        "outputs": 1,
-        "x": 355,
-        "y": 60,
-        "wires": [
-            [
-                "c47cb5c0090236ff"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "c661be97c8589b34",
-        "type": "delay",
-        "z": "f0e76c36111fc593",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "100",
-        "timeoutUnits": "milliseconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 455,
-        "y": 240,
-        "wires": [
-            [
-                "bfbad6308f9b448b"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "ade5c4b456f06909",
-        "type": "junction",
-        "z": "f0e76c36111fc593",
-        "x": 840,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    }
-		]
-    }
+        }
+    ]
+}

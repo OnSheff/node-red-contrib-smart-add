@@ -1,823 +1,822 @@
-
-    {
-        "id": "5d29c8da36bd8aa6",
-        "type": "subflow",
-        "name": "MB parser",
-        "info": "Converts the response from Modbus to the required data format.",
-        "category": "Smart add",
-        "in": [
-            {
-                "x": 100,
-                "y": 180,
-                "wires": [
-                    {
-                        "id": "9b3f6a583c5d302e"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 1040,
-                "y": 180,
-                "wires": [
-                    {
-                        "id": "bee25b2980f32b2e",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [
-            {
-                "name": "TYPE",
-                "type": "str",
-                "value": "1byte",
-                "ui": {
-                    "icon": "font-awesome/fa-reorder",
-                    "label": {
-                        "ru": "Type"
-                    },
-                    "type": "select",
-                    "opts": {
-                        "opts": [
-                            {
-                                "l": {
-                                    "ru": "1byte"
-                                },
-                                "v": "1byte"
-                            },
-                            {
-                                "l": {
-                                    "ru": "2byte"
-                                },
-                                "v": "2byte"
-                            },
-                            {
-                                "l": {
-                                    "ru": "discrete"
-                                },
-                                "v": "discrete"
-                            }
-                        ]
-                    }
-                }
-            },
-            {
-                "name": "SIGNAL",
-                "type": "str",
-                "value": "every",
-                "ui": {
-                    "icon": "font-awesome/fa-code-fork",
-                    "label": {
-                        "ru": "Send"
-                    },
-                    "type": "select",
-                    "opts": {
-                        "opts": [
-                            {
-                                "l": {
-                                    "ru": "every signal"
-                                },
-                                "v": "every"
-                            },
-                            {
-                                "l": {
-                                    "ru": "even"
-                                },
-                                "v": "even"
-                            },
-                            {
-                                "l": {
-                                    "ru": "odd"
-                                },
-                                "v": "odd"
-                            },
-                            {
-                                "l": {
-                                    "ru": "every third"
-                                },
-                                "v": "third"
-                            },
-                            {
-                                "l": {
-                                    "ru": "every fourth"
-                                },
-                                "v": "fourth"
-                            }
-                        ]
-                    }
-                }
-            },
-            {
-                "name": "SHIFT",
-                "type": "num",
-                "value": "0",
-                "ui": {
-                    "icon": "font-awesome/fa-arrows-h",
-                    "label": {
-                        "ru": "Register shift"
-                    },
-                    "type": "spinner",
-                    "opts": {
-                        "min": 0,
-                        "max": 100
-                    }
-                }
-            },
-            {
-                "name": "MODBUS_NODE",
-                "type": "str",
-                "value": "read",
-                "ui": {
-                    "label": {
-                        "ru": "Modbus node type"
-                    },
-                    "type": "select",
-                    "opts": {
-                        "opts": [
-                            {
-                                "l": {
-                                    "ru": "Reader"
-                                },
-                                "v": "read"
-                            },
-                            {
-                                "l": {
-                                    "ru": "Getter"
-                                },
-                                "v": "get"
-                            }
-                        ]
-                    }
-                }
-            },
-            {
-                "name": "MAX_MIN",
-                "type": "bool",
-                "value": "false",
-                "ui": {
-                    "icon": "font-awesome/fa-random",
-                    "label": {
-                        "ru": "Invers byte (Max Min)"
-                    },
-                    "type": "checkbox"
-                }
-            },
-            {
-                "name": "RATE",
-                "type": "num",
-                "value": "50",
-                "ui": {
-                    "icon": "font-awesome/fa-bar-chart-o",
-                    "label": {
-                        "ru": "Rate in ms."
-                    },
-                    "type": "spinner",
-                    "opts": {
-                        "min": 1,
-                        "max": 10000
-                    }
-                }
-            }
-        ],
-        "meta": {
-			"type": "Modbus response parser",
-            "version": "1.0.4",
-            "author": "Anton Shefov <a.shefov@gmail.com>",
-            "desc": "Converts the MB response to the required data format",
-            "keywords": "node-red",
-            "license": "MIT"
-        },
-        "color": "#7FC7FF",
-        "icon": "modbus.png",
-		"status": {
-            "x": 1040,
-            "y": 300,
+{
+    "id": "5d29c8da36bd8aa6",
+    "type": "subflow",
+    "name": "MB parser",
+    "info": "Converts the response from Modbus to the required data format.",
+    "category": "Smart add",
+    "in": [
+        {
+            "x": 100,
+            "y": 180,
             "wires": [
                 {
-                    "id": "532d724ce6a2bda7",
+                    "id": "9b3f6a583c5d302e"
+                }
+            ]
+        }
+    ],
+    "out": [
+        {
+            "x": 1040,
+            "y": 180,
+            "wires": [
+                {
+                    "id": "bee25b2980f32b2e",
                     "port": 0
                 }
             ]
+        }
+    ],
+    "env": [
+        {
+            "name": "TYPE",
+            "type": "str",
+            "value": "1byte",
+            "ui": {
+                "icon": "font-awesome/fa-reorder",
+                "label": {
+                    "ru": "Type"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "ru": "1byte"
+                            },
+                            "v": "1byte"
+                        },
+                        {
+                            "l": {
+                                "ru": "2byte"
+                            },
+                            "v": "2byte"
+                        },
+                        {
+                            "l": {
+                                "ru": "discrete"
+                            },
+                            "v": "discrete"
+                        }
+                    ]
+                }
+            }
         },
-		"flow" : [
-		{
-        "id": "55c3bfe877a559b8",
-        "type": "function",
-        "z": "5d29c8da36bd8aa6",
-        "name": "Convert each int to string binary",
-        "func": "const max_min = env.get('MAX_MIN');\n\nvar a = msg.payload[0].toString(2);\na = \"0000000000000000\".substring(a.length) + a;\n\nvar b = msg.payload[1].toString(2);\nb = \"0000000000000000\".substring(b.length) + b;\n\nif (max_min === true)\n    msg.payload = a + b;\nelse\n    msg.payload = b + a;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 715,
-        "y": 180,
-        "wires": [
-            [
-                "e0b4185d7fce4870"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "9c565e394dac5880",
-        "type": "split",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": "2",
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "topic",
-        "x": 475,
-        "y": 180,
-        "wires": [
-            [
-                "47bd06f73f8f5725"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "c805664670150c68",
-        "type": "change",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "$number(topic) + $number(parts.index) * 2",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "signal",
-                "pt": "msg",
-                "to": "$join([\t    signal, \t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 2)), \"false\",\"even\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 2)), \"true\",\"odd\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 3)), \"false\",\"third\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 4)), \"false\",\"fourth\")\t    ], \"_\")",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "parts",
-                "pt": "msg"
+        {
+            "name": "SIGNAL",
+            "type": "str",
+            "value": "every",
+            "ui": {
+                "icon": "font-awesome/fa-code-fork",
+                "label": {
+                    "ru": "Send"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "ru": "every signal"
+                            },
+                            "v": "every"
+                        },
+                        {
+                            "l": {
+                                "ru": "even"
+                            },
+                            "v": "even"
+                        },
+                        {
+                            "l": {
+                                "ru": "odd"
+                            },
+                            "v": "odd"
+                        },
+                        {
+                            "l": {
+                                "ru": "every third"
+                            },
+                            "v": "third"
+                        },
+                        {
+                            "l": {
+                                "ru": "every fourth"
+                            },
+                            "v": "fourth"
+                        }
+                    ]
+                }
             }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 635,
-        "y": 180,
-        "wires": [
-            [
-                "55c3bfe877a559b8"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "e0b4185d7fce4870",
-        "type": "delay",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": true,
-        "outputs": 1,
-        "x": 795,
-        "y": 180,
-        "wires": [
-            [
-                "ee6e904c3c9c4227"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "c2042fd6fa03cf5e",
-        "type": "switch",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "property": "TYPE",
-        "propertyType": "env",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "1byte",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "2byte",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "discrete",
-                "vt": "str"
+        },
+        {
+            "name": "SHIFT",
+            "type": "num",
+            "value": "0",
+            "ui": {
+                "icon": "font-awesome/fa-arrows-h",
+                "label": {
+                    "ru": "Register shift"
+                },
+                "type": "spinner",
+                "opts": {
+                    "min": 0,
+                    "max": 100
+                }
             }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 3,
-        "x": 375,
-        "y": 180,
-        "wires": [
-            [
-                "f4762b9889bbc04d"
-            ],
-            [
-                "9c565e394dac5880"
-            ],
-            [
-                "7eb392e57c4515e5"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "d1ac77c885b4f833",
-        "type": "change",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "rules": [
-            {
-                "t": "delete",
-                "p": "topic",
-                "pt": "msg"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "$number(input.payload.address)",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "responseBuffer",
-                "pt": "msg"
-            },
-            {
-                "t": "delete",
-                "p": "input",
-                "pt": "msg"
-            },
-            {
-                "t": "delete",
-                "p": "sendingNodeId",
-                "pt": "msg"
-            },
-            {
-                "t": "set",
-                "p": "signal",
-                "pt": "msg",
-                "to": "every",
-                "tot": "str"
+        },
+        {
+            "name": "MODBUS_NODE",
+            "type": "str",
+            "value": "read",
+            "ui": {
+                "label": {
+                    "ru": "Modbus node type"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "ru": "Reader"
+                            },
+                            "v": "read"
+                        },
+                        {
+                            "l": {
+                                "ru": "Getter"
+                            },
+                            "v": "get"
+                        }
+                    ]
+                }
             }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 285,
-        "y": 140,
-        "wires": [
-            [
-                "c2042fd6fa03cf5e"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "7eb392e57c4515e5",
-        "type": "split",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": "1",
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "topic",
-        "x": 475,
-        "y": 260,
-        "wires": [
-            [
-                "718397d09d6cf077"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "6b5e3148c23cc82c",
-        "type": "change",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "$number(topic) + $number(parts.index)",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "signal",
-                "pt": "msg",
-                "to": "$join([\t    signal, \t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 2)), \"false\",\"even\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 2)), \"true\",\"odd\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 3)), \"false\",\"third\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 4)), \"false\",\"fourth\")\t    ], \"_\")",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "parts",
-                "pt": "msg"
+        },
+        {
+            "name": "MAX_MIN",
+            "type": "bool",
+            "value": "false",
+            "ui": {
+                "icon": "font-awesome/fa-random",
+                "label": {
+                    "ru": "Invers byte (Max Min)"
+                },
+                "type": "checkbox"
             }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 635,
-        "y": 260,
-        "wires": [
-            [
-                "e0b4185d7fce4870"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "f4762b9889bbc04d",
-        "type": "split",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": "1",
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "topic",
-        "x": 475,
-        "y": 100,
-        "wires": [
-            [
-                "73cf43eb0d7c022b"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "091fa6bbea8ecc8d",
-        "type": "change",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "$number(topic) + $number(parts.index)",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "signal",
-                "pt": "msg",
-                "to": "$join([\t    signal, \t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 2)), \"false\",\"even\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 2)), \"true\",\"odd\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 3)), \"false\",\"third\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 4)), \"false\",\"fourth\")\t    ], \"_\")",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "parts",
-                "pt": "msg"
+        },
+        {
+            "name": "RATE",
+            "type": "num",
+            "value": "50",
+            "ui": {
+                "icon": "font-awesome/fa-bar-chart-o",
+                "label": {
+                    "ru": "Rate in ms."
+                },
+                "type": "spinner",
+                "opts": {
+                    "min": 1,
+                    "max": 10000
+                }
             }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 635,
-        "y": 100,
-        "wires": [
-            [
-                "e0b4185d7fce4870"
-            ]
-        ],
-        "l": false
+        }
+    ],
+    "meta": {
+        "type": "Modbus response parser",
+        "version": "1.0.4",
+        "author": "Anton Shefov <a.shefov@gmail.com>",
+        "desc": "Converts the MB response to the required data format",
+        "keywords": "node-red",
+        "license": "MIT"
     },
-    {
-        "id": "ee6e904c3c9c4227",
-        "type": "switch",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "property": "signal",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "cont",
-                "v": "SIGNAL",
-                "vt": "env"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 1,
-        "x": 875,
-        "y": 180,
-        "wires": [
-            [
-                "bee25b2980f32b2e"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "bee25b2980f32b2e",
-        "type": "change",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "rules": [
-            {
-                "t": "delete",
-                "p": "signal",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 955,
-        "y": 180,
-        "wires": [
-            []
-        ],
-        "l": false
-    },
-    {
-        "id": "73cf43eb0d7c022b",
-        "type": "switch",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "nnull"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 555,
-        "y": 100,
-        "wires": [
-            [
-                "091fa6bbea8ecc8d"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "47bd06f73f8f5725",
-        "type": "switch",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "nnull"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 555,
-        "y": 180,
-        "wires": [
-            [
-                "c805664670150c68"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "718397d09d6cf077",
-        "type": "switch",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "nnull"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 555,
-        "y": 260,
-        "wires": [
-            [
-                "6b5e3148c23cc82c"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "118a17df3c841bef",
-        "type": "change",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "rules": [
-            {
-                "t": "delete",
-                "p": "topic",
-                "pt": "msg"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "$number(modbusRequest.address)",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "queueLengthByUnitId",
-                "pt": "msg"
-            },
-            {
-                "t": "delete",
-                "p": "queueUnitId",
-                "pt": "msg"
-            },
-            {
-                "t": "delete",
-                "p": "modbusRequest",
-                "pt": "msg"
-            },
-            {
-                "t": "delete",
-                "p": "responseBuffer",
-                "pt": "msg"
-            },
-            {
-                "t": "set",
-                "p": "signal",
-                "pt": "msg",
-                "to": "every",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 285,
-        "y": 220,
-        "wires": [
-            [
-                "c2042fd6fa03cf5e"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "9b3f6a583c5d302e",
-        "type": "switch",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "property": "MODBUS_NODE",
-        "propertyType": "env",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "read",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "get",
-                "vt": "str"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 195,
-        "y": 180,
-        "wires": [
-            [
-                "d1ac77c885b4f833"
-            ],
-            [
-                "118a17df3c841bef"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "49fe5019ce12172c",
-        "type": "inject",
-        "z": "5d29c8da36bd8aa6",
-        "name": "Set RATE",
-        "props": [
-            {
-                "p": "rate",
-                "v": "RATE",
-                "vt": "env"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 700,
-        "y": 40,
-        "wires": [
-            [
-                "e0b4185d7fce4870"
-            ]
-        ]
-    },
-    {
-        "id": "90c8f370c5622b2d",
-        "type": "status",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "scope": [
-            "e0b4185d7fce4870"
-        ],
-        "x": 820,
+    "color": "#7FC7FF",
+    "icon": "modbus.png",
+    "status": {
+        "x": 1040,
         "y": 300,
         "wires": [
-            [
-                "532d724ce6a2bda7"
-            ]
+            {
+                "id": "532d724ce6a2bda7",
+                "port": 0
+            }
         ]
     },
-    {
-        "id": "532d724ce6a2bda7",
-        "type": "change",
-        "z": "5d29c8da36bd8aa6",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "status",
-                "tot": "msg",
-                "dc": true
-            },
-            {
-                "t": "delete",
-                "p": "source",
-                "pt": "msg"
-            },
-            {
-                "t": "delete",
-                "p": "status",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 955,
-        "y": 300,
-        "wires": [
-            []
-        ],
-        "l": false
-    }
-		]
-    }
+    "flow": [
+        {
+            "id": "55c3bfe877a559b8",
+            "type": "function",
+            "z": "5d29c8da36bd8aa6",
+            "name": "Convert each int to string binary",
+            "func": "const max_min = env.get('MAX_MIN');\n\nvar a = msg.payload[0].toString(2);\na = \"0000000000000000\".substring(a.length) + a;\n\nvar b = msg.payload[1].toString(2);\nb = \"0000000000000000\".substring(b.length) + b;\n\nif (max_min === true)\n    msg.payload = a + b;\nelse\n    msg.payload = b + a;\nreturn msg;",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 715,
+            "y": 180,
+            "wires": [
+                [
+                    "e0b4185d7fce4870"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "9c565e394dac5880",
+            "type": "split",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "splt": "\\n",
+            "spltType": "str",
+            "arraySplt": "2",
+            "arraySpltType": "len",
+            "stream": false,
+            "addname": "topic",
+            "x": 475,
+            "y": 180,
+            "wires": [
+                [
+                    "47bd06f73f8f5725"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "c805664670150c68",
+            "type": "change",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "$number(topic) + $number(parts.index) * 2",
+                    "tot": "jsonata"
+                },
+                {
+                    "t": "set",
+                    "p": "signal",
+                    "pt": "msg",
+                    "to": "$join([\t    signal, \t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 2)), \"false\",\"even\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 2)), \"true\",\"odd\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 3)), \"false\",\"third\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 4)), \"false\",\"fourth\")\t    ], \"_\")",
+                    "tot": "jsonata"
+                },
+                {
+                    "t": "delete",
+                    "p": "parts",
+                    "pt": "msg"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 635,
+            "y": 180,
+            "wires": [
+                [
+                    "55c3bfe877a559b8"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "e0b4185d7fce4870",
+            "type": "delay",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "pauseType": "rate",
+            "timeout": "5",
+            "timeoutUnits": "seconds",
+            "rate": "1",
+            "nbRateUnits": "1",
+            "rateUnits": "second",
+            "randomFirst": "1",
+            "randomLast": "5",
+            "randomUnits": "seconds",
+            "drop": false,
+            "allowrate": true,
+            "outputs": 1,
+            "x": 795,
+            "y": 180,
+            "wires": [
+                [
+                    "ee6e904c3c9c4227"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "c2042fd6fa03cf5e",
+            "type": "switch",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "property": "TYPE",
+            "propertyType": "env",
+            "rules": [
+                {
+                    "t": "eq",
+                    "v": "1byte",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "2byte",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "discrete",
+                    "vt": "str"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 3,
+            "x": 375,
+            "y": 180,
+            "wires": [
+                [
+                    "f4762b9889bbc04d"
+                ],
+                [
+                    "9c565e394dac5880"
+                ],
+                [
+                    "7eb392e57c4515e5"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "d1ac77c885b4f833",
+            "type": "change",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "rules": [
+                {
+                    "t": "delete",
+                    "p": "topic",
+                    "pt": "msg"
+                },
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "$number(input.payload.address)",
+                    "tot": "jsonata"
+                },
+                {
+                    "t": "delete",
+                    "p": "responseBuffer",
+                    "pt": "msg"
+                },
+                {
+                    "t": "delete",
+                    "p": "input",
+                    "pt": "msg"
+                },
+                {
+                    "t": "delete",
+                    "p": "sendingNodeId",
+                    "pt": "msg"
+                },
+                {
+                    "t": "set",
+                    "p": "signal",
+                    "pt": "msg",
+                    "to": "every",
+                    "tot": "str"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 285,
+            "y": 140,
+            "wires": [
+                [
+                    "c2042fd6fa03cf5e"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "7eb392e57c4515e5",
+            "type": "split",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "splt": "\\n",
+            "spltType": "str",
+            "arraySplt": "1",
+            "arraySpltType": "len",
+            "stream": false,
+            "addname": "topic",
+            "x": 475,
+            "y": 260,
+            "wires": [
+                [
+                    "718397d09d6cf077"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "6b5e3148c23cc82c",
+            "type": "change",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "$number(topic) + $number(parts.index)",
+                    "tot": "jsonata"
+                },
+                {
+                    "t": "set",
+                    "p": "signal",
+                    "pt": "msg",
+                    "to": "$join([\t    signal, \t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 2)), \"false\",\"even\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 2)), \"true\",\"odd\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 3)), \"false\",\"third\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 4)), \"false\",\"fourth\")\t    ], \"_\")",
+                    "tot": "jsonata"
+                },
+                {
+                    "t": "delete",
+                    "p": "parts",
+                    "pt": "msg"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 635,
+            "y": 260,
+            "wires": [
+                [
+                    "e0b4185d7fce4870"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "f4762b9889bbc04d",
+            "type": "split",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "splt": "\\n",
+            "spltType": "str",
+            "arraySplt": "1",
+            "arraySpltType": "len",
+            "stream": false,
+            "addname": "topic",
+            "x": 475,
+            "y": 100,
+            "wires": [
+                [
+                    "73cf43eb0d7c022b"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "091fa6bbea8ecc8d",
+            "type": "change",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "$number(topic) + $number(parts.index)",
+                    "tot": "jsonata"
+                },
+                {
+                    "t": "set",
+                    "p": "signal",
+                    "pt": "msg",
+                    "to": "$join([\t    signal, \t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 2)), \"false\",\"even\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 2)), \"true\",\"odd\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 3)), \"false\",\"third\"),\t    $replace($string($boolean($number(parts.index + $env('SHIFT')) % 4)), \"false\",\"fourth\")\t    ], \"_\")",
+                    "tot": "jsonata"
+                },
+                {
+                    "t": "delete",
+                    "p": "parts",
+                    "pt": "msg"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 635,
+            "y": 100,
+            "wires": [
+                [
+                    "e0b4185d7fce4870"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "ee6e904c3c9c4227",
+            "type": "switch",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "property": "signal",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "cont",
+                    "v": "SIGNAL",
+                    "vt": "env"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 1,
+            "x": 875,
+            "y": 180,
+            "wires": [
+                [
+                    "bee25b2980f32b2e"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "bee25b2980f32b2e",
+            "type": "change",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "rules": [
+                {
+                    "t": "delete",
+                    "p": "signal",
+                    "pt": "msg"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 955,
+            "y": 180,
+            "wires": [
+                []
+            ],
+            "l": false
+        },
+        {
+            "id": "73cf43eb0d7c022b",
+            "type": "switch",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "property": "payload",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "nnull"
+                }
+            ],
+            "checkall": "true",
+            "repair": false,
+            "outputs": 1,
+            "x": 555,
+            "y": 100,
+            "wires": [
+                [
+                    "091fa6bbea8ecc8d"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "47bd06f73f8f5725",
+            "type": "switch",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "property": "payload",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "nnull"
+                }
+            ],
+            "checkall": "true",
+            "repair": false,
+            "outputs": 1,
+            "x": 555,
+            "y": 180,
+            "wires": [
+                [
+                    "c805664670150c68"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "718397d09d6cf077",
+            "type": "switch",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "property": "payload",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "nnull"
+                }
+            ],
+            "checkall": "true",
+            "repair": false,
+            "outputs": 1,
+            "x": 555,
+            "y": 260,
+            "wires": [
+                [
+                    "6b5e3148c23cc82c"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "118a17df3c841bef",
+            "type": "change",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "rules": [
+                {
+                    "t": "delete",
+                    "p": "topic",
+                    "pt": "msg"
+                },
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "$number(modbusRequest.address)",
+                    "tot": "jsonata"
+                },
+                {
+                    "t": "delete",
+                    "p": "queueLengthByUnitId",
+                    "pt": "msg"
+                },
+                {
+                    "t": "delete",
+                    "p": "queueUnitId",
+                    "pt": "msg"
+                },
+                {
+                    "t": "delete",
+                    "p": "modbusRequest",
+                    "pt": "msg"
+                },
+                {
+                    "t": "delete",
+                    "p": "responseBuffer",
+                    "pt": "msg"
+                },
+                {
+                    "t": "set",
+                    "p": "signal",
+                    "pt": "msg",
+                    "to": "every",
+                    "tot": "str"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 285,
+            "y": 220,
+            "wires": [
+                [
+                    "c2042fd6fa03cf5e"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "9b3f6a583c5d302e",
+            "type": "switch",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "property": "MODBUS_NODE",
+            "propertyType": "env",
+            "rules": [
+                {
+                    "t": "eq",
+                    "v": "read",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "get",
+                    "vt": "str"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 195,
+            "y": 180,
+            "wires": [
+                [
+                    "d1ac77c885b4f833"
+                ],
+                [
+                    "118a17df3c841bef"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "49fe5019ce12172c",
+            "type": "inject",
+            "z": "5d29c8da36bd8aa6",
+            "name": "Set RATE",
+            "props": [
+                {
+                    "p": "rate",
+                    "v": "RATE",
+                    "vt": "env"
+                }
+            ],
+            "repeat": "",
+            "crontab": "",
+            "once": true,
+            "onceDelay": 0.1,
+            "topic": "",
+            "x": 700,
+            "y": 40,
+            "wires": [
+                [
+                    "e0b4185d7fce4870"
+                ]
+            ]
+        },
+        {
+            "id": "90c8f370c5622b2d",
+            "type": "status",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "scope": [
+                "e0b4185d7fce4870"
+            ],
+            "x": 820,
+            "y": 300,
+            "wires": [
+                [
+                    "532d724ce6a2bda7"
+                ]
+            ]
+        },
+        {
+            "id": "532d724ce6a2bda7",
+            "type": "change",
+            "z": "5d29c8da36bd8aa6",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "payload",
+                    "pt": "msg",
+                    "to": "status",
+                    "tot": "msg",
+                    "dc": true
+                },
+                {
+                    "t": "delete",
+                    "p": "source",
+                    "pt": "msg"
+                },
+                {
+                    "t": "delete",
+                    "p": "status",
+                    "pt": "msg"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 955,
+            "y": 300,
+            "wires": [
+                []
+            ],
+            "l": false
+        }
+    ]
+}
