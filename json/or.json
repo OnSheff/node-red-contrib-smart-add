@@ -2,23 +2,23 @@
     "id": "f0e76c36111fc593",
     "type": "subflow",
     "name": "OR",
-    "info": "Logical OR",
+    "info": "Performs the function of a logical OR.\n\n\nIf `msg.topic` = **get_value** is received, the current node value is sent.\n\nIf `msg.topic` = **get_dict** is received, the current dictvalues dictionary is sent.\n\nIf `msg.reset` = **true** is received, the values are reset.\n\n\n\n### Configuration\n\n **Inverse output**\n\nIf set to **true**, the output value will be inverted.\n\n`Default:` **false**\n\n---\n\n **Set msg.topic**\n\nYou can set msg.topic for the output flow.\n\n---\n\n **Rate in sec.**\n\nYou can limit the number of messages sent by the node.\n\n`Available range:` **0 - 3600**\n\n`Default:` **1 mes/sec**\n",
     "category": "Smart add",
     "in": [
         {
-            "x": 60,
-            "y": 140,
+            "x": 100,
+            "y": 160,
             "wires": [
                 {
-                    "id": "a8e3fa3858e87386"
+                    "id": "8000f51d15975831"
                 }
             ]
         }
     ],
     "out": [
         {
-            "x": 940,
-            "y": 100,
+            "x": 1000,
+            "y": 160,
             "wires": [
                 {
                     "id": "ade5c4b456f06909",
@@ -74,7 +74,7 @@
     ],
     "meta": {
         "type": "Logical OR",
-        "version": "1.1.1",
+        "version": "1.2.2",
         "author": "Anton Shefov <a.shefov@gmail.com>",
         "desc": "Logical OR",
         "keywords": "node-red",
@@ -83,15 +83,15 @@
     "color": "#7FC7FF",
     "icon": "font-awesome/fa-code-fork",
     "status": {
-        "x": 940,
-        "y": 180,
+        "x": 1000,
+        "y": 280,
         "wires": [
             {
-                "id": "ade5c4b456f06909",
+                "id": "bfbad6308f9b448b",
                 "port": 0
             },
             {
-                "id": "bfbad6308f9b448b",
+                "id": "a3a885dda83b371f",
                 "port": 0
             }
         ]
@@ -109,8 +109,8 @@
             "initialize": "",
             "finalize": "",
             "libs": [],
-            "x": 310,
-            "y": 180,
+            "x": 450,
+            "y": 200,
             "wires": [
                 [
                     "1443680d28fd9b62"
@@ -135,8 +135,8 @@
             "checkall": "false",
             "repair": false,
             "outputs": 2,
-            "x": 455,
-            "y": 180,
+            "x": 595,
+            "y": 200,
             "wires": [
                 [
                     "821698c641957bfd"
@@ -165,8 +165,8 @@
             "checkall": "false",
             "repair": false,
             "outputs": 2,
-            "x": 695,
-            "y": 140,
+            "x": 755,
+            "y": 160,
             "wires": [
                 [
                     "e2098b594f23a742"
@@ -196,8 +196,8 @@
             "from": "",
             "to": "",
             "reg": false,
-            "x": 775,
-            "y": 100,
+            "x": 835,
+            "y": 120,
             "wires": [
                 [
                     "ade5c4b456f06909"
@@ -222,8 +222,8 @@
             "drop": true,
             "allowrate": true,
             "outputs": 1,
-            "x": 355,
-            "y": 120,
+            "x": 495,
+            "y": 140,
             "wires": [
                 [
                     "1443680d28fd9b62"
@@ -256,8 +256,8 @@
             "checkall": "false",
             "repair": false,
             "outputs": 3,
-            "x": 155,
-            "y": 140,
+            "x": 295,
+            "y": 160,
             "wires": [
                 [
                     "8bef47a0ce52ab82"
@@ -290,8 +290,8 @@
             "from": "",
             "to": "",
             "reg": false,
-            "x": 535,
-            "y": 140,
+            "x": 675,
+            "y": 160,
             "wires": [
                 [
                     "c47cb5c0090236ff"
@@ -327,8 +327,8 @@
             "from": "",
             "to": "",
             "reg": false,
-            "x": 275,
-            "y": 120,
+            "x": 415,
+            "y": 140,
             "wires": [
                 [
                     "6f5ec43f77d1a8c8"
@@ -347,8 +347,8 @@
             "syntax": "mustache",
             "template": "{\n    \"fill\": \"grey\",\n    \"shape\": \"ring\",\n    \"text\": \"no values\"\n}",
             "output": "json",
-            "x": 740,
-            "y": 240,
+            "x": 800,
+            "y": 320,
             "wires": [
                 []
             ]
@@ -370,8 +370,8 @@
             "topic": "",
             "payload": "true",
             "payloadType": "bool",
-            "x": 170,
-            "y": 300,
+            "x": 270,
+            "y": 320,
             "wires": [
                 [
                     "da5941d7d76d5196"
@@ -382,17 +382,20 @@
             "id": "da5941d7d76d5196",
             "type": "function",
             "z": "f0e76c36111fc593",
-            "name": "function 1",
-            "func": "flow.set(\"values_dict\", {});\nflow.set(\"or_value\", null);\n\nreturn {\"payload\" : true};",
-            "outputs": 1,
+            "name": "Reset",
+            "func": "if (msg.topic != null){\n    var values_dict = flow.get(\"values_dict\");\n    var or_value = false;\n    try {\n        delete values_dict[msg.topic];\n        flow.set(\"values_dict\",values_dict);\n    } catch {}\n    if (Object.keys(values_dict).length != 0){\n        for (let key in values_dict){\n            if (values_dict[key]) { or_value = true;}\n        }\n        flow.set(\"or_value\", or_value);\n        return [{ \"payload\": or_value }, null];\n    } else {\n        flow.set(\"or_value\", null);\n        return [null, { \"payload\": true }];\n    }\n} else {\n    flow.set(\"values_dict\", {});\n    flow.set(\"or_value\", null);\n    return [null, { \"payload\": true }];\n}",
+            "outputs": 2,
             "timeout": 0,
             "noerr": 0,
             "initialize": "",
             "finalize": "",
             "libs": [],
-            "x": 320,
-            "y": 240,
+            "x": 450,
+            "y": 260,
             "wires": [
+                [
+                    "1443680d28fd9b62"
+                ],
                 [
                     "c661be97c8589b34"
                 ]
@@ -408,16 +411,22 @@
             "rules": [
                 {
                     "t": "nnull"
+                },
+                {
+                    "t": "else"
                 }
             ],
             "checkall": "false",
             "repair": false,
-            "outputs": 1,
-            "x": 155,
-            "y": 240,
+            "outputs": 2,
+            "x": 195,
+            "y": 160,
             "wires": [
                 [
-                    "da5941d7d76d5196"
+                    "b06473f0b04a13d9"
+                ],
+                [
+                    "a8e3fa3858e87386"
                 ]
             ],
             "l": false
@@ -450,8 +459,8 @@
             "from": "",
             "to": "",
             "reg": false,
-            "x": 275,
-            "y": 60,
+            "x": 415,
+            "y": 80,
             "wires": [
                 [
                     "0612d9088e372761"
@@ -476,8 +485,8 @@
             "drop": true,
             "allowrate": true,
             "outputs": 1,
-            "x": 355,
-            "y": 60,
+            "x": 495,
+            "y": 80,
             "wires": [
                 [
                     "c47cb5c0090236ff"
@@ -502,8 +511,8 @@
             "drop": false,
             "allowrate": false,
             "outputs": 1,
-            "x": 455,
-            "y": 240,
+            "x": 595,
+            "y": 320,
             "wires": [
                 [
                     "bfbad6308f9b448b"
@@ -512,13 +521,62 @@
             "l": false
         },
         {
+            "id": "b06473f0b04a13d9",
+            "type": "link out",
+            "z": "f0e76c36111fc593",
+            "name": "link out 8",
+            "mode": "link",
+            "links": [
+                "91d6571f70dd7307"
+            ],
+            "x": 295,
+            "y": 100,
+            "wires": []
+        },
+        {
+            "id": "91d6571f70dd7307",
+            "type": "link in",
+            "z": "f0e76c36111fc593",
+            "name": "link in 5",
+            "links": [
+                "b06473f0b04a13d9"
+            ],
+            "x": 305,
+            "y": 260,
+            "wires": [
+                [
+                    "da5941d7d76d5196"
+                ]
+            ]
+        },
+        {
+            "id": "a3a885dda83b371f",
+            "type": "function",
+            "z": "f0e76c36111fc593",
+            "name": "counter",
+            "func": "var text = Object.keys(flow.get('values_dict')).length + ': ' + msg.payload;\n\n\nreturn {\n    \"payload\" : {\n        \"fill\": \"blue\",\n        \"shape\": \"dot\",\n        \"text\": text\n    }\n};",
+            "outputs": 1,
+            "timeout": 0,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 800,
+            "y": 240,
+            "wires": [
+                []
+            ]
+        },
+        {
             "id": "ade5c4b456f06909",
             "type": "junction",
             "z": "f0e76c36111fc593",
-            "x": 840,
-            "y": 140,
+            "x": 900,
+            "y": 160,
             "wires": [
-                []
+                [
+                    "a3a885dda83b371f"
+                ]
             ]
         }
     ]
