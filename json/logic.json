@@ -17,7 +17,7 @@
   ],
   "out": [
     {
-      "x": 1080,
+      "x": 920,
       "y": 200,
       "wires": [
         {
@@ -25,7 +25,7 @@
           "port": 0
         },
         {
-          "id": "070c45bd40494155",
+          "id": "90c6d366c3542ed8",
           "port": 0
         }
       ]
@@ -116,7 +116,7 @@
   ],
   "meta": {
     "type": "Binary logic",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "author": "Anton Shefov <a.shefov@gmail.com>",
     "desc": "Binary logic node",
     "license": "MIT"
@@ -124,7 +124,7 @@
   "color": "#7FC7FF",
   "icon": "font-awesome/fa-microchip",
   "status": {
-    "x": 1080,
+    "x": 920,
     "y": 280,
     "wires": [
       {

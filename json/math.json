@@ -25,11 +25,11 @@
                     "port": 0
                 },
                 {
-                    "id": "f6af88283ed51f2d",
+                    "id": "2a65aa4c4f7762fe",
                     "port": 0
                 },
                 {
-                    "id": "2a65aa4c4f7762fe",
+                    "id": "9882c7aca99adbfb",
                     "port": 0
                 }
             ]
@@ -153,7 +153,7 @@
     ],
     "meta": {
         "type": "Math",
-        "version": "1.0.2",
+        "version": "1.0.3",
         "author": "Anton Shefov <a.shefov@gmail.com>",
         "desc": "Mathematical operations",
         "license": "MIT"
@@ -162,7 +162,7 @@
     "icon": "node-red/function.svg",
     "status": {
         "x": 960,
-        "y": 380,
+        "y": 480,
         "wires": [
             {
                 "id": "bbbea093b1f44871",
