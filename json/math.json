@@ -1,0 +1,947 @@
+{
+    "id": "d56a1dd582e82a09",
+    "type": "subflow",
+    "name": "Math",
+    "info": "Performs the selected mathematical operation.\n\nThe node accepts numeric values and writes them to a dictionary to calculate a mathematical function.\nThe `msg.topic` is used as the key.\n\n### Intputs\n\n1. To send the current node value.\n: topic (string) : **get_value**\n\n2. To send the current values dictionary.\n: topic (string) : **get_dict**\n\n3. To send the current sum value.\n: topic (string) : **get_sum**\n\n4. To send the current mean value.\n: topic (string) : **get_mean**\n\n5. To reset values in dictionary.\n: reset (binary) : **true**\n: topic (string) : **any** \n`Note!`\nIt is applied separately for each `msg.topic`.\nIf `msg.topic` is not specified, the whole dictionary is reset.\n\n---\n\n\n### Outputs\n1. The result of selected mathematical operation\n: topic (string) : **topic**\n: payload (numeric) : The result of selected mathematical operation.\n\n2. Sum value\n: topic (string) : **sum**\n: payload (numeric) : Current sum value.\n\n3. Mean value\n: topic (string) : **mean**\n: payload (numeric) : Current mean value.\n\n4. Objects dict\n: topic (string) : **objects_dict**\n: payload (dict) : Dictionary with all accepted data.\n\n\n---\n\n\n### Configuration\n\n **Operation**\n\nChoose the type of mathematical operation.\n\n**Sum / Mean**\n\n`Default:` **Sum**\n\n---\n\n **Set msg.topic**\n\nYou can set msg.topic for the output flow.\n\n---\n\n **Round to**\n\nYou can round the resulting value.\n\n`Note!` It is used for all operations.\n\n`Default:` **0.1**\n\n---\n\n **Rate in sec.**\n\nYou can limit the number of messages sent by the node.\n\n`Note!` It is used only when requesting the current value or values dictionary.\n\n`Available range:` **0 - 3600**\n\n`Default:` **1 mes/sec**\n\n\n---\n\n**Block unless value has changed**\n\nThe output is blocked unless value has changed (ignore initial value).\n\n`Note!` This is gnored when requesting the current value.\n\n`Default:` **false**",
+    "category": "Smart add sf",
+    "in": [
+        {
+            "x": 60,
+            "y": 260,
+            "wires": [
+                {
+                    "id": "48595caeed4c16e9"
+                }
+            ]
+        }
+    ],
+    "out": [
+        {
+            "x": 960,
+            "y": 300,
+            "wires": [
+                {
+                    "id": "c9f7858f7e8e7148",
+                    "port": 0
+                },
+                {
+                    "id": "f6af88283ed51f2d",
+                    "port": 0
+                },
+                {
+                    "id": "2a65aa4c4f7762fe",
+                    "port": 0
+                }
+            ]
+        }
+    ],
+    "env": [
+        {
+            "name": "TYPE",
+            "type": "str",
+            "value": "sum",
+            "ui": {
+                "label": {
+                    "ru": "Operation"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "ru": "Sum"
+                            },
+                            "v": "sum"
+                        },
+                        {
+                            "l": {
+                                "ru": "Mean"
+                            },
+                            "v": "mean"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "TOPIC",
+            "type": "str",
+            "value": "",
+            "ui": {
+                "label": {
+                    "ru": "Set msg.topic"
+                },
+                "type": "input",
+                "opts": {
+                    "types": [
+                        "str"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "ROUND",
+            "type": "str",
+            "value": "10",
+            "ui": {
+                "label": {
+                    "ru": "Round to"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "ru": "1"
+                            },
+                            "v": "1"
+                        },
+                        {
+                            "l": {
+                                "ru": "0.1"
+                            },
+                            "v": "10"
+                        },
+                        {
+                            "l": {
+                                "ru": "0.01"
+                            },
+                            "v": "100"
+                        },
+                        {
+                            "l": {
+                                "ru": "0.001"
+                            },
+                            "v": "1000"
+                        },
+                        {
+                            "l": {
+                                "ru": "0.0001"
+                            },
+                            "v": "10000"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "RATE",
+            "type": "num",
+            "value": "1",
+            "ui": {
+                "type": "spinner",
+                "opts": {
+                    "min": 0,
+                    "max": 3600
+                }
+            }
+        },
+        {
+            "name": "RBE",
+            "type": "bool",
+            "value": "false",
+            "ui": {
+                "label": {
+                    "ru": "Block unless value has changed"
+                },
+                "type": "checkbox"
+            }
+        }
+    ],
+    "meta": {
+        "type": "Math",
+        "version": "1.0.1",
+        "author": "Anton Shefov <a.shefov@gmail.com>",
+        "desc": "Mathematical operations",
+        "license": "MIT"
+    },
+    "color": "#7FC7FF",
+    "icon": "node-red/function.svg",
+    "status": {
+        "x": 960,
+        "y": 380,
+        "wires": [
+            {
+                "id": "bbbea093b1f44871",
+                "port": 0
+            },
+            {
+                "id": "670be3530db3e182",
+                "port": 0
+            }
+        ]
+    },
+    "flow": [
+        {
+            "id": "85ef35ae1ad9ba25",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "TOPIC",
+            "propertyType": "env",
+            "rules": [
+                {
+                    "t": "nnull"
+                },
+                {
+                    "t": "else"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 695,
+            "y": 300,
+            "wires": [
+                [
+                    "7189bcd962796976"
+                ],
+                [
+                    "c9f7858f7e8e7148"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "7189bcd962796976",
+            "type": "change",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "TOPIC",
+                    "tot": "env"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 775,
+            "y": 260,
+            "wires": [
+                [
+                    "c9f7858f7e8e7148"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "9754883efc50ee74",
+            "type": "delay",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "pauseType": "rate",
+            "timeout": "5",
+            "timeoutUnits": "seconds",
+            "rate": "1",
+            "nbRateUnits": "1",
+            "rateUnits": "second",
+            "randomFirst": "1",
+            "randomLast": "5",
+            "randomUnits": "seconds",
+            "drop": true,
+            "allowrate": true,
+            "outputs": 1,
+            "x": 535,
+            "y": 240,
+            "wires": [
+                [
+                    "91e8de47da61c0ea"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "e7480380d621960d",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "topic",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "eq",
+                    "v": "get_dict",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "get_sum",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "get_mean",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "get_value",
+                    "vt": "str"
+                },
+                {
+                    "t": "else"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 5,
+            "x": 245,
+            "y": 260,
+            "wires": [
+                [
+                    "c9f89bf5a80fa4c7"
+                ],
+                [
+                    "cd92e495e7e3ae2d"
+                ],
+                [
+                    "52aecc213c7a98c6"
+                ],
+                [
+                    "d01ee3d5dccbd5a8"
+                ],
+                [
+                    "439840d53dfee113"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "bcc153e0055f589d",
+            "type": "change",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "rate",
+                    "pt": "msg",
+                    "to": "$number($env('RATE')) * 1000\t",
+                    "tot": "jsonata",
+                    "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "payload",
+                    "pt": "msg",
+                    "to": "mean",
+                    "tot": "flow",
+                    "dc": true
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 455,
+            "y": 280,
+            "wires": [
+                [
+                    "9754883efc50ee74"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "670be3530db3e182",
+            "type": "template",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "field": "payload",
+            "fieldType": "msg",
+            "format": "json",
+            "syntax": "mustache",
+            "template": "{\n    \"fill\": \"grey\",\n    \"shape\": \"ring\",\n    \"text\": \"no values\"\n}",
+            "output": "json",
+            "x": 740,
+            "y": 480,
+            "wires": [
+                []
+            ]
+        },
+        {
+            "id": "175dbf8a11a1fe65",
+            "type": "inject",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "props": [
+                {
+                    "p": "payload"
+                }
+            ],
+            "repeat": "",
+            "crontab": "",
+            "once": true,
+            "onceDelay": 0.1,
+            "topic": "",
+            "payload": "true",
+            "payloadType": "bool",
+            "x": 210,
+            "y": 480,
+            "wires": [
+                [
+                    "5f594b40145f7c88"
+                ]
+            ]
+        },
+        {
+            "id": "48595caeed4c16e9",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "reset",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "nnull"
+                },
+                {
+                    "t": "else"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 155,
+            "y": 260,
+            "wires": [
+                [
+                    "f3622ab90bbbfe61"
+                ],
+                [
+                    "e7480380d621960d"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "c9f89bf5a80fa4c7",
+            "type": "change",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "rate",
+                    "pt": "msg",
+                    "to": "$number($env('RATE')) * 1000\t",
+                    "tot": "jsonata",
+                    "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "payload",
+                    "pt": "msg",
+                    "to": "values_dict",
+                    "tot": "flow",
+                    "dc": true
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 375,
+            "y": 60,
+            "wires": [
+                [
+                    "e853cb9b118ff344"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "e853cb9b118ff344",
+            "type": "delay",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "pauseType": "rate",
+            "timeout": "5",
+            "timeoutUnits": "seconds",
+            "rate": "1",
+            "nbRateUnits": "1",
+            "rateUnits": "second",
+            "randomFirst": "1",
+            "randomLast": "5",
+            "randomUnits": "seconds",
+            "drop": true,
+            "allowrate": true,
+            "outputs": 1,
+            "x": 535,
+            "y": 60,
+            "wires": [
+                [
+                    "f6af88283ed51f2d"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "9a71a58e06882534",
+            "type": "delay",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "pauseType": "delay",
+            "timeout": "100",
+            "timeoutUnits": "milliseconds",
+            "rate": "1",
+            "nbRateUnits": "1",
+            "rateUnits": "second",
+            "randomFirst": "1",
+            "randomLast": "5",
+            "randomUnits": "seconds",
+            "drop": false,
+            "allowrate": false,
+            "outputs": 1,
+            "x": 535,
+            "y": 480,
+            "wires": [
+                [
+                    "670be3530db3e182"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "f3622ab90bbbfe61",
+            "type": "link out",
+            "z": "d56a1dd582e82a09",
+            "name": "link out 10",
+            "mode": "link",
+            "links": [
+                "8363742b8de7e420"
+            ],
+            "x": 245,
+            "y": 180,
+            "wires": []
+        },
+        {
+            "id": "8363742b8de7e420",
+            "type": "link in",
+            "z": "d56a1dd582e82a09",
+            "name": "link in 7",
+            "links": [
+                "f3622ab90bbbfe61"
+            ],
+            "x": 245,
+            "y": 420,
+            "wires": [
+                [
+                    "5f594b40145f7c88"
+                ]
+            ]
+        },
+        {
+            "id": "bbbea093b1f44871",
+            "type": "function",
+            "z": "d56a1dd582e82a09",
+            "name": "counter",
+            "func": "var length = Object.keys(flow.get('values_dict')).length;\nvar text = String(length) + ': ' + msg.payload;\n\nif (length > 0){\n    return [{\n        \"payload\": {\n            \"fill\": \"blue\",\n            \"shape\": \"dot\",\n            \"text\": text\n        }\n    }, null];\n} else {\n    return [null, {\"payload\" : 0}]\n}\n",
+            "outputs": 2,
+            "timeout": 0,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 740,
+            "y": 380,
+            "wires": [
+                [],
+                [
+                    "670be3530db3e182"
+                ]
+            ]
+        },
+        {
+            "id": "f6af88283ed51f2d",
+            "type": "change",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "objects_dict",
+                    "tot": "str"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 775,
+            "y": 60,
+            "wires": [
+                []
+            ],
+            "l": false
+        },
+        {
+            "id": "91e8de47da61c0ea",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "payload",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "nnull"
+                }
+            ],
+            "checkall": "true",
+            "repair": false,
+            "outputs": 1,
+            "x": 615,
+            "y": 240,
+            "wires": [
+                [
+                    "85ef35ae1ad9ba25"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "6ece06cec3b82ba1",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "RBE",
+            "propertyType": "env",
+            "rules": [
+                {
+                    "t": "true"
+                },
+                {
+                    "t": "else"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 535,
+            "y": 360,
+            "wires": [
+                [
+                    "c605c5a71788ae8b"
+                ],
+                [
+                    "85ef35ae1ad9ba25"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "c605c5a71788ae8b",
+            "type": "rbe",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "func": "rbe",
+            "gap": "",
+            "start": "",
+            "inout": "out",
+            "septopics": false,
+            "property": "payload",
+            "topi": "topic",
+            "x": 615,
+            "y": 300,
+            "wires": [
+                [
+                    "85ef35ae1ad9ba25"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "439840d53dfee113",
+            "type": "function",
+            "z": "d56a1dd582e82a09",
+            "name": "Add to dict",
+            "func": "var values_dict = flow.get(\"values_dict\");\n\nif (msg.topic != null){\n    values_dict[String(msg.topic)] = Number(msg.payload);\n    flow.set(\"values_dict\", values_dict);\n    return { \"payload\": true };\n}",
+            "outputs": 1,
+            "timeout": "",
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 210,
+            "y": 360,
+            "wires": [
+                [
+                    "8aef7e66fbfcd2cd"
+                ]
+            ]
+        },
+        {
+            "id": "5f594b40145f7c88",
+            "type": "function",
+            "z": "d56a1dd582e82a09",
+            "name": "Reset",
+            "func": "if (msg.topic != null){\n    var values_dict = flow.get(\"values_dict\");\n    try {\n        delete values_dict[msg.topic];\n        flow.set(\"values_dict\",values_dict);\n    } catch {}\n    if (Object.keys(values_dict).length != 0){\n        return [{ \"payload\": true }, null];\n    } else {\n        flow.set(\"sum\", null);\n        flow.set(\"mean\", null);\n        return [null, { \"payload\": true }];\n    }\n} else {\n    flow.set(\"values_dict\", {});\n    flow.set(\"sum\", null);\n    flow.set(\"mean\", null);\n    return [null, { \"payload\": true }];\n}",
+            "outputs": 2,
+            "timeout": 0,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 410,
+            "y": 480,
+            "wires": [
+                [
+                    "8aef7e66fbfcd2cd"
+                ],
+                [
+                    "9a71a58e06882534"
+                ]
+            ]
+        },
+        {
+            "id": "8aef7e66fbfcd2cd",
+            "type": "function",
+            "z": "d56a1dd582e82a09",
+            "name": "Math",
+            "func": "var round = Number(env.get('ROUND'));\nvar values_dict = flow.get(\"values_dict\");\nvar sum = 0;\nvar mean = 0;\n\nfor (let key in values_dict){\n    sum += values_dict[key];\n}\n\nmean = sum / Object.keys(values_dict).length;\n\nsum = Math.round(sum * round) / round;\nmean = Math.round(mean * round) / round;\n\nflow.set(\"sum\", sum);\nflow.set(\"mean\", mean);\nflow.set(\"values_dict\", values_dict);\n\nswitch (env.get('TYPE')){\n    case \"sum\" : \n        return {\"payload\" : sum};\n    case \"mean\" :\n        return {\"payload\" : mean};\n}",
+            "outputs": 1,
+            "timeout": "",
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 410,
+            "y": 360,
+            "wires": [
+                [
+                    "6ece06cec3b82ba1"
+                ]
+            ]
+        },
+        {
+            "id": "cc91646af77ac302",
+            "type": "change",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "rate",
+                    "pt": "msg",
+                    "to": "$number($env('RATE')) * 1000\t",
+                    "tot": "jsonata",
+                    "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "payload",
+                    "pt": "msg",
+                    "to": "sum",
+                    "tot": "flow",
+                    "dc": true
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 455,
+            "y": 200,
+            "wires": [
+                [
+                    "9754883efc50ee74"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "d01ee3d5dccbd5a8",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "TYPE",
+            "propertyType": "env",
+            "rules": [
+                {
+                    "t": "eq",
+                    "v": "sum",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "mean",
+                    "vt": "str"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 375,
+            "y": 240,
+            "wires": [
+                [
+                    "cc91646af77ac302"
+                ],
+                [
+                    "bcc153e0055f589d"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "cd92e495e7e3ae2d",
+            "type": "change",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "rate",
+                    "pt": "msg",
+                    "to": "$number($env('RATE')) * 1000\t",
+                    "tot": "jsonata",
+                    "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "payload",
+                    "pt": "msg",
+                    "to": "sum",
+                    "tot": "flow",
+                    "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "sum",
+                    "tot": "str"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 375,
+            "y": 120,
+            "wires": [
+                [
+                    "c609b37a8a88be4b"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "52aecc213c7a98c6",
+            "type": "change",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "rate",
+                    "pt": "msg",
+                    "to": "$number($env('RATE')) * 1000\t",
+                    "tot": "jsonata",
+                    "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "payload",
+                    "pt": "msg",
+                    "to": "mean",
+                    "tot": "flow",
+                    "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "mean",
+                    "tot": "str"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 375,
+            "y": 180,
+            "wires": [
+                [
+                    "c609b37a8a88be4b"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "c609b37a8a88be4b",
+            "type": "delay",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "pauseType": "rate",
+            "timeout": "5",
+            "timeoutUnits": "seconds",
+            "rate": "1",
+            "nbRateUnits": "1",
+            "rateUnits": "second",
+            "randomFirst": "1",
+            "randomLast": "5",
+            "randomUnits": "seconds",
+            "drop": true,
+            "allowrate": true,
+            "outputs": 1,
+            "x": 535,
+            "y": 120,
+            "wires": [
+                [
+                    "2a65aa4c4f7762fe"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "2a65aa4c4f7762fe",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "payload",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "nnull"
+                }
+            ],
+            "checkall": "true",
+            "repair": false,
+            "outputs": 1,
+            "x": 775,
+            "y": 120,
+            "wires": [
+                []
+            ],
+            "l": false
+        },
+        {
+            "id": "c9f7858f7e8e7148",
+            "type": "junction",
+            "z": "d56a1dd582e82a09",
+            "x": 840,
+            "y": 300,
+            "wires": [
+                [
+                    "bbbea093b1f44871"
+                ]
+            ]
+        }
+    ]
+}

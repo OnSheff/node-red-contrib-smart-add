@@ -781,6 +781,30 @@
                 []
             ],
             "l": false
+        },
+        {
+        "id": "64d2cbb9f702f496",
+        "type": "inject",
+        "z": "10e1fc48c2918ddb",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{     \"fill\": \"grey\",     \"shape\": \"ring\",     \"text\": \"waiting\" }",
+        "payloadType": "json",
+        "x": 835,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "l": false
         }
     ]
 }
