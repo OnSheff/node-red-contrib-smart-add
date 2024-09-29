@@ -35,7 +35,7 @@
     {
       "name": "TYPE",
       "type": "str",
-      "value": "OR",
+      "value": "or",
       "ui": {
         "label": {
           "ru": "Logic type"
@@ -116,7 +116,7 @@
   ],
   "meta": {
     "type": "Binary logic",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "author": "Anton Shefov <a.shefov@gmail.com>",
     "desc": "Binary logic node",
     "license": "MIT"
@@ -143,7 +143,7 @@
       "type": "function",
       "z": "060a37f1d48e60e7",
       "name": "OR",
-      "func": "var values_dict = flow.get(\"values_dict\");\nvar or_value = flow.get(\"result_value\");\n\n\nif (msg.topic != null){\n    values_dict[String(msg.topic)] = Boolean(msg.payload);\n    or_value = false;\n    for (let key in values_dict){\n        if (values_dict[key]) { or_value = true;}\n    }\n    flow.set(\"result_value\", or_value);\n    flow.set(\"values_dict\", values_dict);\n}\n\nif (or_value != null) {\n    return { \"payload\": or_value };\n}",
+      "func": "var values_dict = flow.get(\"values_dict\");\nvar or_value = flow.get(\"result_value\");\n\n\nif (msg.topic != null){\n    values_dict[String(msg.topic)] = Boolean(msg.payload);\n    or_value = false;\n    for (let key in values_dict){\n        if (values_dict[key]) { or_value = true;}\n    }\n    if (env.get('TYPE') == \"nor\"){\n        or_value = !or_value;\n    }\n    flow.set(\"result_value\", or_value);\n    flow.set(\"values_dict\", values_dict);\n}\n\nif (or_value != null) {\n    return { \"payload\": or_value };\n}",
       "outputs": 1,
       "timeout": "",
       "noerr": 0,
@@ -157,46 +157,6 @@
           "2ec968d8bb68ee70"
         ]
       ]
-    },
-    {
-      "id": "1d1023804744fcda",
-      "type": "switch",
-      "z": "060a37f1d48e60e7",
-      "name": "INVERSE?",
-      "property": "TYPE",
-      "propertyType": "env",
-      "rules": [
-        {
-          "t": "eq",
-          "v": "nor",
-          "vt": "str"
-        },
-        {
-          "t": "eq",
-          "v": "nand",
-          "vt": "str"
-        },
-        {
-          "t": "else"
-        }
-      ],
-      "checkall": "false",
-      "repair": false,
-      "outputs": 3,
-      "x": 695,
-      "y": 200,
-      "wires": [
-        [
-          "8f4fc32ac97b3e95"
-        ],
-        [
-          "8f4fc32ac97b3e95"
-        ],
-        [
-          "c7653e369f117572"
-        ]
-      ],
-      "l": false
     },
     {
       "id": "c7653e369f117572",
@@ -216,7 +176,7 @@
       "checkall": "false",
       "repair": false,
       "outputs": 2,
-      "x": 855,
+      "x": 695,
       "y": 200,
       "wires": [
         [
@@ -247,7 +207,7 @@
       "from": "",
       "to": "",
       "reg": false,
-      "x": 935,
+      "x": 775,
       "y": 140,
       "wires": [
         [
@@ -323,34 +283,6 @@
       "l": false
     },
     {
-      "id": "8f4fc32ac97b3e95",
-      "type": "change",
-      "z": "060a37f1d48e60e7",
-      "name": "NOT",
-      "rules": [
-        {
-          "t": "set",
-          "p": "payload",
-          "pt": "msg",
-          "to": "$not(msg.payload)\t",
-          "tot": "jsonata"
-        }
-      ],
-      "action": "",
-      "property": "",
-      "from": "",
-      "to": "",
-      "reg": false,
-      "x": 775,
-      "y": 140,
-      "wires": [
-        [
-          "c7653e369f117572"
-        ]
-      ],
-      "l": false
-    },
-    {
       "id": "11a2609f244f94be",
       "type": "change",
       "z": "060a37f1d48e60e7",
@@ -398,7 +330,7 @@
       "syntax": "mustache",
       "template": "{\n    \"fill\": \"grey\",\n    \"shape\": \"ring\",\n    \"text\": \"no values\"\n}",
       "output": "json",
-      "x": 900,
+      "x": 740,
       "y": 380,
       "wires": [
         []
@@ -503,6 +435,13 @@
           "to": "values_dict",
           "tot": "flow",
           "dc": true
+        },
+        {
+          "t": "set",
+          "p": "topic",
+          "pt": "msg",
+          "to": "objects_dict",
+          "tot": "str"
         }
       ],
       "action": "",
@@ -540,7 +479,7 @@
       "y": 80,
       "wires": [
         [
-          "070c45bd40494155"
+          "90c6d366c3542ed8"
         ]
       ],
       "l": false
@@ -612,7 +551,7 @@
       "initialize": "",
       "finalize": "",
       "libs": [],
-      "x": 900,
+      "x": 740,
       "y": 280,
       "wires": [
         [],
@@ -626,7 +565,7 @@
       "type": "function",
       "z": "060a37f1d48e60e7",
       "name": "AND",
-      "func": "var values_dict = flow.get(\"values_dict\");\nvar and_value = flow.get(\"result_value\");\n\n\nif (msg.topic != null){\n    values_dict[String(msg.topic)] = Boolean(msg.payload);\n    and_value = true;\n    for (let key in values_dict){\n        and_value = and_value && values_dict[key];\n    }\n    flow.set(\"result_value\", and_value);\n    flow.set(\"values_dict\", values_dict);\n}\n\nif (and_value != null) {\n    return { \"payload\": and_value };\n}",
+      "func": "var values_dict = flow.get(\"values_dict\");\nvar and_value = flow.get(\"result_value\");\n\n\nif (msg.topic != null){\n    values_dict[String(msg.topic)] = Boolean(msg.payload);\n    and_value = true;\n    for (let key in values_dict){\n        and_value = and_value && values_dict[key];\n    }\n    if (env.get('TYPE') == \"nand\"){\n        and_value = !and_value;\n    }\n    flow.set(\"result_value\", and_value);\n    flow.set(\"values_dict\", values_dict);\n}\n\nif (and_value != null) {\n    return { \"payload\": and_value };\n}",
       "outputs": 1,
       "timeout": "",
       "noerr": 0,
@@ -692,32 +631,6 @@
       "l": false
     },
     {
-      "id": "070c45bd40494155",
-      "type": "change",
-      "z": "060a37f1d48e60e7",
-      "name": "",
-      "rules": [
-        {
-          "t": "set",
-          "p": "topic",
-          "pt": "msg",
-          "to": "objects_dict",
-          "tot": "str"
-        }
-      ],
-      "action": "",
-      "property": "",
-      "from": "",
-      "to": "",
-      "reg": false,
-      "x": 935,
-      "y": 80,
-      "wires": [
-        []
-      ],
-      "l": false
-    },
-    {
       "id": "963cd98ee0ac2c2d",
       "type": "switch",
       "z": "060a37f1d48e60e7",
@@ -732,11 +645,11 @@
       "checkall": "true",
       "repair": false,
       "outputs": 1,
-      "x": 535,
+      "x": 595,
       "y": 140,
       "wires": [
         [
-          "1d1023804744fcda"
+          "c7653e369f117572"
         ]
       ],
       "l": false
@@ -763,10 +676,12 @@
       "y": 280,
       "wires": [
         [
-          "7ce4456e9da746f4"
+          "7ce4456e9da746f4",
+          "822fd46809d7bf98"
         ],
         [
-          "1d1023804744fcda"
+          "c7653e369f117572",
+          "822fd46809d7bf98"
         ]
       ],
       "l": false
@@ -787,8 +702,30 @@
       "y": 200,
       "wires": [
         [
-          "1d1023804744fcda"
+          "c7653e369f117572"
         ]
+      ],
+      "l": false
+    },
+    {
+      "id": "90c6d366c3542ed8",
+      "type": "switch",
+      "z": "060a37f1d48e60e7",
+      "name": "",
+      "property": "payload",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "nempty"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 1,
+      "x": 775,
+      "y": 80,
+      "wires": [
+        []
       ],
       "l": false
     },
@@ -796,12 +733,10 @@
       "id": "4b89cf3bab0b929a",
       "type": "junction",
       "z": "060a37f1d48e60e7",
-      "x": 1000,
+      "x": 840,
       "y": 200,
       "wires": [
-        [
-          "822fd46809d7bf98"
-        ]
+        []
       ]
     }
   ]

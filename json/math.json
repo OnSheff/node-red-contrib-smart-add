@@ -3,7 +3,7 @@
     "type": "subflow",
     "name": "Math",
     "info": "Performs the selected mathematical operation.\n\nThe node accepts numeric values and writes them to a dictionary to calculate a mathematical function.\nThe `msg.topic` is used as the key.\n\n### Intputs\n\n1. To send the current node value.\n: topic (string) : **get_value**\n\n2. To send the current values dictionary.\n: topic (string) : **get_dict**\n\n3. To send the current sum value.\n: topic (string) : **get_sum**\n\n4. To send the current mean value.\n: topic (string) : **get_mean**\n\n5. To reset values in dictionary.\n: reset (binary) : **true**\n: topic (string) : **any** \n`Note!`\nIt is applied separately for each `msg.topic`.\nIf `msg.topic` is not specified, the whole dictionary is reset.\n\n---\n\n\n### Outputs\n1. The result of selected mathematical operation\n: topic (string) : **topic**\n: payload (numeric) : The result of selected mathematical operation.\n\n2. Sum value\n: topic (string) : **sum**\n: payload (numeric) : Current sum value.\n\n3. Mean value\n: topic (string) : **mean**\n: payload (numeric) : Current mean value.\n\n4. Objects dict\n: topic (string) : **objects_dict**\n: payload (dict) : Dictionary with all accepted data.\n\n\n---\n\n\n### Configuration\n\n **Operation**\n\nChoose the type of mathematical operation.\n\n**Sum / Mean**\n\n`Default:` **Sum**\n\n---\n\n **Set msg.topic**\n\nYou can set msg.topic for the output flow.\n\n---\n\n **Round to**\n\nYou can round the resulting value.\n\n`Note!` It is used for all operations.\n\n`Default:` **0.1**\n\n---\n\n **Rate in sec.**\n\nYou can limit the number of messages sent by the node.\n\n`Note!` It is used only when requesting the current value or values dictionary.\n\n`Available range:` **0 - 3600**\n\n`Default:` **1 mes/sec**\n\n\n---\n\n**Block unless value has changed**\n\nThe output is blocked unless value has changed (ignore initial value).\n\n`Note!` This is gnored when requesting the current value.\n\n`Default:` **false**",
-    "category": "Smart add sf",
+    "category": "Smart add",
     "in": [
         {
             "x": 60,
@@ -129,6 +129,9 @@
             "type": "num",
             "value": "1",
             "ui": {
+                "label": {
+                    "ru": "Rate in sec."
+                },
                 "type": "spinner",
                 "opts": {
                     "min": 0,
@@ -150,7 +153,7 @@
     ],
     "meta": {
         "type": "Math",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "author": "Anton Shefov <a.shefov@gmail.com>",
         "desc": "Mathematical operations",
         "license": "MIT"
@@ -442,6 +445,13 @@
                     "to": "values_dict",
                     "tot": "flow",
                     "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "objects_dict",
+                    "tot": "str"
                 }
             ],
             "action": "",
@@ -479,7 +489,7 @@
             "y": 60,
             "wires": [
                 [
-                    "f6af88283ed51f2d"
+                    "9882c7aca99adbfb"
                 ]
             ],
             "l": false
@@ -551,40 +561,14 @@
             "initialize": "",
             "finalize": "",
             "libs": [],
-            "x": 740,
-            "y": 380,
+            "x": 580,
+            "y": 420,
             "wires": [
                 [],
                 [
                     "670be3530db3e182"
                 ]
             ]
-        },
-        {
-            "id": "f6af88283ed51f2d",
-            "type": "change",
-            "z": "d56a1dd582e82a09",
-            "name": "",
-            "rules": [
-                {
-                    "t": "set",
-                    "p": "topic",
-                    "pt": "msg",
-                    "to": "objects_dict",
-                    "tot": "str"
-                }
-            ],
-            "action": "",
-            "property": "",
-            "from": "",
-            "to": "",
-            "reg": false,
-            "x": 775,
-            "y": 60,
-            "wires": [
-                []
-            ],
-            "l": false
         },
         {
             "id": "91e8de47da61c0ea",
@@ -700,7 +684,8 @@
                     "8aef7e66fbfcd2cd"
                 ],
                 [
-                    "9a71a58e06882534"
+                    "9a71a58e06882534",
+                    "23be42fc4a8f4a06"
                 ]
             ]
         },
@@ -720,7 +705,8 @@
             "y": 360,
             "wires": [
                 [
-                    "6ece06cec3b82ba1"
+                    "6ece06cec3b82ba1",
+                    "bbbea093b1f44871"
                 ]
             ]
         },
@@ -921,11 +907,95 @@
                     "t": "nnull"
                 }
             ],
-            "checkall": "true",
+            "checkall": "false",
             "repair": false,
             "outputs": 1,
-            "x": 775,
+            "x": 615,
             "y": 120,
+            "wires": [
+                []
+            ],
+            "l": false
+        },
+        {
+            "id": "aa99c6f032781cee",
+            "type": "link out",
+            "z": "d56a1dd582e82a09",
+            "name": "link out 11",
+            "mode": "link",
+            "links": [
+                "cf208bdc7d761403"
+            ],
+            "x": 615,
+            "y": 540,
+            "wires": []
+        },
+        {
+            "id": "cf208bdc7d761403",
+            "type": "link in",
+            "z": "d56a1dd582e82a09",
+            "name": "link in 8",
+            "links": [
+                "aa99c6f032781cee"
+            ],
+            "x": 535,
+            "y": 300,
+            "wires": [
+                [
+                    "c605c5a71788ae8b"
+                ]
+            ]
+        },
+        {
+            "id": "23be42fc4a8f4a06",
+            "type": "change",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "reset",
+                    "pt": "msg",
+                    "to": "true",
+                    "tot": "bool"
+                },
+                {
+                    "t": "delete",
+                    "p": "payload",
+                    "pt": "msg"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 535,
+            "y": 540,
+            "wires": [
+                [
+                    "aa99c6f032781cee"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "9882c7aca99adbfb",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "payload",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "nempty"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 1,
+            "x": 615,
+            "y": 60,
             "wires": [
                 []
             ],
@@ -938,9 +1008,7 @@
             "x": 840,
             "y": 300,
             "wires": [
-                [
-                    "bbbea093b1f44871"
-                ]
+                []
             ]
         }
     ]
