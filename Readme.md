@@ -21,3 +21,12 @@ Sends the value by change or after a period of time.
 
 ### OR
 Logical OR
+
+### Logic
+Performs the selected logical operation.
+
+### Math
+Performs the selected mathematical operation.
+
+### WB parser
+Parser for Wirenboard nodes.

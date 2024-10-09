@@ -2,13 +2,13 @@
     "id": "10e1fc48c2918ddb",
     "type": "subflow",
     "name": "Connection status",
-    "info": "Checks the connection with the host and sends the status\r\n\r\n### Outputs\r\n\r\n: payload (boolean) : Connection status with host\r\n: topic (string) : Host name\r\n\r\n\r\n### Configuration\r\n\r\n**Hosts**\r\n\r\nA json file of the following format:\r\n\r\n \r\n    {\r\n        \"Host_name\": {\r\n            \"name\": \"Host_name\",\r\n            \"host\": \"IP-address\"\r\n        }\r\n    }\r\n\r\n**Number of attempts**\r\n\r\nNumber of connection attempts _(1-10)_\r\n\r\n`Default:` **3**\r\n\r\n---\r\n**Delay between attemts (sec.)**\r\n\r\nDelay between connection attempts in seconds _(1-60)_\r\n\r\n`Default:` **3**\r\n\r\n---\r\n**Polling intetval (min.)**\r\n\r\nThe period between status polls in minutes _(0-60)_\r\n\r\n`Default:` **5**\r\n\r\n---\r\n**Repeat every (min.)**\r\n\r\nThe period for resending the status in minutes _(0-60)_\r\n\r\n`Default:` **20**",
+    "info": "Checks the connection with the host and sends the status\r\n\r\n### Outputs\r\n\r\n: payload (boolean) : Connection status with host\r\n: topic (string) : Host name\r\n\r\n\r\n### Configuration\r\n\r\n**Hosts**\r\n\r\nA json file of the following format:\r\n \r\n    {\r\n        \"Host_name\": \"IP-address\"\r\n    }\r\n\r\n**Number of attempts**\r\n\r\nNumber of connection attempts _(1-10)_\r\n\r\n`Default:` **3**\r\n\r\n---\r\n**Delay between attemts (sec.)**\r\n\r\nDelay between connection attempts in seconds _(1-60)_\r\n\r\n`Default:` **3**\r\n\r\n\r\n---\r\n**Repeat every (min.)**\r\n\r\nThe period for resending the status in minutes _(0-60)_\r\n\r\n`Default:` **20**",
     "category": "Smart add",
     "in": [],
     "out": [
         {
-            "x": 950,
-            "y": 200,
+            "x": 1030,
+            "y": 260,
             "wires": [
                 {
                     "id": "1b4a8496adfc4aa0",
@@ -17,8 +17,8 @@
             ]
         },
         {
-            "x": 960,
-            "y": 260,
+            "x": 1040,
+            "y": 320,
             "wires": [
                 {
                     "id": "7e8fb88859f97fd9",
@@ -27,94 +27,78 @@
             ]
         }
     ],
-    "env": [
-        {
-            "name": "HOSTS",
-            "type": "json",
-            "value": "{}",
-            "ui": {
-                "icon": "font-awesome/fa-list-alt",
-                "label": {
-                    "ru": "Hosts (json)"
-                },
-                "type": "input",
-                "opts": {
-                    "types": [
-                        "json",
-                        "env"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "ATTEMPTS",
-            "type": "num",
-            "value": "3",
-            "ui": {
-                "icon": "font-awesome/fa-tasks",
-                "label": {
-                    "ru": "Number of attempts"
-                },
-                "type": "spinner",
-                "opts": {
-                    "min": 1,
-                    "max": 10
-                }
-            }
-        },
-        {
-            "name": "ATTEMPTS_DELAY",
-            "type": "num",
-            "value": "3",
-            "ui": {
-                "icon": "font-awesome/fa-clock-o",
-                "label": {
-                    "ru": "Delay between attemts (sec.)"
-                },
-                "type": "spinner",
-                "opts": {
-                    "min": 1,
-                    "max": 60
-                }
-            }
-        },
-        {
-            "name": "INTERVAL",
-            "type": "num",
-            "value": "5",
-            "ui": {
-                "icon": "font-awesome/fa-hourglass-half",
-                "label": {
-                    "ru": "Polling intetval (min.)"
-                },
-                "type": "spinner",
-                "opts": {
-                    "min": 0,
-                    "max": 60
-                }
-            }
-        },
-        {
-            "name": "REPEAT",
-            "type": "num",
-            "value": "20",
-            "ui": {
-                "icon": "font-awesome/fa-retweet",
-                "label": {
-                    "ru": "Repeat every (min.)"
-                },
-                "type": "spinner",
-                "opts": {
-                    "min": 0,
-                    "max": 60
-                }
-            }
-        }
-    ],
+	"env": [
+		{
+			"name": "HOSTS",
+			"type": "json",
+			"value": "{}",
+			"ui": {
+				"icon": "font-awesome/fa-list-alt",
+				"label": {
+					"ru": "Hosts (json)"
+				},
+				"type": "input",
+				"opts": {
+					"types": [
+						"json",
+						"env"
+					]
+				}
+			}
+		},
+		{
+			"name": "ATTEMPTS",
+			"type": "num",
+			"value": "3",
+			"ui": {
+				"icon": "font-awesome/fa-tasks",
+				"label": {
+					"ru": "Number of attempts"
+				},
+				"type": "spinner",
+				"opts": {
+					"min": 1,
+					"max": 10
+				}
+			}
+		},
+		{
+			"name": "ATTEMPTS_DELAY",
+			"type": "num",
+			"value": "3",
+			"ui": {
+				"icon": "font-awesome/fa-clock-o",
+				"label": {
+					"ru": "Delay between attemts (sec.)"
+				},
+				"type": "spinner",
+				"opts": {
+					"min": 1,
+					"max": 60
+				}
+			}
+		},
+		{
+			"name": "REPEAT",
+			"type": "num",
+			"value": "20",
+			"ui": {
+				"icon": "font-awesome/fa-retweet",
+				"label": {
+					"ru": "Repeat every (min.)"
+				},
+				"type": "spinner",
+				"opts": {
+					"min": 0,
+					"max": 60
+				}
+			}
+		}
+	],
     "meta": {
         "type": "Connection status",
-        "version": "1.1.2",
-        "author": "Anton Shefov <a.shefov@gmail.com.ru>",
+        "version": "1.2.1",
+        "author": "Anton Shefov <a.shefov@gmail.com>",
         "desc": "Checks the connection to the hosts",
         "license": "MIT"
     },
@@ -125,686 +109,771 @@
     ],
     "icon": "font-awesome/fa-link",
     "status": {
-        "x": 920,
-        "y": 140,
-        "wires": [
-            {
-                "id": "0dd40a696e850b18",
-                "port": 0
-            }
-        ]
-    },
+		"x": 1000,
+		"y": 200,
+		"wires": [
+			{
+				"id": "0dd40a696e850b18",
+				"port": 0
+			},
+			{
+				"id": "64d2cbb9f702f496",
+				"port": 0
+			},
+			{
+				"id": "f6856535c79d4a95",
+				"port": 0
+			}
+		]
+	},
     "flow": [
         {
-            "id": "ca48e3156c901cc5",
-            "type": "trigger",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "op1": "",
-            "op2": "",
-            "op1type": "pay",
-            "op2type": "payl",
-            "duration": "-250",
-            "extend": false,
-            "overrideDelay": true,
-            "units": "ms",
-            "reset": "",
-            "bytopic": "topic",
-            "topic": "topic",
-            "outputs": 1,
-            "x": 735,
-            "y": 200,
-            "wires": [
-                [
-                    "7e8fb88859f97fd9",
-                    "0dd40a696e850b18",
-                    "1b4a8496adfc4aa0"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "7e8fb88859f97fd9",
-            "type": "change",
-            "z": "10e1fc48c2918ddb",
-            "name": "NOT",
-            "rules": [
-                {
-                    "t": "set",
-                    "p": "payload",
-                    "pt": "msg",
-                    "to": "$not(msg.payload)\t",
-                    "tot": "jsonata"
-                },
-                {
-                    "t": "delete",
-                    "p": "delay",
-                    "pt": "msg"
-                }
-            ],
-            "action": "",
-            "property": "",
-            "from": "",
-            "to": "",
-            "reg": false,
-            "x": 835,
-            "y": 260,
-            "wires": [
-                []
-            ],
-            "l": false
-        },
-        {
-            "id": "0dd40a696e850b18",
-            "type": "template",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "field": "payload",
-            "fieldType": "msg",
-            "format": "handlebars",
-            "syntax": "mustache",
-            "template": "{{topic}}: {{payload}}",
-            "output": "str",
-            "x": 835,
-            "y": 140,
-            "wires": [
-                []
-            ],
-            "l": false
-        },
-        {
-            "id": "e9fcb11538581225",
-            "type": "inject",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "props": [
-                {
-                    "p": "payload"
-                },
-                {
-                    "p": "delay",
-                    "v": "$number($env('INTERVAL')) * 60000",
-                    "vt": "jsonata"
-                }
-            ],
-            "repeat": "",
-            "crontab": "",
-            "once": true,
-            "onceDelay": "2",
-            "topic": "",
-            "payload": "HOSTS",
-            "payloadType": "env",
-            "x": 95,
-            "y": 80,
-            "wires": [
-                [
-                    "bff1be259b8d5e93"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "bff1be259b8d5e93",
-            "type": "trigger",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "op1": "",
-            "op2": "0",
-            "op1type": "pay",
-            "op2type": "str",
-            "duration": "-5",
-            "extend": false,
-            "overrideDelay": true,
-            "units": "min",
-            "reset": "",
-            "bytopic": "all",
-            "topic": "topic",
-            "outputs": 1,
-            "x": 175,
-            "y": 80,
-            "wires": [
-                [
-                    "34ce64062c32d24b"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "34ce64062c32d24b",
-            "type": "split",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "splt": "\\n",
-            "spltType": "str",
-            "arraySplt": 1,
-            "arraySpltType": "len",
-            "stream": false,
-            "addname": "topic",
-            "x": 255,
-            "y": 80,
-            "wires": [
-                [
-                    "1244923ef5aa855b"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "82c3b68728c42824",
-            "type": "delay",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "pauseType": "rate",
-            "timeout": "5",
-            "timeoutUnits": "seconds",
-            "rate": "1",
-            "nbRateUnits": "10",
-            "rateUnits": "second",
-            "randomFirst": "1",
-            "randomLast": "5",
-            "randomUnits": "seconds",
-            "drop": false,
-            "allowrate": true,
-            "outputs": 1,
-            "x": 415,
-            "y": 80,
-            "wires": [
-                [
-                    "c3557b3842dc3445"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "76c29bfdd9a21582",
-            "type": "exec",
-            "z": "10e1fc48c2918ddb",
-            "command": "ping ",
-            "addpay": "payload",
-            "append": "-c 1",
-            "useSpawn": "true",
-            "timer": "10",
-            "winHide": false,
-            "oldrc": false,
-            "name": "",
-            "x": 130,
-            "y": 240,
-            "wires": [
-                [
-                    "ef5a1c85e7be276b"
-                ],
-                [],
-                [
-                    "d1fb1161051ebe13"
-                ]
-            ]
-        },
-        {
-            "id": "ef5a1c85e7be276b",
-            "type": "switch",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "property": "payload",
-            "propertyType": "msg",
-            "rules": [
-                {
-                    "t": "cont",
-                    "v": "1 received",
-                    "vt": "str"
-                },
-                {
-                    "t": "else"
-                }
-            ],
-            "checkall": "false",
-            "repair": false,
-            "outputs": 2,
-            "x": 255,
-            "y": 220,
-            "wires": [
-                [
-                    "9f73fab7ee2f70f5"
-                ],
-                [
-                    "41122fcf2be64896"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "9f73fab7ee2f70f5",
-            "type": "change",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "rules": [
-                {
-                    "t": "set",
-                    "p": "payload",
-                    "pt": "msg",
-                    "to": "true",
-                    "tot": "bool"
-                },
-                {
-                    "t": "set",
-                    "p": "counter",
-                    "pt": "flow",
-                    "to": "0",
-                    "tot": "num"
-                }
-            ],
-            "action": "",
-            "property": "",
-            "from": "",
-            "to": "",
-            "reg": false,
-            "x": 335,
-            "y": 200,
-            "wires": [
-                [
-                    "3f9cb93d5731dfdd"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "d1fb1161051ebe13",
-            "type": "switch",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "property": "payload.signal",
-            "propertyType": "msg",
-            "rules": [
-                {
-                    "t": "eq",
-                    "v": "SIGTERM",
-                    "vt": "str"
-                }
-            ],
-            "checkall": "true",
-            "repair": false,
-            "outputs": 1,
-            "x": 255,
-            "y": 340,
-            "wires": [
-                [
-                    "cbbddd011f675b2d"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "f401c81cfb1be392",
-            "type": "change",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "rules": [
-                {
-                    "t": "set",
-                    "p": "topic",
-                    "pt": "msg",
-                    "to": "payload.name",
-                    "tot": "msg",
-                    "dc": true
-                },
-                {
-                    "t": "set",
-                    "p": "payload",
-                    "pt": "msg",
-                    "to": "payload.host",
-                    "tot": "msg",
-                    "dc": true
-                },
-                {
-                    "t": "delete",
-                    "p": "rate",
-                    "pt": "msg"
-                },
-                {
-                    "t": "delete",
-                    "p": "parts",
-                    "pt": "msg"
-                },
-                {
-                    "t": "delete",
-                    "p": "delay",
-                    "pt": "msg"
-                },
-                {
-                    "t": "set",
-                    "p": "counter",
-                    "pt": "flow",
-                    "to": "$flowContext('counter') - 1",
-                    "tot": "jsonata"
-                }
-            ],
-            "action": "",
-            "property": "",
-            "from": "",
-            "to": "",
-            "reg": false,
-            "x": 735,
-            "y": 80,
-            "wires": [
-                [
-                    "76c29bfdd9a21582"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "3f9cb93d5731dfdd",
-            "type": "rbe",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "func": "rbe",
-            "gap": "",
-            "start": "",
-            "inout": "out",
-            "septopics": true,
-            "property": "payload",
-            "topi": "topic",
-            "x": 575,
-            "y": 200,
-            "wires": [
-                [
-                    "24800600dcb829d0"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "24800600dcb829d0",
-            "type": "change",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "rules": [
-                {
-                    "t": "set",
-                    "p": "delay",
-                    "pt": "msg",
-                    "to": "$number($env('REPEAT')) * 60000",
-                    "tot": "jsonata"
-                }
-            ],
-            "action": "",
-            "property": "",
-            "from": "",
-            "to": "",
-            "reg": false,
-            "x": 655,
-            "y": 200,
-            "wires": [
-                [
-                    "ca48e3156c901cc5"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "cbbddd011f675b2d",
-            "type": "switch",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "property": "counter",
-            "propertyType": "flow",
-            "rules": [
-                {
-                    "t": "eq",
-                    "v": "0",
-                    "vt": "num"
-                }
-            ],
-            "checkall": "false",
-            "repair": false,
-            "outputs": 1,
-            "x": 415,
-            "y": 340,
-            "wires": [
-                [
-                    "201dd3b57ea56c2b"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "89d7bed15f230af5",
-            "type": "switch",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "property": "counter",
-            "propertyType": "flow",
-            "rules": [
-                {
-                    "t": "btwn",
-                    "v": "1",
-                    "vt": "num",
-                    "v2": "$number($env('ATTEMPTS'))",
-                    "v2t": "jsonata"
-                }
-            ],
-            "checkall": "false",
-            "repair": false,
-            "outputs": 1,
-            "x": 655,
-            "y": 80,
-            "wires": [
-                [
-                    "f401c81cfb1be392"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "c3557b3842dc3445",
-            "type": "change",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "rules": [
-                {
-                    "t": "set",
-                    "p": "counter",
-                    "pt": "flow",
-                    "to": "$number($env('ATTEMPTS'))",
-                    "tot": "jsonata"
-                },
-                {
-                    "t": "set",
-                    "p": "delay",
-                    "pt": "msg",
-                    "to": "$number($env('ATTEMPTS_DELAY'))*1000",
-                    "tot": "jsonata"
-                }
-            ],
-            "action": "",
-            "property": "",
-            "from": "",
-            "to": "",
-            "reg": false,
-            "x": 495,
-            "y": 80,
-            "wires": [
-                [
-                    "0764b1dba14f238f"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "0764b1dba14f238f",
-            "type": "trigger",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "op1": "",
-            "op2": "0",
-            "op1type": "pay",
-            "op2type": "str",
-            "duration": "-3",
-            "extend": false,
-            "overrideDelay": true,
-            "units": "s",
-            "reset": "",
-            "bytopic": "all",
-            "topic": "topic",
-            "outputs": 1,
-            "x": 575,
-            "y": 80,
-            "wires": [
-                [
-                    "89d7bed15f230af5"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "1244923ef5aa855b",
-            "type": "change",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "rules": [
-                {
-                    "t": "delete",
-                    "p": "delay",
-                    "pt": "msg"
-                },
-                {
-                    "t": "set",
-                    "p": "rate",
-                    "pt": "msg",
-                    "to": "($number($env('ATTEMPTS')) * $number($env('ATTEMPTS_DELAY')) + 1) * 1000",
-                    "tot": "jsonata"
-                }
-            ],
-            "action": "",
-            "property": "",
-            "from": "",
-            "to": "",
-            "reg": false,
-            "x": 335,
-            "y": 80,
-            "wires": [
-                [
-                    "82c3b68728c42824"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "201dd3b57ea56c2b",
-            "type": "change",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "rules": [
-                {
-                    "t": "set",
-                    "p": "payload",
-                    "pt": "msg",
-                    "to": "false",
-                    "tot": "bool"
-                }
-            ],
-            "action": "",
-            "property": "",
-            "from": "",
-            "to": "",
-            "reg": false,
-            "x": 495,
-            "y": 340,
-            "wires": [
-                [
-                    "3f9cb93d5731dfdd"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "41122fcf2be64896",
-            "type": "switch",
-            "z": "10e1fc48c2918ddb",
-            "name": "",
-            "property": "payload",
-            "propertyType": "msg",
-            "rules": [
-                {
-                    "t": "cont",
-                    "v": "Unreachable",
-                    "vt": "str"
-                },
-                {
-                    "t": "cont",
-                    "v": "0 received",
-                    "vt": "str"
-                },
-                {
-                    "t": "cont",
-                    "v": "100% packet loss",
-                    "vt": "str"
-                }
-            ],
-            "checkall": "false",
-            "repair": false,
-            "outputs": 3,
-            "x": 335,
-            "y": 280,
-            "wires": [
-                [
-                    "cbbddd011f675b2d"
-                ],
-                [
-                    "cbbddd011f675b2d"
-                ],
-                [
-                    "cbbddd011f675b2d"
-                ]
-            ],
-            "l": false
-        },
-        {
-            "id": "1b4a8496adfc4aa0",
-            "type": "change",
-            "z": "10e1fc48c2918ddb",
-            "name": "NOT",
-            "rules": [
-                {
-                    "t": "delete",
-                    "p": "delay",
-                    "pt": "msg"
-                }
-            ],
-            "action": "",
-            "property": "",
-            "from": "",
-            "to": "",
-            "reg": false,
-            "x": 835,
-            "y": 200,
-            "wires": [
-                []
-            ],
-            "l": false
-        },
-        {
-        "id": "64d2cbb9f702f496",
-        "type": "inject",
+        "id": "ca48e3156c901cc5",
+        "type": "trigger",
         "z": "10e1fc48c2918ddb",
         "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{     \"fill\": \"grey\",     \"shape\": \"ring\",     \"text\": \"waiting\" }",
-        "payloadType": "json",
-        "x": 835,
-        "y": 80,
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "payl",
+        "duration": "-250",
+        "extend": false,
+        "overrideDelay": true,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "topic",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 815,
+        "y": 260,
         "wires": [
-            []
+            [
+                "7e8fb88859f97fd9",
+                "1b4a8496adfc4aa0"
+            ]
         ],
         "l": false
-        }
+		},
+		{
+			"id": "7e8fb88859f97fd9",
+			"type": "change",
+			"z": "10e1fc48c2918ddb",
+			"name": "NOT",
+			"rules": [
+				{
+					"t": "set",
+					"p": "payload",
+					"pt": "msg",
+					"to": "$not(msg.payload)\t",
+					"tot": "jsonata"
+				},
+				{
+					"t": "delete",
+					"p": "delay",
+					"pt": "msg"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 915,
+			"y": 320,
+			"wires": [
+				[]
+			],
+			"l": false
+		},
+		{
+			"id": "0dd40a696e850b18",
+			"type": "template",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"field": "payload",
+			"fieldType": "msg",
+			"format": "json",
+			"syntax": "mustache",
+			"template": "{\n    \"fill\": \"green\",\n    \"shape\": \"ring\",\n    \"text\": \"{{topic}}: {{payload}}\"\n}",
+			"output": "json",
+			"x": 755,
+			"y": 160,
+			"wires": [
+				[]
+			],
+			"l": false
+		},
+		{
+			"id": "e9fcb11538581225",
+			"type": "inject",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"props": [
+				{
+					"p": "payload"
+				}
+			],
+			"repeat": "",
+			"crontab": "",
+			"once": true,
+			"onceDelay": "2",
+			"topic": "",
+			"payload": "HOSTS",
+			"payloadType": "env",
+			"x": 95,
+			"y": 80,
+			"wires": [
+				[
+					"a799c69b8163507d"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "bff1be259b8d5e93",
+			"type": "trigger",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"op1": "",
+			"op2": "0",
+			"op1type": "pay",
+			"op2type": "str",
+			"duration": "-5",
+			"extend": false,
+			"overrideDelay": true,
+			"units": "min",
+			"reset": "",
+			"bytopic": "all",
+			"topic": "topic",
+			"outputs": 1,
+			"x": 255,
+			"y": 80,
+			"wires": [
+				[
+					"34ce64062c32d24b"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "34ce64062c32d24b",
+			"type": "split",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"splt": "\\n",
+			"spltType": "str",
+			"arraySplt": 1,
+			"arraySpltType": "len",
+			"stream": false,
+			"addname": "topic",
+			"property": "payload",
+			"x": 335,
+			"y": 80,
+			"wires": [
+				[
+					"1244923ef5aa855b"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "82c3b68728c42824",
+			"type": "delay",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"pauseType": "rate",
+			"timeout": "5",
+			"timeoutUnits": "seconds",
+			"rate": "1",
+			"nbRateUnits": "10",
+			"rateUnits": "second",
+			"randomFirst": "1",
+			"randomLast": "5",
+			"randomUnits": "seconds",
+			"drop": false,
+			"allowrate": true,
+			"outputs": 1,
+			"x": 495,
+			"y": 80,
+			"wires": [
+				[
+					"c3557b3842dc3445"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "76c29bfdd9a21582",
+			"type": "exec",
+			"z": "10e1fc48c2918ddb",
+			"command": "ping -c 1 -w 1 ",
+			"addpay": "payload",
+			"append": "",
+			"useSpawn": "true",
+			"timer": "10",
+			"winHide": false,
+			"oldrc": false,
+			"name": "",
+			"x": 180,
+			"y": 240,
+			"wires": [
+				[
+					"ef5a1c85e7be276b"
+				],
+				[],
+				[
+					"d1fb1161051ebe13"
+				]
+			]
+		},
+		{
+			"id": "ef5a1c85e7be276b",
+			"type": "switch",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"property": "payload",
+			"propertyType": "msg",
+			"rules": [
+				{
+					"t": "cont",
+					"v": "1 received",
+					"vt": "str"
+				},
+				{
+					"t": "else"
+				}
+			],
+			"checkall": "false",
+			"repair": false,
+			"outputs": 2,
+			"x": 335,
+			"y": 220,
+			"wires": [
+				[
+					"9f73fab7ee2f70f5"
+				],
+				[
+					"41122fcf2be64896"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "9f73fab7ee2f70f5",
+			"type": "change",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "payload",
+					"pt": "msg",
+					"to": "true",
+					"tot": "bool"
+				},
+				{
+					"t": "set",
+					"p": "counter",
+					"pt": "flow",
+					"to": "0",
+					"tot": "num"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 415,
+			"y": 200,
+			"wires": [
+				[
+					"5d7d1ceaf8b5f49b"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "d1fb1161051ebe13",
+			"type": "switch",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"property": "payload.signal",
+			"propertyType": "msg",
+			"rules": [
+				{
+					"t": "eq",
+					"v": "SIGTERM",
+					"vt": "str"
+				}
+			],
+			"checkall": "true",
+			"repair": false,
+			"outputs": 1,
+			"x": 335,
+			"y": 340,
+			"wires": [
+				[
+					"cbbddd011f675b2d"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "f401c81cfb1be392",
+			"type": "change",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "topic",
+					"pt": "msg",
+					"to": "payload.name",
+					"tot": "msg",
+					"dc": true
+				},
+				{
+					"t": "set",
+					"p": "payload",
+					"pt": "msg",
+					"to": "payload.host",
+					"tot": "msg",
+					"dc": true
+				},
+				{
+					"t": "delete",
+					"p": "rate",
+					"pt": "msg"
+				},
+				{
+					"t": "delete",
+					"p": "parts",
+					"pt": "msg"
+				},
+				{
+					"t": "delete",
+					"p": "delay",
+					"pt": "msg"
+				},
+				{
+					"t": "set",
+					"p": "counter",
+					"pt": "flow",
+					"to": "$flowContext('counter') - 1",
+					"tot": "jsonata"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 815,
+			"y": 80,
+			"wires": [
+				[
+					"76c29bfdd9a21582"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "3f9cb93d5731dfdd",
+			"type": "rbe",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"func": "rbe",
+			"gap": "",
+			"start": "",
+			"inout": "out",
+			"septopics": true,
+			"property": "payload",
+			"topi": "topic",
+			"x": 655,
+			"y": 260,
+			"wires": [
+				[
+					"24800600dcb829d0"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "24800600dcb829d0",
+			"type": "change",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "delay",
+					"pt": "msg",
+					"to": "$number($env('REPEAT')) * 60000",
+					"tot": "jsonata"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 735,
+			"y": 260,
+			"wires": [
+				[
+					"ca48e3156c901cc5"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "cbbddd011f675b2d",
+			"type": "switch",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"property": "counter",
+			"propertyType": "flow",
+			"rules": [
+				{
+					"t": "eq",
+					"v": "0",
+					"vt": "num"
+				}
+			],
+			"checkall": "false",
+			"repair": false,
+			"outputs": 1,
+			"x": 495,
+			"y": 340,
+			"wires": [
+				[
+					"201dd3b57ea56c2b"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "89d7bed15f230af5",
+			"type": "switch",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"property": "counter",
+			"propertyType": "flow",
+			"rules": [
+				{
+					"t": "btwn",
+					"v": "1",
+					"vt": "num",
+					"v2": "$number($env('ATTEMPTS'))",
+					"v2t": "jsonata"
+				}
+			],
+			"checkall": "false",
+			"repair": false,
+			"outputs": 1,
+			"x": 735,
+			"y": 80,
+			"wires": [
+				[
+					"f401c81cfb1be392"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "c3557b3842dc3445",
+			"type": "change",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "counter",
+					"pt": "flow",
+					"to": "$number($env('ATTEMPTS'))",
+					"tot": "jsonata"
+				},
+				{
+					"t": "set",
+					"p": "delay",
+					"pt": "msg",
+					"to": "$number($env('ATTEMPTS_DELAY'))*1000",
+					"tot": "jsonata"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 575,
+			"y": 80,
+			"wires": [
+				[
+					"0764b1dba14f238f"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "0764b1dba14f238f",
+			"type": "trigger",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"op1": "",
+			"op2": "0",
+			"op1type": "pay",
+			"op2type": "str",
+			"duration": "-3",
+			"extend": false,
+			"overrideDelay": true,
+			"units": "s",
+			"reset": "",
+			"bytopic": "all",
+			"topic": "topic",
+			"outputs": 1,
+			"x": 655,
+			"y": 80,
+			"wires": [
+				[
+					"89d7bed15f230af5"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "1244923ef5aa855b",
+			"type": "change",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"rules": [
+				{
+					"t": "delete",
+					"p": "delay",
+					"pt": "msg"
+				},
+				{
+					"t": "set",
+					"p": "rate",
+					"pt": "msg",
+					"to": "($number($env('ATTEMPTS')) * $number($env('ATTEMPTS_DELAY')) + 1) * 1000",
+					"tot": "jsonata"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 415,
+			"y": 80,
+			"wires": [
+				[
+					"82c3b68728c42824"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "201dd3b57ea56c2b",
+			"type": "change",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "payload",
+					"pt": "msg",
+					"to": "false",
+					"tot": "bool"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 575,
+			"y": 340,
+			"wires": [
+				[
+					"5d7d1ceaf8b5f49b"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "41122fcf2be64896",
+			"type": "switch",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"property": "payload",
+			"propertyType": "msg",
+			"rules": [
+				{
+					"t": "cont",
+					"v": "Unreachable",
+					"vt": "str"
+				},
+				{
+					"t": "cont",
+					"v": "0 received",
+					"vt": "str"
+				},
+				{
+					"t": "cont",
+					"v": "100% packet loss",
+					"vt": "str"
+				}
+			],
+			"checkall": "false",
+			"repair": false,
+			"outputs": 3,
+			"x": 415,
+			"y": 280,
+			"wires": [
+				[
+					"cbbddd011f675b2d"
+				],
+				[
+					"cbbddd011f675b2d"
+				],
+				[
+					"cbbddd011f675b2d"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "1b4a8496adfc4aa0",
+			"type": "change",
+			"z": "10e1fc48c2918ddb",
+			"name": "NOT",
+			"rules": [
+				{
+					"t": "delete",
+					"p": "delay",
+					"pt": "msg"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 915,
+			"y": 260,
+			"wires": [
+				[]
+			],
+			"l": false
+		},
+		{
+			"id": "64d2cbb9f702f496",
+			"type": "inject",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"props": [
+				{
+					"p": "payload"
+				}
+			],
+			"repeat": "",
+			"crontab": "",
+			"once": true,
+			"onceDelay": 0.1,
+			"topic": "",
+			"payload": "{\"fill\":\"grey\",\"shape\":\"ring\",\"text\":\"waiting\"}",
+			"payloadType": "json",
+			"x": 915,
+			"y": 140,
+			"wires": [
+				[]
+			],
+			"l": false
+		},
+		{
+			"id": "a799c69b8163507d",
+			"type": "function",
+			"z": "10e1fc48c2918ddb",
+			"name": "function 2",
+			"func": "var attempts = Number(env.get('ATTEMPTS'));\nvar attempts_del = Number(env.get('ATTEMPTS_DELAY'));\nvar interval = 0;\nvar new_msg = {};\n\nfor (let key in msg.payload){\n    new_msg[key] = {\"name\" : key, \"host\": msg.payload[key]}\n}\ninterval = ((attempts * attempts_del) + 1) * Object.keys(new_msg).length * 1000 + 2000;\nreturn {\"payload\" : new_msg, \"delay\" : interval};",
+			"outputs": 1,
+			"timeout": 0,
+			"noerr": 0,
+			"initialize": "",
+			"finalize": "",
+			"libs": [],
+			"x": 175,
+			"y": 80,
+			"wires": [
+				[
+					"bff1be259b8d5e93"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "f66c9c2ffde76021",
+			"type": "switch",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"property": "payload",
+			"propertyType": "msg",
+			"rules": [
+				{
+					"t": "true"
+				},
+				{
+					"t": "false"
+				}
+			],
+			"checkall": "false",
+			"repair": false,
+			"outputs": 2,
+			"x": 655,
+			"y": 200,
+			"wires": [
+				[
+					"0dd40a696e850b18"
+				],
+				[
+					"f6856535c79d4a95"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "f6856535c79d4a95",
+			"type": "template",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"field": "payload",
+			"fieldType": "msg",
+			"format": "json",
+			"syntax": "mustache",
+			"template": "{\n    \"fill\": \"red\",\n    \"shape\": \"ring\",\n    \"text\": \"{{topic}}: {{payload}}\"\n}",
+			"output": "json",
+			"x": 755,
+			"y": 220,
+			"wires": [
+				[]
+			],
+			"l": false
+		},
+		{
+			"id": "5d7d1ceaf8b5f49b",
+			"type": "junction",
+			"z": "10e1fc48c2918ddb",
+			"x": 580,
+			"y": 200,
+			"wires": [
+				[
+					"3f9cb93d5731dfdd",
+					"f66c9c2ffde76021"
+				]
+			]
+		}
     ]
 }
