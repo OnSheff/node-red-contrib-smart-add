@@ -30,3 +30,6 @@ Performs the selected mathematical operation.
 
 ### WB parser
 Parser for Wirenboard nodes.
+
+### Hysteresis
+Deadband with reset after a specified period

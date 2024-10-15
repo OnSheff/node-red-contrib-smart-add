@@ -1,0 +1,650 @@
+{
+	"id": "0299d74541d642c3",
+	"type": "subflow",
+	"name": "Hysteresis",
+	"info": "The output is blocked unless value has changed (ignore initial value).\r\n\r\n\r\nWhen a new input value is received, it is compared with the last output value. If the new value is greater than or equal to the previous one (+- threshold), it is sent to the output.\r\n\r\nAfter the specified time value, the stored value (last output) is automatically reset. If the time is not set, the values are not automatically reset.\r\n\r\n`Note!` \r\nAll parameters are applied to each individual `msg.topic`.\r\n\r\n### Intputs\r\n\r\n1. To send the last output values.\r\n: topic (string) : **get_values**\r\n\r\n2. To reset last output values.\r\n: reset (binary) : **true**\r\n: topic (string) : **any** \r\n`Note!`\r\nIt is applied separately for each `msg.topic`.\r\nIf `msg.topic` is not specified, all values will be reset.\r\n\r\n---\r\n\r\n\r\n### Outputs\r\n\r\n: topic (string) : **topic**\r\n: payload (numeric) : **Output value**\r\n\r\n\r\n---\r\n\r\n\r\n### Configuration\r\n\r\n **Threshold type**\r\n\r\nSelecting the type of threshold.\r\n\r\n - **Absolute** - counts in absolute values.\r\n\r\n - **%** - counts as a percentage.\r\n\r\n---\r\n\r\n **Threshold value**\r\n\r\nSets the threshold value.\r\n\r\n\r\n`Default:` **5**\r\n\r\n---\r\n\r\n\r\n\r\n**Delay minutes**\r\n\r\nReset delay in minutes.\r\n\r\n`Available range:` **0 - 4380**\r\n\r\n`Default:` **10**\r\n\r\n---\r\n**Delay seconds**\r\n\r\nReset delay in seconds.\r\n\r\n`Available range:` **0 - 59**\r\n\r\n`Default:` **0**",
+	"category": "Smart add",
+	"in": [
+		{
+			"x": 60,
+			"y": 160,
+			"wires": [
+				{
+					"id": "3d52d9715aafdcc4"
+				}
+			]
+		}
+	],
+	"out": [
+		{
+			"x": 1060,
+			"y": 160,
+			"wires": [
+				{
+					"id": "9859284c55e5ef28",
+					"port": 0
+				},
+				{
+					"id": "7be16b6f293d5a8d",
+					"port": 0
+				}
+			]
+		}
+	],
+	"env": [
+		{
+			"name": "TYPE",
+			"type": "str",
+			"value": "perc",
+			"ui": {
+				"label": {
+					"ru": "Deadband type"
+				},
+				"type": "select",
+				"opts": {
+					"opts": [
+						{
+							"l": {
+								"ru": "Absolute"
+							},
+							"v": "abs"
+						},
+						{
+							"l": {
+								"ru": "%"
+							},
+							"v": "perc"
+						}
+					]
+				}
+			}
+		},
+		{
+			"name": "DEADBAND",
+			"type": "num",
+			"value": "5",
+			"ui": {
+				"label": {
+					"ru": "Deadband value"
+				},
+				"type": "spinner",
+				"opts": {
+					"min": 0,
+					"max": 1000
+				}
+			}
+		},
+		{
+			"name": "TIME",
+			"type": "num",
+			"value": "60",
+			"ui": {
+				"label": {
+					"ru": "Deadband time (min.)"
+				},
+				"type": "spinner",
+				"opts": {
+					"min": 0,
+					"max": 4320
+				}
+			}
+		},
+		{
+			"name": "SEC",
+			"type": "num",
+			"value": "0",
+			"ui": {
+				"label": {
+					"ru": "Deadband time (sec.)"
+				},
+				"type": "spinner",
+				"opts": {
+					"min": 0,
+					"max": 59
+				}
+			}
+		}
+	],
+	"meta": {
+		"type": "Hysteresis",
+		"version": "1.0.1",
+		"author": "Anton Shefov <a.shefov@intelvision.ru>",
+		"desc": "Deadband with reset after a specified period",
+		"license": "MIT"
+	},
+	"color": "#7FC7FF",
+	"icon": "node-red/rbe.svg",
+	"status": {
+		"x": 1060,
+		"y": 280,
+		"wires": [
+			{
+				"id": "22b02dcd325dfb2e",
+				"port": 0
+			},
+			{
+				"id": "34e8e1ef538ecffa",
+				"port": 0
+			}
+		]
+	},
+    "flow": [
+		{
+		"id": "bf35710333a4e1ff",
+		"type": "switch",
+		"z": "0299d74541d642c3",
+		"name": "",
+		"property": "topic",
+		"propertyType": "msg",
+		"rules": [
+			{
+				"t": "eq",
+				"v": "get_values",
+				"vt": "str"
+			},
+			{
+				"t": "else"
+			}
+		],
+		"checkall": "false",
+		"repair": false,
+		"outputs": 2,
+		"x": 255,
+		"y": 160,
+		"wires": [
+			[
+				"5e2f54359c8df9cd"
+			],
+			[
+				"e926b3118a91ce6e"
+			]
+		],
+		"l": false
+		},
+		{
+			"id": "22b02dcd325dfb2e",
+			"type": "template",
+			"z": "0299d74541d642c3",
+			"name": "",
+			"field": "payload",
+			"fieldType": "msg",
+			"format": "json",
+			"syntax": "mustache",
+			"template": "{\n    \"fill\": \"grey\",\n    \"shape\": \"ring\",\n    \"text\": \"no values\"\n}",
+			"output": "json",
+			"x": 900,
+			"y": 340,
+			"wires": [
+				[]
+			]
+		},
+		{
+			"id": "1bbf190a08ee3230",
+			"type": "inject",
+			"z": "0299d74541d642c3",
+			"name": "",
+			"props": [
+				{
+					"p": "payload"
+				}
+			],
+			"repeat": "",
+			"crontab": "",
+			"once": true,
+			"onceDelay": 0.1,
+			"topic": "",
+			"payload": "true",
+			"payloadType": "bool",
+			"x": 310,
+			"y": 280,
+			"wires": [
+				[
+					"ae22b39c8456f7f0"
+				]
+			]
+		},
+		{
+			"id": "3d52d9715aafdcc4",
+			"type": "switch",
+			"z": "0299d74541d642c3",
+			"name": "",
+			"property": "reset",
+			"propertyType": "msg",
+			"rules": [
+				{
+					"t": "nnull"
+				},
+				{
+					"t": "else"
+				}
+			],
+			"checkall": "false",
+			"repair": false,
+			"outputs": 2,
+			"x": 165,
+			"y": 160,
+			"wires": [
+				[
+					"4eca163247e6806c"
+				],
+				[
+					"bf35710333a4e1ff"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "5e2f54359c8df9cd",
+			"type": "change",
+			"z": "0299d74541d642c3",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "payload",
+					"pt": "msg",
+					"to": "values_dict",
+					"tot": "flow",
+					"dc": true
+				},
+				{
+					"t": "set",
+					"p": "topic",
+					"pt": "msg",
+					"to": "objects_dict",
+					"tot": "str"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 455,
+			"y": 100,
+			"wires": [
+				[
+					"813e439559b10514"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "62fccf39e68dad56",
+			"type": "delay",
+			"z": "0299d74541d642c3",
+			"name": "",
+			"pauseType": "delay",
+			"timeout": "100",
+			"timeoutUnits": "milliseconds",
+			"rate": "1",
+			"nbRateUnits": "1",
+			"rateUnits": "second",
+			"randomFirst": "1",
+			"randomLast": "5",
+			"randomUnits": "seconds",
+			"drop": false,
+			"allowrate": false,
+			"outputs": 1,
+			"x": 695,
+			"y": 340,
+			"wires": [
+				[
+					"22b02dcd325dfb2e"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "34e8e1ef538ecffa",
+			"type": "function",
+			"z": "0299d74541d642c3",
+			"name": "counter",
+			"func": "var length = Object.keys(flow.get('values_dict')).length;\nvar text = String(length);\n\nif (length > 0){\n    return [{\n        \"payload\": {\n            \"fill\": \"blue\",\n            \"shape\": \"dot\",\n            \"text\": text\n        }\n    }, null];\n} else {\n    return [null, {\"payload\" : 0}]\n}\n",
+			"outputs": 2,
+			"timeout": 0,
+			"noerr": 0,
+			"initialize": "",
+			"finalize": "",
+			"libs": [],
+			"x": 740,
+			"y": 280,
+			"wires": [
+				[],
+				[
+					"22b02dcd325dfb2e"
+				]
+			]
+		},
+		{
+			"id": "ae22b39c8456f7f0",
+			"type": "function",
+			"z": "0299d74541d642c3",
+			"name": "Reset",
+			"func": "if (msg.topic != null){\n    var values_dict = flow.get(\"values_dict\");\n    try {\n        delete values_dict[msg.topic];\n        flow.set(\"values_dict\",values_dict);\n    } catch {}\n    if (Object.keys(values_dict).length != 0){\n        return [{ \"payload\": true }, null];\n    } else {\n        return [null, { \"payload\": true }];\n    }\n} else {\n    flow.set(\"values_dict\", {});\n    return [null, { \"payload\": true }];\n}",
+			"outputs": 2,
+			"timeout": 0,
+			"noerr": 0,
+			"initialize": "",
+			"finalize": "",
+			"libs": [],
+			"x": 490,
+			"y": 280,
+			"wires": [
+				[
+					"34e8e1ef538ecffa"
+				],
+				[
+					"62fccf39e68dad56"
+				]
+			]
+		},
+		{
+			"id": "682c4812c42dd2f8",
+			"type": "function",
+			"z": "0299d74541d642c3",
+			"name": "Deadband abs",
+			"func": "var deadband = Number(env.get('DEADBAND'));\nvar values_dict = flow.get(\"values_dict\");\nvar topic = String(msg.topic);\nvar new_value = Number(msg.payload);\nvar changed = false;\n\n\nif (values_dict[topic] != null) {\n    if (new_value >= (values_dict[topic] + deadband)){\n        changed = true;\n    } else if (new_value <= (values_dict[topic] - deadband)){\n        changed = true;\n    }\n} else {\n    changed = true;\n}\n\nif (changed === true){\n    values_dict[msg.topic] = new_value;\n    flow.set(\"values_dict\", values_dict);\n    return { \"payload\": new_value, \"topic\" : topic};\n}\n\n",
+			"outputs": 1,
+			"timeout": "",
+			"noerr": 0,
+			"initialize": "",
+			"finalize": "",
+			"libs": [],
+			"x": 520,
+			"y": 160,
+			"wires": [
+				[
+					"34e8e1ef538ecffa",
+					"9859284c55e5ef28"
+				]
+			]
+		},
+		{
+			"id": "813e439559b10514",
+			"type": "switch",
+			"z": "0299d74541d642c3",
+			"name": "",
+			"property": "payload",
+			"propertyType": "msg",
+			"rules": [
+				{
+					"t": "nempty"
+				}
+			],
+			"checkall": "false",
+			"repair": false,
+			"outputs": 1,
+			"x": 555,
+			"y": 100,
+			"wires": [
+				[
+					"9615b20f396ff80e"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "9eee2d750b2d3632",
+			"type": "function",
+			"z": "0299d74541d642c3",
+			"name": "Deadband %",
+			"func": "var deadband = Number(env.get('DEADBAND'));\nvar values_dict = flow.get(\"values_dict\");\nvar topic = String(msg.topic);\nvar new_value = Number(msg.payload);\nvar changed = false;\n\n\nif (values_dict[topic] != null) {\n    if (new_value / values_dict[topic] >= (1 + deadband / 100)){\n        changed = true;\n    } else if (new_value / values_dict[topic] <= (1 - deadband / 100)){\n        changed = true;\n    }\n} else {\n    changed = true;\n}\n\nif (changed === true){\n    values_dict[msg.topic] = new_value;\n    flow.set(\"values_dict\", values_dict);\n    return { \"payload\": new_value, \"topic\": topic};\n}\n\n",
+			"outputs": 1,
+			"timeout": "",
+			"noerr": 0,
+			"initialize": "",
+			"finalize": "",
+			"libs": [],
+			"x": 510,
+			"y": 220,
+			"wires": [
+				[
+					"34e8e1ef538ecffa",
+					"9859284c55e5ef28"
+				]
+			]
+		},
+		{
+			"id": "e926b3118a91ce6e",
+			"type": "switch",
+			"z": "0299d74541d642c3",
+			"name": "",
+			"property": "TYPE",
+			"propertyType": "env",
+			"rules": [
+				{
+					"t": "eq",
+					"v": "abs",
+					"vt": "str"
+				},
+				{
+					"t": "eq",
+					"v": "perc",
+					"vt": "str"
+				}
+			],
+			"checkall": "false",
+			"repair": false,
+			"outputs": 2,
+			"x": 355,
+			"y": 160,
+			"wires": [
+				[
+					"682c4812c42dd2f8"
+				],
+				[
+					"9eee2d750b2d3632"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "c0b6f08394b1e080",
+			"type": "change",
+			"z": "0299d74541d642c3",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "reset",
+					"pt": "msg",
+					"to": "true",
+					"tot": "bool"
+				},
+				{
+					"t": "delete",
+					"p": "payload",
+					"pt": "msg"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 955,
+			"y": 220,
+			"wires": [
+				[
+					"b7d6363f085a52c2"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "c81d1cfce49f5e76",
+			"type": "trigger",
+			"z": "0299d74541d642c3",
+			"name": "",
+			"op1": "",
+			"op2": "true",
+			"op1type": "nul",
+			"op2type": "bool",
+			"duration": "5",
+			"extend": true,
+			"overrideDelay": true,
+			"units": "s",
+			"reset": "",
+			"bytopic": "topic",
+			"topic": "topic",
+			"outputs": 1,
+			"x": 855,
+			"y": 220,
+			"wires": [
+				[
+					"c0b6f08394b1e080"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "b7d6363f085a52c2",
+			"type": "link out",
+			"z": "0299d74541d642c3",
+			"name": "link out 14",
+			"mode": "link",
+			"links": [
+				"26ca344e528619e2"
+			],
+			"x": 1055,
+			"y": 220,
+			"wires": []
+		},
+		{
+			"id": "26ca344e528619e2",
+			"type": "link in",
+			"z": "0299d74541d642c3",
+			"name": "link in 10",
+			"links": [
+				"b7d6363f085a52c2",
+				"4eca163247e6806c"
+			],
+			"x": 345,
+			"y": 340,
+			"wires": [
+				[
+					"ae22b39c8456f7f0"
+				]
+			]
+		},
+		{
+			"id": "4eca163247e6806c",
+			"type": "link out",
+			"z": "0299d74541d642c3",
+			"name": "link out 15",
+			"mode": "link",
+			"links": [
+				"13ad0ec27c822cfb",
+				"26ca344e528619e2"
+			],
+			"x": 255,
+			"y": 100,
+			"wires": []
+		},
+		{
+			"id": "e1ab4e8e7cc8c813",
+			"type": "change",
+			"z": "0299d74541d642c3",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "delay",
+					"pt": "msg",
+					"to": "($env('TIME') * 60000 + $env('SEC') * 1000)",
+					"tot": "jsonata"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 755,
+			"y": 220,
+			"wires": [
+				[
+					"c81d1cfce49f5e76"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "7be16b6f293d5a8d",
+			"type": "change",
+			"z": "0299d74541d642c3",
+			"name": "",
+			"rules": [
+				{
+					"t": "delete",
+					"p": "data_array",
+					"pt": "msg"
+				},
+				{
+					"t": "delete",
+					"p": "math",
+					"pt": "msg"
+				},
+				{
+					"t": "delete",
+					"p": "event",
+					"pt": "msg"
+				},
+				{
+					"t": "delete",
+					"p": "parts",
+					"pt": "msg"
+				},
+				{
+					"t": "delete",
+					"p": "payload_in",
+					"pt": "msg"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 755,
+			"y": 100,
+			"wires": [
+				[]
+			],
+			"l": false
+		},
+		{
+			"id": "9615b20f396ff80e",
+			"type": "split",
+			"z": "0299d74541d642c3",
+			"name": "",
+			"splt": "\\n",
+			"spltType": "str",
+			"arraySplt": 1,
+			"arraySpltType": "len",
+			"stream": false,
+			"addname": "topic",
+			"x": 655,
+			"y": 100,
+			"wires": [
+				[
+					"7be16b6f293d5a8d"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "9859284c55e5ef28",
+			"type": "junction",
+			"z": "0299d74541d642c3",
+			"x": 680,
+			"y": 160,
+			"wires": [
+				[
+					"e1ab4e8e7cc8c813"
+				]
+			]
+		}
+    ]
+}

@@ -1,6 +1,6 @@
 {
 	"name": "@on_sheff/node-red-contrib-smart-add",
-	"version": "1.0.13",
+	"version": "1.0.14",
 	"description": "Easy add-ons for Node-red",
 	"main": "index.js",
 	"scripts": {
@@ -25,7 +25,8 @@
 			"OR" : "or.js",
 			"Logic" : "logic.js",
 			"Math" : "math.js",
-			"WB parser": "wb_parser.js"
+			"WB parser": "wb_parser.js",
+			"Hysteresis": "hysteresis.js"
 		}
 	},
 	"engines": {
