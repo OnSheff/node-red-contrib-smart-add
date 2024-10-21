@@ -1,6 +1,6 @@
 {
 	"name": "@on_sheff/node-red-contrib-smart-add",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"description": "Easy add-ons for Node-red",
 	"main": "index.js",
 	"scripts": {

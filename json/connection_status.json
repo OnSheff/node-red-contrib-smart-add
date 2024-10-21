@@ -2,31 +2,31 @@
     "id": "10e1fc48c2918ddb",
     "type": "subflow",
     "name": "Connection status",
-    "info": "Checks the connection with the host and sends the status\r\n\r\n### Outputs\r\n\r\n: payload (boolean) : Connection status with host\r\n: topic (string) : Host name\r\n\r\n\r\n### Configuration\r\n\r\n**Hosts**\r\n\r\nA json file of the following format:\r\n \r\n    {\r\n        \"Host_name\": \"IP-address\"\r\n    }\r\n\r\n**Number of attempts**\r\n\r\nNumber of connection attempts _(1-10)_\r\n\r\n`Default:` **3**\r\n\r\n---\r\n**Delay between attemts (sec.)**\r\n\r\nDelay between connection attempts in seconds _(1-60)_\r\n\r\n`Default:` **3**\r\n\r\n\r\n---\r\n**Repeat every (min.)**\r\n\r\nThe period for resending the status in minutes _(0-60)_\r\n\r\n`Default:` **20**",
+    "info": "Checks the connection with the host and sends the status\r\n\r\n### Outputs\r\n\r\n: payload (boolean) : Connection status with host\r\n: topic (string) : Host name\r\n\r\n\r\n### Configuration\r\n\r\n**Hosts**\r\n\r\nA json file of the following format:\r\n \r\n    {\r\n        \"Host_name\": \"IP-address\"\r\n    }\r\n\r\n**Number of attempts**\r\n\r\nNumber of connection attempts _(1-10)_\r\n\r\n`Default:` **3**\r\n\r\n---\r\n**Delay between attemts (sec.)**\r\n\r\nDelay between connection attempts in seconds _(1-60)_\r\n\r\n`Default:` **3**\r\n\r\n\r\n---\r\n**Repeat every (min.)**\r\n\r\nThe period for resending the status in minutes _(0-60)_\r\n\r\n`Note!` If **0** is set, the value is sent at each poll.\r\n\r\n`Default:` **20**",
     "category": "Smart add",
     "in": [],
     "out": [
-        {
-            "x": 1030,
-            "y": 260,
-            "wires": [
-                {
-                    "id": "1b4a8496adfc4aa0",
-                    "port": 0
-                }
-            ]
-        },
-        {
-            "x": 1040,
-            "y": 320,
-            "wires": [
-                {
-                    "id": "7e8fb88859f97fd9",
-                    "port": 0
-                }
-            ]
-        }
-    ],
+		{
+			"x": 1110,
+			"y": 280,
+			"wires": [
+				{
+					"id": "1b4a8496adfc4aa0",
+					"port": 0
+				}
+			]
+		},
+		{
+			"x": 1120,
+			"y": 340,
+			"wires": [
+				{
+					"id": "7e8fb88859f97fd9",
+					"port": 0
+				}
+			]
+		}
+	],
 	"env": [
 		{
 			"name": "HOSTS",
@@ -97,7 +97,7 @@
 	],
     "meta": {
         "type": "Connection status",
-        "version": "1.2.1",
+        "version": "1.2.2",
         "author": "Anton Shefov <a.shefov@gmail.com>",
         "desc": "Checks the connection to the hosts",
         "license": "MIT"
@@ -109,8 +109,8 @@
     ],
     "icon": "font-awesome/fa-link",
     "status": {
-		"x": 1000,
-		"y": 200,
+		"x": 1080,
+		"y": 220,
 		"wires": [
 			{
 				"id": "0dd40a696e850b18",
@@ -128,31 +128,30 @@
 	},
     "flow": [
         {
-        "id": "ca48e3156c901cc5",
-        "type": "trigger",
-        "z": "10e1fc48c2918ddb",
-        "name": "",
-        "op1": "",
-        "op2": "",
-        "op1type": "pay",
-        "op2type": "payl",
-        "duration": "-250",
-        "extend": false,
-        "overrideDelay": true,
-        "units": "ms",
-        "reset": "",
-        "bytopic": "topic",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 815,
-        "y": 260,
-        "wires": [
-            [
-                "7e8fb88859f97fd9",
-                "1b4a8496adfc4aa0"
-            ]
-        ],
-        "l": false
+			"id": "ca48e3156c901cc5",
+			"type": "trigger",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"op1": "",
+			"op2": "",
+			"op1type": "pay",
+			"op2type": "payl",
+			"duration": "-250",
+			"extend": false,
+			"overrideDelay": true,
+			"units": "ms",
+			"reset": "",
+			"bytopic": "topic",
+			"topic": "topic",
+			"outputs": 1,
+			"x": 855,
+			"y": 340,
+			"wires": [
+				[
+					"3f937d428ea21675"
+				]
+			],
+			"l": false
 		},
 		{
 			"id": "7e8fb88859f97fd9",
@@ -178,8 +177,8 @@
 			"from": "",
 			"to": "",
 			"reg": false,
-			"x": 915,
-			"y": 320,
+			"x": 995,
+			"y": 340,
 			"wires": [
 				[]
 			],
@@ -196,8 +195,8 @@
 			"syntax": "mustache",
 			"template": "{\n    \"fill\": \"green\",\n    \"shape\": \"ring\",\n    \"text\": \"{{topic}}: {{payload}}\"\n}",
 			"output": "json",
-			"x": 755,
-			"y": 160,
+			"x": 735,
+			"y": 180,
 			"wires": [
 				[]
 			],
@@ -490,8 +489,8 @@
 			"septopics": true,
 			"property": "payload",
 			"topi": "topic",
-			"x": 655,
-			"y": 260,
+			"x": 735,
+			"y": 340,
 			"wires": [
 				[
 					"24800600dcb829d0"
@@ -518,8 +517,8 @@
 			"from": "",
 			"to": "",
 			"reg": false,
-			"x": 735,
-			"y": 260,
+			"x": 795,
+			"y": 340,
 			"wires": [
 				[
 					"ca48e3156c901cc5"
@@ -762,8 +761,8 @@
 			"from": "",
 			"to": "",
 			"reg": false,
-			"x": 915,
-			"y": 260,
+			"x": 995,
+			"y": 280,
 			"wires": [
 				[]
 			],
@@ -786,7 +785,7 @@
 			"topic": "",
 			"payload": "{\"fill\":\"grey\",\"shape\":\"ring\",\"text\":\"waiting\"}",
 			"payloadType": "json",
-			"x": 915,
+			"x": 905,
 			"y": 140,
 			"wires": [
 				[]
@@ -855,10 +854,44 @@
 			"syntax": "mustache",
 			"template": "{\n    \"fill\": \"red\",\n    \"shape\": \"ring\",\n    \"text\": \"{{topic}}: {{payload}}\"\n}",
 			"output": "json",
-			"x": 755,
+			"x": 735,
 			"y": 220,
 			"wires": [
 				[]
+			],
+			"l": false
+		},
+		{
+			"id": "0ce6e7b54034e11a",
+			"type": "switch",
+			"z": "10e1fc48c2918ddb",
+			"name": "",
+			"property": "REPEAT",
+			"propertyType": "env",
+			"rules": [
+				{
+					"t": "eq",
+					"v": "0",
+					"vt": "num"
+				},
+				{
+					"t": "gt",
+					"v": "0",
+					"vt": "num"
+				}
+			],
+			"checkall": "false",
+			"repair": false,
+			"outputs": 2,
+			"x": 655,
+			"y": 280,
+			"wires": [
+				[
+					"3f937d428ea21675"
+				],
+				[
+					"3f9cb93d5731dfdd"
+				]
 			],
 			"l": false
 		},
@@ -870,8 +903,21 @@
 			"y": 200,
 			"wires": [
 				[
-					"3f9cb93d5731dfdd",
-					"f66c9c2ffde76021"
+					"f66c9c2ffde76021",
+					"0ce6e7b54034e11a"
+				]
+			]
+		},
+		{
+			"id": "3f937d428ea21675",
+			"type": "junction",
+			"z": "10e1fc48c2918ddb",
+			"x": 920,
+			"y": 280,
+			"wires": [
+				[
+					"1b4a8496adfc4aa0",
+					"7e8fb88859f97fd9"
 				]
 			]
 		}
