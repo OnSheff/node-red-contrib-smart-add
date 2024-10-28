@@ -16,6 +16,9 @@ Generates a Modbus request.
 ### MB parser
 Converts the response from Modbus to the required data format.
 
+### MB queue
+Creates a queue of Modbus requests.
+
 ### Repeater
 Sends the value by change or after a period of time.
 

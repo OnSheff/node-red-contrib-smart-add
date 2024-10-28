@@ -1,0 +1,386 @@
+{
+	"id": "871624442b6901da",
+	"type": "subflow",
+	"name": "MB_queue",
+	"info": "Creates a queue of Modbus requests.\r\n\r\nWhen any input command is received, the following request is generated.\r\nThe requests are repeated cyclically.\r\n\r\n\r\n### Outputs\r\n\r\n: payload (json) : Request\r\n\r\n### Configuration\r\n\r\n**Address pool**\r\n\r\nA json file of the following format:\r\n \r\n    {\r\n        \"Start address\": \"Quantity\"\r\n    }\r\n\r\n\r\n---\r\n**Delay (ms.)**\r\n\r\nDelay between requests in milliseconds _(0-100000)_\r\n\r\n`Default:` **200**\r\n\r\n\r\n\r\n---\r\n\r\n\r\n`Fore example:` \r\n\r\n**With json:**\r\n\r\n    {\r\n        \"120\": \"16\",\r\n        \"30\": \"32\"\r\n    }\r\n\r\n**Generates 2 requests:**\r\n\r\n\r\n    {\r\n        \"topic\" : 120,\r\n        \"quantity:\" 16\r\n    }\r\n`&`\r\n\r\n    {\r\n        \"topic\" : 30,\r\n        \"quantity:\" 32\r\n    }\r\n\r\n",
+	"category": "SmartUnity",
+	"in": [
+		{
+			"x": 100,
+			"y": 180,
+			"wires": [
+				{
+					"id": "76d439574e3b5b62"
+				}
+			]
+		}
+	],
+	"out": [
+		{
+			"x": 1020,
+			"y": 180,
+			"wires": [
+				{
+					"id": "d6a62f21cbb23ae6",
+					"port": 0
+				}
+			]
+		}
+	],
+	"env": [
+		{
+			"name": "QUEUE",
+			"type": "json",
+			"value": "{}",
+			"ui": {
+				"label": {
+					"ru": "Queue"
+				},
+				"type": "input",
+				"opts": {
+					"types": [
+						"json"
+					]
+				}
+			}
+		},
+		{
+			"name": "DELAY",
+			"type": "num",
+			"value": "200",
+			"ui": {
+				"label": {
+					"ru": "Delay (ms.)"
+				},
+				"type": "spinner",
+				"opts": {
+					"min": 0,
+					"max": 100000
+				}
+			}
+		}
+	],
+	"meta": {
+		"type": "Modbus queue",
+		"version": "0.1.5",
+		"author": "Anton Shefov <a.shefov@gmail.com>",
+		"desc": "Generates a Modbus request queue",
+		"license": "MIT"
+	},
+	"color": "#7FC7FF",
+	"status": {
+		"x": 1020,
+		"y": 240,
+		"wires": [
+			{
+				"id": "52285732918087fc",
+				"port": 0
+			},
+			{
+				"id": "654d237d8446e032",
+				"port": 0
+			}
+		]
+	},
+	"flow" : [
+		{
+		"id": "074c2eb23e3a9a52",
+		"type": "function",
+		"z": "871624442b6901da",
+		"name": "Modbus queue",
+		"func": "const queue = env.get('QUEUE');\nvar current_num = context.get('current_num');\n\nnode.send({ \n    \"payload\": true,\n    \"topic\": Number(Object.keys(queue)[current_num]),\n    \"quantity\": Number(Object.values(queue)[current_num])\n    });\n\nif (current_num < Object.keys(queue).length - 1) {\n    current_num += 1;\n} else {\n    current_num = 0;\n}\ncontext.set('current_num', current_num);",
+		"outputs": 1,
+		"noerr": 0,
+		"initialize": "// Добавленный здесь код будет исполняться\n// однократно при развертывании узла.\ncontext.set('current_num', 0);",
+		"finalize": "",
+		"libs": [],
+		"x": 600,
+		"y": 180,
+		"wires": [
+			[
+				"d6a62f21cbb23ae6"
+			]
+		]
+		},
+		{
+			"id": "d6a62f21cbb23ae6",
+			"type": "switch",
+			"z": "871624442b6901da",
+			"name": "",
+			"property": "topic",
+			"propertyType": "msg",
+			"rules": [
+				{
+					"t": "nnull"
+				}
+			],
+			"checkall": "true",
+			"repair": false,
+			"outputs": 1,
+			"x": 755,
+			"y": 180,
+			"wires": [
+				[
+					"654d237d8446e032"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "52285732918087fc",
+			"type": "template",
+			"z": "871624442b6901da",
+			"name": "",
+			"field": "payload",
+			"fieldType": "msg",
+			"format": "json",
+			"syntax": "mustache",
+			"template": "{\n    \"fill\": \"grey\",\n    \"shape\": \"ring\",\n    \"text\": \"Waiting\"\n}",
+			"output": "json",
+			"x": 935,
+			"y": 300,
+			"wires": [
+				[]
+			],
+			"l": false
+		},
+		{
+			"id": "882f2171f14e66cc",
+			"type": "inject",
+			"z": "871624442b6901da",
+			"name": "",
+			"props": [
+				{
+					"p": "payload"
+				}
+			],
+			"repeat": "",
+			"crontab": "",
+			"once": true,
+			"onceDelay": 0.1,
+			"topic": "",
+			"payload": "true",
+			"payloadType": "bool",
+			"x": 810,
+			"y": 360,
+			"wires": [
+				[
+					"52285732918087fc"
+				]
+			]
+		},
+		{
+			"id": "654d237d8446e032",
+			"type": "template",
+			"z": "871624442b6901da",
+			"name": "",
+			"field": "payload",
+			"fieldType": "msg",
+			"format": "handlebars",
+			"syntax": "mustache",
+			"template": "{\n    \"fill\": \"green\",\n    \"shape\": \"dot\",\n    \"text\": \"{{topic}}: {{quantity}}\"\n}",
+			"output": "json",
+			"x": 835,
+			"y": 240,
+			"wires": [
+				[
+					"a61bbf81325464d1"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "c9087ffd819839a7",
+			"type": "change",
+			"z": "871624442b6901da",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "payload",
+					"pt": "msg",
+					"to": "status.text",
+					"tot": "msg",
+					"dc": true
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 195,
+			"y": 80,
+			"wires": [
+				[
+					"4598f1945085872a"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "4598f1945085872a",
+			"type": "switch",
+			"z": "871624442b6901da",
+			"name": "",
+			"property": "payload",
+			"propertyType": "msg",
+			"rules": [
+				{
+					"t": "eq",
+					"v": "active",
+					"vt": "str"
+				}
+			],
+			"checkall": "false",
+			"repair": false,
+			"outputs": 1,
+			"x": 275,
+			"y": 80,
+			"wires": [
+				[
+					"4de93f6caec032df"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "76d439574e3b5b62",
+			"type": "switch",
+			"z": "871624442b6901da",
+			"name": "",
+			"property": "status.text",
+			"propertyType": "msg",
+			"rules": [
+				{
+					"t": "nnull"
+				},
+				{
+					"t": "else"
+				}
+			],
+			"checkall": "false",
+			"repair": false,
+			"outputs": 2,
+			"x": 195,
+			"y": 180,
+			"wires": [
+				[
+					"c9087ffd819839a7",
+					"227e621599ab45e1"
+				],
+				[
+					"074c2eb23e3a9a52",
+					"227e621599ab45e1"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "4de93f6caec032df",
+			"type": "change",
+			"z": "871624442b6901da",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "delay",
+					"pt": "msg",
+					"to": "$env('DELAY')",
+					"tot": "jsonata"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 355,
+			"y": 80,
+			"wires": [
+				[
+					"bea85e8a7e34bfee"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "bea85e8a7e34bfee",
+			"type": "trigger",
+			"z": "871624442b6901da",
+			"name": "",
+			"op1": "",
+			"op2": "true",
+			"op1type": "nul",
+			"op2type": "bool",
+			"duration": "100",
+			"extend": true,
+			"overrideDelay": true,
+			"units": "ms",
+			"reset": "",
+			"bytopic": "all",
+			"topic": "topic",
+			"outputs": 1,
+			"x": 435,
+			"y": 80,
+			"wires": [
+				[
+					"074c2eb23e3a9a52"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "227e621599ab45e1",
+			"type": "trigger",
+			"z": "871624442b6901da",
+			"name": "",
+			"op1": "",
+			"op2": "true",
+			"op1type": "nul",
+			"op2type": "bool",
+			"duration": "5",
+			"extend": true,
+			"overrideDelay": false,
+			"units": "s",
+			"reset": "",
+			"bytopic": "all",
+			"topic": "topic",
+			"outputs": 1,
+			"x": 355,
+			"y": 140,
+			"wires": [
+				[
+					"074c2eb23e3a9a52"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "a61bbf81325464d1",
+			"type": "trigger",
+			"z": "871624442b6901da",
+			"name": "",
+			"op1": "",
+			"op2": "true",
+			"op1type": "nul",
+			"op2type": "bool",
+			"duration": "2",
+			"extend": true,
+			"overrideDelay": false,
+			"units": "s",
+			"reset": "",
+			"bytopic": "all",
+			"topic": "topic",
+			"outputs": 1,
+			"x": 835,
+			"y": 300,
+			"wires": [
+				[
+					"52285732918087fc"
+				]
+			],
+			"l": false
+		}
+	]
+}
