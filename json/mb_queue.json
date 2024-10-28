@@ -62,12 +62,13 @@
 	],
 	"meta": {
 		"type": "Modbus queue",
-		"version": "0.1.5",
+		"version": "1.0.1",
 		"author": "Anton Shefov <a.shefov@gmail.com>",
 		"desc": "Generates a Modbus request queue",
 		"license": "MIT"
 	},
 	"color": "#7FC7FF",
+	"icon": "font-awesome/fa-list-ol",
 	"status": {
 		"x": 1020,
 		"y": 240,
@@ -84,23 +85,23 @@
 	},
 	"flow" : [
 		{
-		"id": "074c2eb23e3a9a52",
-		"type": "function",
-		"z": "871624442b6901da",
-		"name": "Modbus queue",
-		"func": "const queue = env.get('QUEUE');\nvar current_num = context.get('current_num');\n\nnode.send({ \n    \"payload\": true,\n    \"topic\": Number(Object.keys(queue)[current_num]),\n    \"quantity\": Number(Object.values(queue)[current_num])\n    });\n\nif (current_num < Object.keys(queue).length - 1) {\n    current_num += 1;\n} else {\n    current_num = 0;\n}\ncontext.set('current_num', current_num);",
-		"outputs": 1,
-		"noerr": 0,
-		"initialize": "// Добавленный здесь код будет исполняться\n// однократно при развертывании узла.\ncontext.set('current_num', 0);",
-		"finalize": "",
-		"libs": [],
-		"x": 600,
-		"y": 180,
-		"wires": [
-			[
-				"d6a62f21cbb23ae6"
-			]
-		]
+        "id": "074c2eb23e3a9a52",
+        "type": "function",
+        "z": "871624442b6901da",
+        "name": "Modbus queue",
+        "func": "const queue = env.get('QUEUE');\nvar current_num = context.get('current_num');\n\nnode.send({ \n    \"payload\": true,\n    \"topic\": Number(Object.keys(queue)[current_num]),\n    \"quantity\": Number(Object.values(queue)[current_num])\n    });\n\nif (current_num < Object.keys(queue).length - 1) {\n    current_num += 1;\n} else {\n    current_num = 0;\n}\ncontext.set('current_num', current_num);",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Добавленный здесь код будет исполняться\n// однократно при развертывании узла.\ncontext.set('current_num', 0);",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 240,
+        "wires": [
+            [
+                "d6a62f21cbb23ae6"
+            ]
+        ]
 		},
 		{
 			"id": "d6a62f21cbb23ae6",
@@ -118,7 +119,7 @@
 			"repair": false,
 			"outputs": 1,
 			"x": 755,
-			"y": 180,
+			"y": 240,
 			"wires": [
 				[
 					"654d237d8446e032"
@@ -138,7 +139,7 @@
 			"template": "{\n    \"fill\": \"grey\",\n    \"shape\": \"ring\",\n    \"text\": \"Waiting\"\n}",
 			"output": "json",
 			"x": 935,
-			"y": 300,
+			"y": 360,
 			"wires": [
 				[]
 			],
@@ -162,10 +163,11 @@
 			"payload": "true",
 			"payloadType": "bool",
 			"x": 810,
-			"y": 360,
+			"y": 420,
 			"wires": [
 				[
-					"52285732918087fc"
+					"52285732918087fc",
+					"1a130b35f592a589"
 				]
 			]
 		},
@@ -181,7 +183,7 @@
 			"template": "{\n    \"fill\": \"green\",\n    \"shape\": \"dot\",\n    \"text\": \"{{topic}}: {{quantity}}\"\n}",
 			"output": "json",
 			"x": 835,
-			"y": 240,
+			"y": 300,
 			"wires": [
 				[
 					"a61bbf81325464d1"
@@ -210,7 +212,7 @@
 			"to": "",
 			"reg": false,
 			"x": 195,
-			"y": 80,
+			"y": 60,
 			"wires": [
 				[
 					"4598f1945085872a"
@@ -230,16 +232,22 @@
 					"t": "eq",
 					"v": "active",
 					"vt": "str"
+				},
+				{
+					"t": "else"
 				}
 			],
 			"checkall": "false",
 			"repair": false,
-			"outputs": 1,
+			"outputs": 2,
 			"x": 275,
-			"y": 80,
+			"y": 60,
 			"wires": [
 				[
-					"4de93f6caec032df"
+					"adc4b638004dc07b"
+				],
+				[
+					"c7c32db46fb5241a"
 				]
 			],
 			"l": false
@@ -263,7 +271,7 @@
 			"repair": false,
 			"outputs": 2,
 			"x": 195,
-			"y": 180,
+			"y": 240,
 			"wires": [
 				[
 					"c9087ffd819839a7",
@@ -288,6 +296,13 @@
 					"pt": "msg",
 					"to": "$env('DELAY')",
 					"tot": "jsonata"
+				},
+				{
+					"t": "set",
+					"p": "queue",
+					"pt": "flow",
+					"to": "false",
+					"tot": "bool"
 				}
 			],
 			"action": "",
@@ -295,11 +310,11 @@
 			"from": "",
 			"to": "",
 			"reg": false,
-			"x": 355,
-			"y": 80,
+			"x": 445,
+			"y": 60,
 			"wires": [
 				[
-					"bea85e8a7e34bfee"
+					"204db998f1eb74de"
 				]
 			],
 			"l": false
@@ -314,18 +329,18 @@
 			"op1type": "nul",
 			"op2type": "bool",
 			"duration": "100",
-			"extend": true,
+			"extend": false,
 			"overrideDelay": true,
 			"units": "ms",
 			"reset": "",
 			"bytopic": "all",
 			"topic": "topic",
 			"outputs": 1,
-			"x": 435,
-			"y": 80,
+			"x": 605,
+			"y": 60,
 			"wires": [
 				[
-					"074c2eb23e3a9a52"
+					"10a1ef92d61f3914"
 				]
 			],
 			"l": false
@@ -348,7 +363,7 @@
 			"topic": "topic",
 			"outputs": 1,
 			"x": 355,
-			"y": 140,
+			"y": 200,
 			"wires": [
 				[
 					"074c2eb23e3a9a52"
@@ -374,10 +389,209 @@
 			"topic": "topic",
 			"outputs": 1,
 			"x": 835,
-			"y": 300,
+			"y": 360,
 			"wires": [
 				[
 					"52285732918087fc"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "204db998f1eb74de",
+			"type": "delay",
+			"z": "871624442b6901da",
+			"name": "",
+			"pauseType": "random",
+			"timeout": "5",
+			"timeoutUnits": "seconds",
+			"rate": "1",
+			"nbRateUnits": "1",
+			"rateUnits": "second",
+			"randomFirst": "10",
+			"randomLast": "100",
+			"randomUnits": "milliseconds",
+			"drop": false,
+			"allowrate": false,
+			"outputs": 1,
+			"x": 525,
+			"y": 60,
+			"wires": [
+				[
+					"bea85e8a7e34bfee"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "10a1ef92d61f3914",
+			"type": "switch",
+			"z": "871624442b6901da",
+			"name": "",
+			"property": "queue",
+			"propertyType": "flow",
+			"rules": [
+				{
+					"t": "true"
+				},
+				{
+					"t": "false"
+				}
+			],
+			"checkall": "false",
+			"repair": false,
+			"outputs": 2,
+			"x": 685,
+			"y": 60,
+			"wires": [
+				[
+					"967d4296ef8447f8"
+				],
+				[
+					"074c2eb23e3a9a52"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "967d4296ef8447f8",
+			"type": "change",
+			"z": "871624442b6901da",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "request",
+					"pt": "flow",
+					"to": "true",
+					"tot": "bool"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 775,
+			"y": 60,
+			"wires": [
+				[]
+			],
+			"l": false
+		},
+		{
+			"id": "1a130b35f592a589",
+			"type": "change",
+			"z": "871624442b6901da",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "request",
+					"pt": "flow",
+					"to": "false",
+					"tot": "bool"
+				},
+				{
+					"t": "set",
+					"p": "queue",
+					"pt": "flow",
+					"to": "false",
+					"tot": "bool"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 935,
+			"y": 420,
+			"wires": [
+				[]
+			],
+			"l": false
+		},
+		{
+			"id": "c7c32db46fb5241a",
+			"type": "change",
+			"z": "871624442b6901da",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "queue",
+					"pt": "flow",
+					"to": "true",
+					"tot": "bool"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 355,
+			"y": 120,
+			"wires": [
+				[]
+			],
+			"l": false
+		},
+		{
+			"id": "adc4b638004dc07b",
+			"type": "switch",
+			"z": "871624442b6901da",
+			"name": "",
+			"property": "request",
+			"propertyType": "flow",
+			"rules": [
+				{
+					"t": "false"
+				},
+				{
+					"t": "true"
+				}
+			],
+			"checkall": "false",
+			"repair": false,
+			"outputs": 2,
+			"x": 365,
+			"y": 60,
+			"wires": [
+				[
+					"4de93f6caec032df"
+				],
+				[
+					"edc33c415908909d"
+				]
+			],
+			"l": false
+		},
+		{
+			"id": "edc33c415908909d",
+			"type": "change",
+			"z": "871624442b6901da",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "request",
+					"pt": "flow",
+					"to": "false",
+					"tot": "bool"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 445,
+			"y": 120,
+			"wires": [
+				[
+					"074c2eb23e3a9a52"
 				]
 			],
 			"l": false
