@@ -3,7 +3,7 @@
 	"type": "subflow",
 	"name": "MB_queue",
 	"info": "Creates a queue of Modbus requests.\r\n\r\nWhen any input command is received, the following request is generated.\r\nThe requests are repeated cyclically.\r\n\r\n\r\n### Outputs\r\n\r\n: payload (json) : Request\r\n\r\n### Configuration\r\n\r\n**Address pool**\r\n\r\nA json file of the following format:\r\n \r\n    {\r\n        \"Start address\": \"Quantity\"\r\n    }\r\n\r\n\r\n---\r\n**Delay (ms.)**\r\n\r\nDelay between requests in milliseconds _(0-100000)_\r\n\r\n`Default:` **200**\r\n\r\n\r\n\r\n---\r\n\r\n\r\n`Fore example:` \r\n\r\n**With json:**\r\n\r\n    {\r\n        \"120\": \"16\",\r\n        \"30\": \"32\"\r\n    }\r\n\r\n**Generates 2 requests:**\r\n\r\n\r\n    {\r\n        \"topic\" : 120,\r\n        \"quantity:\" 16\r\n    }\r\n`&`\r\n\r\n    {\r\n        \"topic\" : 30,\r\n        \"quantity:\" 32\r\n    }\r\n\r\n",
-	"category": "SmartUnity",
+	"category": "Smart add",
 	"in": [
 		{
 			"x": 100,
