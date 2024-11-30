@@ -2,7 +2,7 @@
     "id": "d56a1dd582e82a09",
     "type": "subflow",
     "name": "Math",
-    "info": "Performs the selected mathematical operation.\n\nThe node accepts numeric values and writes them to a dictionary to calculate a mathematical function.\nThe `msg.topic` is used as the key.\n\n### Intputs\n\n1. To send the current node value.\n: topic (string) : **get_value**\n\n2. To send the current values dictionary.\n: topic (string) : **get_dict**\n\n3. To send the current sum value.\n: topic (string) : **get_sum**\n\n4. To send the current mean value.\n: topic (string) : **get_mean**\n\n5. To reset values in dictionary.\n: reset (binary) : **true**\n: topic (string) : **any** \n`Note!`\nIt is applied separately for each `msg.topic`.\nIf `msg.topic` is not specified, the whole dictionary is reset.\n\n---\n\n\n### Outputs\n1. The result of selected mathematical operation\n: topic (string) : **topic**\n: payload (numeric) : The result of selected mathematical operation.\n\n2. Sum value\n: topic (string) : **sum**\n: payload (numeric) : Current sum value.\n\n3. Mean value\n: topic (string) : **mean**\n: payload (numeric) : Current mean value.\n\n4. Objects dict\n: topic (string) : **objects_dict**\n: payload (dict) : Dictionary with all accepted data.\n\n\n---\n\n\n### Configuration\n\n **Operation**\n\nChoose the type of mathematical operation.\n\n**Sum / Mean**\n\n`Default:` **Sum**\n\n---\n\n **Set msg.topic**\n\nYou can set msg.topic for the output flow.\n\n---\n\n **Round to**\n\nYou can round the resulting value.\n\n`Note!` It is used for all operations.\n\n`Default:` **0.1**\n\n---\n\n **Rate in sec.**\n\nYou can limit the number of messages sent by the node.\n\n`Note!` It is used only when requesting the current value or values dictionary.\n\n`Available range:` **0 - 3600**\n\n`Default:` **1 mes/sec**\n\n\n---\n\n**Block unless value has changed**\n\nThe output is blocked unless value has changed (ignore initial value).\n\n`Note!` This is gnored when requesting the current value.\n\n`Default:` **false**",
+    "info": "Performs the selected mathematical operation.\n\nThe node accepts numeric values and writes them to a dictionary to calculate a mathematical function.\nThe `msg.topic` is used as the key.\n\n### Intputs\n\n1. To send the current node value.\n: topic (string) : **get_value**\n\n2. To send the current values dictionary.\n: topic (string) : **get_dict**\n\n3. To send the current sum value.\n: topic (string) : **get_sum**\n\n4. To send the current mean value.\n: topic (string) : **get_mean**\n\n5. To reset values in dictionary.\n: reset (binary) : **true**\n: topic (string) : **any** \n`Note!`\nIt is applied separately for each `msg.topic`.\nIf `msg.topic` is not specified, the whole dictionary is reset.\n\n---\n\n\n### Outputs\n1. The result of selected mathematical operation\n: topic (string) : **topic**\n: payload (numeric) : The result of selected mathematical operation.\n\n2. Sum value\n: topic (string) : **sum**\n: payload (numeric) : Current sum value.\n\n3. Mean value\n: topic (string) : **mean**\n: payload (numeric) : C...",
     "category": "Smart add",
     "in": [
         {
@@ -16,168 +16,168 @@
         }
     ],
     "out": [
-		{
-			"x": 900,
-			"y": 340,
-			"wires": [
-				{
-					"id": "c9f7858f7e8e7148",
-					"port": 0
-				}
-			]
-		},
-		{
-			"x": 900,
-			"y": 460,
-			"wires": [
-				{
-					"id": "6d0cb9342eefc3ee",
-					"port": 0
-				},
-				{
-					"id": "bf12db724db41911",
-					"port": 0
-				}
-			]
-		}
-	],
+        {
+            "x": 900,
+            "y": 340,
+            "wires": [
+                {
+                    "id": "c9f7858f7e8e7148",
+                    "port": 0
+                }
+            ]
+        },
+        {
+            "x": 900,
+            "y": 460,
+            "wires": [
+                {
+                    "id": "6d0cb9342eefc3ee",
+                    "port": 0
+                },
+                {
+                    "id": "bf12db724db41911",
+                    "port": 0
+                }
+            ]
+        }
+    ],
     "env": [
-		{
-			"name": "TYPE",
-			"type": "str",
-			"value": "sum",
-			"ui": {
-				"label": {
-					"ru": "Operation"
-				},
-				"type": "select",
-				"opts": {
-					"opts": [
-						{
-							"l": {
-								"ru": "Sum"
-							},
-							"v": "sum"
-						},
-						{
-							"l": {
-								"ru": "Mean"
-							},
-							"v": "mean"
-						},
-						{
-							"l": {
-								"ru": "Max"
-							},
-							"v": "max"
-						},
-						{
-							"l": {
-								"ru": "Min"
-							},
-							"v": "min"
-						},
-						{
-							"l": {
-								"ru": "Count"
-							},
-							"v": "count"
-						}
-					]
-				}
-			}
-		},
-		{
-			"name": "TOPIC",
-			"type": "str",
-			"value": "",
-			"ui": {
-				"label": {
-					"ru": "Set msg.topic"
-				},
-				"type": "input",
-				"opts": {
-					"types": [
-						"str"
-					]
-				}
-			}
-		},
-		{
-			"name": "ROUND",
-			"type": "str",
-			"value": "10",
-			"ui": {
-				"label": {
-					"ru": "Round to"
-				},
-				"type": "select",
-				"opts": {
-					"opts": [
-						{
-							"l": {
-								"ru": "1"
-							},
-							"v": "1"
-						},
-						{
-							"l": {
-								"ru": "0.1"
-							},
-							"v": "10"
-						},
-						{
-							"l": {
-								"ru": "0.01"
-							},
-							"v": "100"
-						},
-						{
-							"l": {
-								"ru": "0.001"
-							},
-							"v": "1000"
-						},
-						{
-							"l": {
-								"ru": "0.0001"
-							},
-							"v": "10000"
-						}
-					]
-				}
-			}
-		},
-		{
-			"name": "RATE",
-			"type": "num",
-			"value": "1",
-			"ui": {
-				"label": {
-					"ru": "Rate in sec."
-				},
-				"type": "spinner",
-				"opts": {
-					"min": 0,
-					"max": 3600
-				}
-			}
-		},
-		{
-			"name": "RBE",
-			"type": "bool",
-			"value": "false",
-			"ui": {
-				"label": {
-					"ru": "Block unless value has changed"
-				},
-				"type": "checkbox"
-			}
-		}
-	],
+        {
+            "name": "TYPE",
+            "type": "str",
+            "value": "sum",
+            "ui": {
+                "label": {
+                    "ru": "Operation"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "ru": "Sum"
+                            },
+                            "v": "sum"
+                        },
+                        {
+                            "l": {
+                                "ru": "Mean"
+                            },
+                            "v": "mean"
+                        },
+                        {
+                            "l": {
+                                "ru": "Max"
+                            },
+                            "v": "max"
+                        },
+                        {
+                            "l": {
+                                "ru": "Min"
+                            },
+                            "v": "min"
+                        },
+                        {
+                            "l": {
+                                "ru": "Count"
+                            },
+                            "v": "count"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "TOPIC",
+            "type": "str",
+            "value": "",
+            "ui": {
+                "label": {
+                    "ru": "Set msg.topic"
+                },
+                "type": "input",
+                "opts": {
+                    "types": [
+                        "str"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "ROUND",
+            "type": "str",
+            "value": "10",
+            "ui": {
+                "label": {
+                    "ru": "Round to"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "ru": "1"
+                            },
+                            "v": "1"
+                        },
+                        {
+                            "l": {
+                                "ru": "0.1"
+                            },
+                            "v": "10"
+                        },
+                        {
+                            "l": {
+                                "ru": "0.01"
+                            },
+                            "v": "100"
+                        },
+                        {
+                            "l": {
+                                "ru": "0.001"
+                            },
+                            "v": "1000"
+                        },
+                        {
+                            "l": {
+                                "ru": "0.0001"
+                            },
+                            "v": "10000"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "RATE",
+            "type": "num",
+            "value": "1",
+            "ui": {
+                "label": {
+                    "ru": "Rate in sec."
+                },
+                "type": "spinner",
+                "opts": {
+                    "min": 0,
+                    "max": 3600
+                }
+            }
+        },
+        {
+            "name": "RBE",
+            "type": "bool",
+            "value": "false",
+            "ui": {
+                "label": {
+                    "ru": "Block unless value has changed"
+                },
+                "type": "checkbox"
+            }
+        }
+    ],
     "meta": {
         "type": "Math",
-        "version": "1.1.1",
+        "version": "1.1.2",
         "author": "Anton Shefov <a.shefov@gmail.com>",
         "desc": "Mathematical operations",
         "license": "MIT"
@@ -185,840 +185,840 @@
     "color": "#7FC7FF",
     "icon": "node-red/function.svg",
     "status": {
-		"x": 900,
-		"y": 580,
-		"wires": [
-			{
-				"id": "bbbea093b1f44871",
-				"port": 0
-			},
-			{
-				"id": "670be3530db3e182",
-				"port": 0
-			}
-		]
-	},
-    "flow": [
-        {
-        "id": "85ef35ae1ad9ba25",
-        "type": "switch",
-        "z": "d56a1dd582e82a09",
-        "name": "",
-        "property": "TOPIC",
-        "propertyType": "env",
-        "rules": [
+        "x": 900,
+        "y": 580,
+        "wires": [
             {
-                "t": "nnull"
+                "id": "bbbea093b1f44871",
+                "port": 0
             },
             {
-                "t": "else"
+                "id": "670be3530db3e182",
+                "port": 0
             }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 695,
-        "y": 340,
-        "wires": [
-            [
-                "7189bcd962796976"
+        ]
+    },
+    "flow": [
+        {
+            "id": "85ef35ae1ad9ba25",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "TOPIC",
+            "propertyType": "env",
+            "rules": [
+                {
+                    "t": "nnull"
+                },
+                {
+                    "t": "else"
+                }
             ],
-            [
-                "c9f7858f7e8e7148"
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 695,
+            "y": 340,
+            "wires": [
+                [
+                    "7189bcd962796976"
+                ],
+                [
+                    "c9f7858f7e8e7148"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "7189bcd962796976",
+            "type": "change",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "TOPIC",
+                    "tot": "env"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 775,
+            "y": 300,
+            "wires": [
+                [
+                    "c9f7858f7e8e7148"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "9754883efc50ee74",
+            "type": "delay",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "pauseType": "rate",
+            "timeout": "5",
+            "timeoutUnits": "seconds",
+            "rate": "1",
+            "nbRateUnits": "1",
+            "rateUnits": "second",
+            "randomFirst": "1",
+            "randomLast": "5",
+            "randomUnits": "seconds",
+            "drop": true,
+            "allowrate": true,
+            "outputs": 1,
+            "x": 535,
+            "y": 280,
+            "wires": [
+                [
+                    "91e8de47da61c0ea"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "e7480380d621960d",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "topic",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "cont",
+                    "v": "get_",
+                    "vt": "str"
+                },
+                {
+                    "t": "else"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 245,
+            "y": 300,
+            "wires": [
+                [
+                    "01d948dd6334c2d3"
+                ],
+                [
+                    "439840d53dfee113"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "670be3530db3e182",
+            "type": "template",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "field": "payload",
+            "fieldType": "msg",
+            "format": "json",
+            "syntax": "mustache",
+            "template": "{\n    \"fill\": \"grey\",\n    \"shape\": \"ring\",\n    \"text\": \"no values\"\n}",
+            "output": "json",
+            "x": 740,
+            "y": 580,
+            "wires": [
+                []
             ]
-        ],
-        "l": false
-		},
-		{
-			"id": "7189bcd962796976",
-			"type": "change",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"rules": [
-				{
-					"t": "set",
-					"p": "topic",
-					"pt": "msg",
-					"to": "TOPIC",
-					"tot": "env"
-				}
-			],
-			"action": "",
-			"property": "",
-			"from": "",
-			"to": "",
-			"reg": false,
-			"x": 775,
-			"y": 300,
-			"wires": [
-				[
-					"c9f7858f7e8e7148"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "9754883efc50ee74",
-			"type": "delay",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"pauseType": "rate",
-			"timeout": "5",
-			"timeoutUnits": "seconds",
-			"rate": "1",
-			"nbRateUnits": "1",
-			"rateUnits": "second",
-			"randomFirst": "1",
-			"randomLast": "5",
-			"randomUnits": "seconds",
-			"drop": true,
-			"allowrate": true,
-			"outputs": 1,
-			"x": 535,
-			"y": 280,
-			"wires": [
-				[
-					"91e8de47da61c0ea"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "e7480380d621960d",
-			"type": "switch",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"property": "topic",
-			"propertyType": "msg",
-			"rules": [
-				{
-					"t": "cont",
-					"v": "get_",
-					"vt": "str"
-				},
-				{
-					"t": "else"
-				}
-			],
-			"checkall": "false",
-			"repair": false,
-			"outputs": 2,
-			"x": 245,
-			"y": 300,
-			"wires": [
-				[
-					"01d948dd6334c2d3"
-				],
-				[
-					"439840d53dfee113"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "670be3530db3e182",
-			"type": "template",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"field": "payload",
-			"fieldType": "msg",
-			"format": "json",
-			"syntax": "mustache",
-			"template": "{\n    \"fill\": \"grey\",\n    \"shape\": \"ring\",\n    \"text\": \"no values\"\n}",
-			"output": "json",
-			"x": 740,
-			"y": 580,
-			"wires": [
-				[]
-			]
-		},
-		{
-			"id": "175dbf8a11a1fe65",
-			"type": "inject",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"props": [
-				{
-					"p": "payload"
-				}
-			],
-			"repeat": "",
-			"crontab": "",
-			"once": true,
-			"onceDelay": 0.1,
-			"topic": "",
-			"payload": "true",
-			"payloadType": "bool",
-			"x": 210,
-			"y": 580,
-			"wires": [
-				[
-					"5f594b40145f7c88"
-				]
-			]
-		},
-		{
-			"id": "48595caeed4c16e9",
-			"type": "switch",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"property": "reset",
-			"propertyType": "msg",
-			"rules": [
-				{
-					"t": "nnull"
-				},
-				{
-					"t": "else"
-				}
-			],
-			"checkall": "false",
-			"repair": false,
-			"outputs": 2,
-			"x": 155,
-			"y": 300,
-			"wires": [
-				[
-					"f3622ab90bbbfe61"
-				],
-				[
-					"e7480380d621960d"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "c9f89bf5a80fa4c7",
-			"type": "change",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"rules": [
-				{
-					"t": "set",
-					"p": "rate",
-					"pt": "msg",
-					"to": "$number($env('RATE')) * 1000\t",
-					"tot": "jsonata",
-					"dc": true
-				},
-				{
-					"t": "set",
-					"p": "payload",
-					"pt": "msg",
-					"to": "values_dict",
-					"tot": "flow",
-					"dc": true
-				},
-				{
-					"t": "set",
-					"p": "topic",
-					"pt": "msg",
-					"to": "objects_dict",
-					"tot": "str"
-				}
-			],
-			"action": "",
-			"property": "",
-			"from": "",
-			"to": "",
-			"reg": false,
-			"x": 455,
-			"y": 160,
-			"wires": [
-				[
-					"e853cb9b118ff344"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "e853cb9b118ff344",
-			"type": "delay",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"pauseType": "rate",
-			"timeout": "5",
-			"timeoutUnits": "seconds",
-			"rate": "1",
-			"nbRateUnits": "1",
-			"rateUnits": "second",
-			"randomFirst": "1",
-			"randomLast": "5",
-			"randomUnits": "seconds",
-			"drop": true,
-			"allowrate": true,
-			"outputs": 1,
-			"x": 535,
-			"y": 160,
-			"wires": [
-				[
-					"9882c7aca99adbfb"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "9a71a58e06882534",
-			"type": "delay",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"pauseType": "delay",
-			"timeout": "100",
-			"timeoutUnits": "milliseconds",
-			"rate": "1",
-			"nbRateUnits": "1",
-			"rateUnits": "second",
-			"randomFirst": "1",
-			"randomLast": "5",
-			"randomUnits": "seconds",
-			"drop": false,
-			"allowrate": false,
-			"outputs": 1,
-			"x": 535,
-			"y": 580,
-			"wires": [
-				[
-					"670be3530db3e182"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "f3622ab90bbbfe61",
-			"type": "link out",
-			"z": "d56a1dd582e82a09",
-			"name": "link out 10",
-			"mode": "link",
-			"links": [
-				"8363742b8de7e420"
-			],
-			"x": 245,
-			"y": 220,
-			"wires": []
-		},
-		{
-			"id": "8363742b8de7e420",
-			"type": "link in",
-			"z": "d56a1dd582e82a09",
-			"name": "link in 7",
-			"links": [
-				"f3622ab90bbbfe61"
-			],
-			"x": 245,
-			"y": 520,
-			"wires": [
-				[
-					"5f594b40145f7c88"
-				]
-			]
-		},
-		{
-			"id": "bbbea093b1f44871",
-			"type": "function",
-			"z": "d56a1dd582e82a09",
-			"name": "counter",
-			"func": "var length = Object.keys(flow.get('values_dict')).length;\nvar text = String(length) + ': ' + msg.payload;\n\nif (length > 0){\n    return [{\n        \"payload\": {\n            \"fill\": \"blue\",\n            \"shape\": \"dot\",\n            \"text\": text\n        }\n    }, null];\n} else {\n    return [null, {\"payload\" : 0}]\n}\n",
-			"outputs": 2,
-			"timeout": 0,
-			"noerr": 0,
-			"initialize": "",
-			"finalize": "",
-			"libs": [],
-			"x": 580,
-			"y": 520,
-			"wires": [
-				[],
-				[
-					"670be3530db3e182"
-				]
-			]
-		},
-		{
-			"id": "91e8de47da61c0ea",
-			"type": "switch",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"property": "payload",
-			"propertyType": "msg",
-			"rules": [
-				{
-					"t": "nnull"
-				}
-			],
-			"checkall": "true",
-			"repair": false,
-			"outputs": 1,
-			"x": 615,
-			"y": 280,
-			"wires": [
-				[
-					"85ef35ae1ad9ba25"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "6ece06cec3b82ba1",
-			"type": "switch",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"property": "RBE",
-			"propertyType": "env",
-			"rules": [
-				{
-					"t": "true"
-				},
-				{
-					"t": "else"
-				}
-			],
-			"checkall": "false",
-			"repair": false,
-			"outputs": 2,
-			"x": 535,
-			"y": 400,
-			"wires": [
-				[
-					"c605c5a71788ae8b"
-				],
-				[
-					"85ef35ae1ad9ba25"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "c605c5a71788ae8b",
-			"type": "rbe",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"func": "rbe",
-			"gap": "",
-			"start": "",
-			"inout": "out",
-			"septopics": false,
-			"property": "payload",
-			"topi": "topic",
-			"x": 615,
-			"y": 340,
-			"wires": [
-				[
-					"85ef35ae1ad9ba25"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "439840d53dfee113",
-			"type": "function",
-			"z": "d56a1dd582e82a09",
-			"name": "Add to dict",
-			"func": "var values_dict = flow.get(\"values_dict\");\nvar values = [];\n\nif (msg.topic != null){\n    values_dict[String(msg.topic)] = Number(msg.payload);\n    values = Object.values(values_dict).toSorted((a, b) => a - b);\n    flow.set(\"values_dict\", values_dict);\n    flow.set(\"values\", values);\n    return { \"payload\": true };\n}",
-			"outputs": 1,
-			"timeout": "",
-			"noerr": 0,
-			"initialize": "",
-			"finalize": "",
-			"libs": [],
-			"x": 150,
-			"y": 400,
-			"wires": [
-				[
-					"8aef7e66fbfcd2cd"
-				]
-			]
-		},
-		{
-			"id": "5f594b40145f7c88",
-			"type": "function",
-			"z": "d56a1dd582e82a09",
-			"name": "Reset",
-			"func": "if (msg.topic != null){\n    var values_dict = flow.get(\"values_dict\");\n    try {\n        delete values_dict[msg.topic];\n        flow.set(\"values_dict\",values_dict);\n        flow.set(\"values\", Object.values(values_dict).toSorted((a, b) => a - b));\n    } catch {}\n    if (Object.keys(values_dict).length != 0){\n        return [{ \"payload\": true }, null];\n    } else {\n        flow.set(\"values\", []);\n        flow.set(\"result\", {});\n        return [null, { \"payload\": true}];\n    }\n} else {\n    flow.set(\"values_dict\", {});\n    flow.set(\"values\", []);\n    flow.set(\"result\", {});\n    return [null, { \"payload\": true}];\n}",
-			"outputs": 2,
-			"timeout": 0,
-			"noerr": 0,
-			"initialize": "",
-			"finalize": "",
-			"libs": [],
-			"x": 410,
-			"y": 580,
-			"wires": [
-				[
-					"8aef7e66fbfcd2cd"
-				],
-				[
-					"9a71a58e06882534",
-					"23be42fc4a8f4a06"
-				]
-			]
-		},
-		{
-			"id": "8aef7e66fbfcd2cd",
-			"type": "function",
-			"z": "d56a1dd582e82a09",
-			"name": "Math",
-			"func": "const round = Number(env.get('ROUND'));\nvar values = flow.get(\"values\");\nvar result = { \"sum\": 0 };\nresult.min = Math.round(values[0] * round) / round;\nnode.send({\"payload\" : result.min, \"topic\" : \"min\"});\nresult.max = Math.round(values.at(-1) * round) / round;\nnode.send({\"payload\" : result.max, \"topic\" : \"max\"});\n\nfor (let val of values) {\n    result.sum += val;\n}\nresult.sum = Math.round(result.sum * round) / round;\nnode.send({\"payload\" : result.sum, \"topic\" : \"sum\"});\nresult.mean = Math.round((result.sum / values.length) * round) / round;\nnode.send({\"payload\" : result.mean, \"topic\" : \"mean\"});\nresult.count = values.length;\nnode.send({ \"payload\": result.count, \"topic\": \"count\" });\n\nflow.set(\"result\", result);",
-			"outputs": 1,
-			"timeout": "",
-			"noerr": 0,
-			"initialize": "",
-			"finalize": "",
-			"libs": [],
-			"x": 330,
-			"y": 400,
-			"wires": [
-				[
-					"bbbea093b1f44871",
-					"6d0cb9342eefc3ee",
-					"9ce15d86e730ebad"
-				]
-			]
-		},
-		{
-			"id": "aa99c6f032781cee",
-			"type": "link out",
-			"z": "d56a1dd582e82a09",
-			"name": "link out 11",
-			"mode": "link",
-			"links": [
-				"cf208bdc7d761403"
-			],
-			"x": 615,
-			"y": 640,
-			"wires": []
-		},
-		{
-			"id": "cf208bdc7d761403",
-			"type": "link in",
-			"z": "d56a1dd582e82a09",
-			"name": "link in 8",
-			"links": [
-				"aa99c6f032781cee"
-			],
-			"x": 535,
-			"y": 340,
-			"wires": [
-				[
-					"c605c5a71788ae8b"
-				]
-			]
-		},
-		{
-			"id": "23be42fc4a8f4a06",
-			"type": "change",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"rules": [
-				{
-					"t": "set",
-					"p": "reset",
-					"pt": "msg",
-					"to": "true",
-					"tot": "bool"
-				},
-				{
-					"t": "delete",
-					"p": "payload",
-					"pt": "msg"
-				}
-			],
-			"action": "",
-			"property": "",
-			"from": "",
-			"to": "",
-			"reg": false,
-			"x": 535,
-			"y": 640,
-			"wires": [
-				[
-					"aa99c6f032781cee"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "9882c7aca99adbfb",
-			"type": "switch",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"property": "payload",
-			"propertyType": "msg",
-			"rules": [
-				{
-					"t": "nempty"
-				}
-			],
-			"checkall": "false",
-			"repair": false,
-			"outputs": 1,
-			"x": 615,
-			"y": 160,
-			"wires": [
-				[
-					"ff3684ed9a1919a7"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "6d0cb9342eefc3ee",
-			"type": "rbe",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"func": "rbe",
-			"gap": "",
-			"start": "",
-			"inout": "out",
-			"septopics": true,
-			"property": "payload",
-			"topi": "topic",
-			"x": 535,
-			"y": 460,
-			"wires": [
-				[]
-			],
-			"l": false
-		},
-		{
-			"id": "1d64855045cbf8df",
-			"type": "function",
-			"z": "d56a1dd582e82a09",
-			"name": "Math",
-			"func": "const round = Number(env.get('ROUND'));\nvar values = flow.get(\"values\");\nvar result = { \"sum\": 0 };\nresult.min = Math.round(values[0] * round) / round;\nresult.max = Math.round(values.at(-1) * round) / round;\n\n\nfor (let val of values) {\n    result.sum += val;\n}\nresult.sum = Math.round(result.sum * round) / round;\nresult.mean = Math.round((result.sum / values.length) * round) / round;\nresult.count = values.length;\n\nflow.set(\"result\", result);\n\n\nswitch (env.get('TYPE')) {\n    case \"sum\":\n        return [{ \"payload\": result.sum }, { \"payload\": result }];\n    case \"mean\":\n        return [{ \"payload\": result.mean }, { \"payload\": result }];\n    case \"min\":\n        return [{ \"payload\": result.min }, { \"payload\": result }];\n    case \"max\":\n        return [{ \"payload\": result.max }, { \"payload\": result }];\n}",
-			"outputs": 2,
-			"timeout": "",
-			"noerr": 0,
-			"initialize": "",
-			"finalize": "",
-			"libs": [],
-			"x": 210,
-			"y": 880,
-			"wires": [
-				[],
-				[]
-			]
-		},
-		{
-			"id": "9ce15d86e730ebad",
-			"type": "switch",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"property": "topic",
-			"propertyType": "msg",
-			"rules": [
-				{
-					"t": "eq",
-					"v": "TYPE",
-					"vt": "env"
-				}
-			],
-			"checkall": "true",
-			"repair": false,
-			"outputs": 1,
-			"x": 455,
-			"y": 400,
-			"wires": [
-				[
-					"6ece06cec3b82ba1"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "ff3684ed9a1919a7",
-			"type": "link out",
-			"z": "d56a1dd582e82a09",
-			"name": "link out 20",
-			"mode": "link",
-			"links": [
-				"bf12db724db41911"
-			],
-			"x": 695,
-			"y": 220,
-			"wires": []
-		},
-		{
-			"id": "bf12db724db41911",
-			"type": "link in",
-			"z": "d56a1dd582e82a09",
-			"name": "link in 13",
-			"links": [
-				"ff3684ed9a1919a7"
-			],
-			"x": 795,
-			"y": 420,
-			"wires": [
-				[]
-			]
-		},
-		{
-			"id": "48310112765a11bb",
-			"type": "function",
-			"z": "d56a1dd582e82a09",
-			"name": "function 6",
-			"func": "const rate = Number(env.get('RATE'));\nvar result = flow.get('result');\nvar type = String(msg.topic).split('_')[1];\n\nif (type == \"value\"){\n    type = String(env.get('TYPE'))\n    node.send([null, { \"payload\": result[type], \"rate\": rate * 1000 }]);\n} else {\n    node.send([{ \"payload\": result[type], \"topic\": type, \"rate\": rate * 1000 }, null]);\n}\n",
-			"outputs": 2,
-			"timeout": 0,
-			"noerr": 0,
-			"initialize": "",
-			"finalize": "",
-			"libs": [],
-			"x": 455,
-			"y": 280,
-			"wires": [
-				[
-					"88e809b57c5073ce"
-				],
-				[
-					"9754883efc50ee74"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "88e809b57c5073ce",
-			"type": "delay",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"pauseType": "rate",
-			"timeout": "5",
-			"timeoutUnits": "seconds",
-			"rate": "1",
-			"nbRateUnits": "1",
-			"rateUnits": "second",
-			"randomFirst": "1",
-			"randomLast": "5",
-			"randomUnits": "seconds",
-			"drop": true,
-			"allowrate": true,
-			"outputs": 1,
-			"x": 535,
-			"y": 220,
-			"wires": [
-				[
-					"8f5afa6280fee393"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "8f5afa6280fee393",
-			"type": "switch",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"property": "payload",
-			"propertyType": "msg",
-			"rules": [
-				{
-					"t": "nnull"
-				}
-			],
-			"checkall": "false",
-			"repair": false,
-			"outputs": 1,
-			"x": 615,
-			"y": 220,
-			"wires": [
-				[
-					"ff3684ed9a1919a7"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "01d948dd6334c2d3",
-			"type": "switch",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"property": "topic",
-			"propertyType": "msg",
-			"rules": [
-				{
-					"t": "eq",
-					"v": "get_dict",
-					"vt": "str"
-				},
-				{
-					"t": "eq",
-					"v": "get_json",
-					"vt": "str"
-				},
-				{
-					"t": "else"
-				}
-			],
-			"checkall": "false",
-			"repair": false,
-			"outputs": 3,
-			"x": 335,
-			"y": 280,
-			"wires": [
-				[
-					"c9f89bf5a80fa4c7"
-				],
-				[
-					"11748d82a454b687"
-				],
-				[
-					"48310112765a11bb"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "11748d82a454b687",
-			"type": "change",
-			"z": "d56a1dd582e82a09",
-			"name": "",
-			"rules": [
-				{
-					"t": "set",
-					"p": "rate",
-					"pt": "msg",
-					"to": "$number($env('RATE')) * 1000\t",
-					"tot": "jsonata",
-					"dc": true
-				},
-				{
-					"t": "set",
-					"p": "payload",
-					"pt": "msg",
-					"to": "result",
-					"tot": "flow",
-					"dc": true
-				},
-				{
-					"t": "set",
-					"p": "topic",
-					"pt": "msg",
-					"to": "TOPIC",
-					"tot": "env",
-					"dc": true
-				}
-			],
-			"action": "",
-			"property": "",
-			"from": "",
-			"to": "",
-			"reg": false,
-			"x": 455,
-			"y": 220,
-			"wires": [
-				[
-					"e853cb9b118ff344"
-				]
-			],
-			"l": false
-		},
-		{
-			"id": "c9f7858f7e8e7148",
-			"type": "junction",
-			"z": "d56a1dd582e82a09",
-			"x": 840,
-			"y": 340,
-			"wires": [
-				[]
-			]
-		}
+        },
+        {
+            "id": "175dbf8a11a1fe65",
+            "type": "inject",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "props": [
+                {
+                    "p": "payload"
+                }
+            ],
+            "repeat": "",
+            "crontab": "",
+            "once": true,
+            "onceDelay": 0.1,
+            "topic": "",
+            "payload": "true",
+            "payloadType": "bool",
+            "x": 210,
+            "y": 580,
+            "wires": [
+                [
+                    "5f594b40145f7c88"
+                ]
+            ]
+        },
+        {
+            "id": "48595caeed4c16e9",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "reset",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "nnull"
+                },
+                {
+                    "t": "else"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 155,
+            "y": 300,
+            "wires": [
+                [
+                    "f3622ab90bbbfe61"
+                ],
+                [
+                    "e7480380d621960d"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "c9f89bf5a80fa4c7",
+            "type": "change",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "rate",
+                    "pt": "msg",
+                    "to": "$number($env('RATE')) * 1000\t",
+                    "tot": "jsonata",
+                    "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "payload",
+                    "pt": "msg",
+                    "to": "values_dict",
+                    "tot": "flow",
+                    "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "objects_dict",
+                    "tot": "str"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 455,
+            "y": 160,
+            "wires": [
+                [
+                    "e853cb9b118ff344"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "e853cb9b118ff344",
+            "type": "delay",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "pauseType": "rate",
+            "timeout": "5",
+            "timeoutUnits": "seconds",
+            "rate": "1",
+            "nbRateUnits": "1",
+            "rateUnits": "second",
+            "randomFirst": "1",
+            "randomLast": "5",
+            "randomUnits": "seconds",
+            "drop": true,
+            "allowrate": true,
+            "outputs": 1,
+            "x": 535,
+            "y": 160,
+            "wires": [
+                [
+                    "9882c7aca99adbfb"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "9a71a58e06882534",
+            "type": "delay",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "pauseType": "delay",
+            "timeout": "100",
+            "timeoutUnits": "milliseconds",
+            "rate": "1",
+            "nbRateUnits": "1",
+            "rateUnits": "second",
+            "randomFirst": "1",
+            "randomLast": "5",
+            "randomUnits": "seconds",
+            "drop": false,
+            "allowrate": false,
+            "outputs": 1,
+            "x": 535,
+            "y": 580,
+            "wires": [
+                [
+                    "670be3530db3e182"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "f3622ab90bbbfe61",
+            "type": "link out",
+            "z": "d56a1dd582e82a09",
+            "name": "link out 10",
+            "mode": "link",
+            "links": [
+                "8363742b8de7e420"
+            ],
+            "x": 245,
+            "y": 220,
+            "wires": []
+        },
+        {
+            "id": "8363742b8de7e420",
+            "type": "link in",
+            "z": "d56a1dd582e82a09",
+            "name": "link in 7",
+            "links": [
+                "f3622ab90bbbfe61"
+            ],
+            "x": 245,
+            "y": 520,
+            "wires": [
+                [
+                    "5f594b40145f7c88"
+                ]
+            ]
+        },
+        {
+            "id": "bbbea093b1f44871",
+            "type": "function",
+            "z": "d56a1dd582e82a09",
+            "name": "counter",
+            "func": "var length = Object.keys(flow.get('values_dict')).length;\nvar text = String(length) + ': ' + msg.payload;\n\nif (length > 0){\n    return [{\n        \"payload\": {\n            \"fill\": \"blue\",\n            \"shape\": \"dot\",\n            \"text\": text\n        }\n    }, null];\n} else {\n    return [null, {\"payload\" : 0}]\n}\n",
+            "outputs": 2,
+            "timeout": 0,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 580,
+            "y": 520,
+            "wires": [
+                [],
+                [
+                    "670be3530db3e182"
+                ]
+            ]
+        },
+        {
+            "id": "91e8de47da61c0ea",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "payload",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "nnull"
+                }
+            ],
+            "checkall": "true",
+            "repair": false,
+            "outputs": 1,
+            "x": 615,
+            "y": 280,
+            "wires": [
+                [
+                    "85ef35ae1ad9ba25"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "6ece06cec3b82ba1",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "RBE",
+            "propertyType": "env",
+            "rules": [
+                {
+                    "t": "true"
+                },
+                {
+                    "t": "else"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 2,
+            "x": 535,
+            "y": 400,
+            "wires": [
+                [
+                    "c605c5a71788ae8b"
+                ],
+                [
+                    "85ef35ae1ad9ba25"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "c605c5a71788ae8b",
+            "type": "rbe",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "func": "rbe",
+            "gap": "",
+            "start": "",
+            "inout": "out",
+            "septopics": false,
+            "property": "payload",
+            "topi": "topic",
+            "x": 615,
+            "y": 340,
+            "wires": [
+                [
+                    "85ef35ae1ad9ba25"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "439840d53dfee113",
+            "type": "function",
+            "z": "d56a1dd582e82a09",
+            "name": "Add to dict",
+            "func": "var values_dict = flow.get(\"values_dict\");\nvar values = [];\n\nif (msg.topic != null){\n    values_dict[String(msg.topic)] = Number(msg.payload);\n    values = Object.values(values_dict).sort();\n    flow.set(\"values_dict\", values_dict);\n    flow.set(\"values\", values);\n    return { \"payload\": true };\n}",
+            "outputs": 1,
+            "timeout": "",
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 150,
+            "y": 400,
+            "wires": [
+                [
+                    "8aef7e66fbfcd2cd"
+                ]
+            ]
+        },
+        {
+            "id": "5f594b40145f7c88",
+            "type": "function",
+            "z": "d56a1dd582e82a09",
+            "name": "Reset",
+            "func": "if (msg.topic != null){\n    var values_dict = flow.get(\"values_dict\");\n    try {\n        delete values_dict[msg.topic];\n        flow.set(\"values_dict\",values_dict);\n        flow.set(\"values\", Object.values(values_dict).toSorted((a, b) => a - b));\n    } catch {}\n    if (Object.keys(values_dict).length != 0){\n        return [{ \"payload\": true }, null];\n    } else {\n        flow.set(\"values\", []);\n        flow.set(\"result\", {});\n        return [null, { \"payload\": true}];\n    }\n} else {\n    flow.set(\"values_dict\", {});\n    flow.set(\"values\", []);\n    flow.set(\"result\", {});\n    return [null, { \"payload\": true}];\n}",
+            "outputs": 2,
+            "timeout": 0,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 410,
+            "y": 580,
+            "wires": [
+                [
+                    "8aef7e66fbfcd2cd"
+                ],
+                [
+                    "9a71a58e06882534",
+                    "23be42fc4a8f4a06"
+                ]
+            ]
+        },
+        {
+            "id": "8aef7e66fbfcd2cd",
+            "type": "function",
+            "z": "d56a1dd582e82a09",
+            "name": "Math",
+            "func": "const round = Number(env.get('ROUND'));\nvar values = flow.get(\"values\");\nvar result = { \"sum\": 0 };\nresult.min = Math.round(values[0] * round) / round;\nnode.send({\"payload\" : result.min, \"topic\" : \"min\"});\nresult.max = Math.round(values.at(-1) * round) / round;\nnode.send({\"payload\" : result.max, \"topic\" : \"max\"});\n\nfor (let val of values) {\n    result.sum += val;\n}\nresult.sum = Math.round(result.sum * round) / round;\nnode.send({\"payload\" : result.sum, \"topic\" : \"sum\"});\nresult.mean = Math.round((result.sum / values.length) * round) / round;\nnode.send({\"payload\" : result.mean, \"topic\" : \"mean\"});\nresult.count = values.length;\nnode.send({ \"payload\": result.count, \"topic\": \"count\" });\n\nflow.set(\"result\", result);",
+            "outputs": 1,
+            "timeout": "",
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 330,
+            "y": 400,
+            "wires": [
+                [
+                    "bbbea093b1f44871",
+                    "6d0cb9342eefc3ee",
+                    "9ce15d86e730ebad"
+                ]
+            ]
+        },
+        {
+            "id": "aa99c6f032781cee",
+            "type": "link out",
+            "z": "d56a1dd582e82a09",
+            "name": "link out 11",
+            "mode": "link",
+            "links": [
+                "cf208bdc7d761403"
+            ],
+            "x": 615,
+            "y": 640,
+            "wires": []
+        },
+        {
+            "id": "cf208bdc7d761403",
+            "type": "link in",
+            "z": "d56a1dd582e82a09",
+            "name": "link in 8",
+            "links": [
+                "aa99c6f032781cee"
+            ],
+            "x": 535,
+            "y": 340,
+            "wires": [
+                [
+                    "c605c5a71788ae8b"
+                ]
+            ]
+        },
+        {
+            "id": "23be42fc4a8f4a06",
+            "type": "change",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "reset",
+                    "pt": "msg",
+                    "to": "true",
+                    "tot": "bool"
+                },
+                {
+                    "t": "delete",
+                    "p": "payload",
+                    "pt": "msg"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 535,
+            "y": 640,
+            "wires": [
+                [
+                    "aa99c6f032781cee"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "9882c7aca99adbfb",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "payload",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "nempty"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 1,
+            "x": 615,
+            "y": 160,
+            "wires": [
+                [
+                    "ff3684ed9a1919a7"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "6d0cb9342eefc3ee",
+            "type": "rbe",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "func": "rbe",
+            "gap": "",
+            "start": "",
+            "inout": "out",
+            "septopics": true,
+            "property": "payload",
+            "topi": "topic",
+            "x": 535,
+            "y": 460,
+            "wires": [
+                []
+            ],
+            "l": false
+        },
+        {
+            "id": "1d64855045cbf8df",
+            "type": "function",
+            "z": "d56a1dd582e82a09",
+            "name": "Math",
+            "func": "const round = Number(env.get('ROUND'));\nvar values = flow.get(\"values\");\nvar result = { \"sum\": 0 };\nresult.min = Math.round(values[0] * round) / round;\nresult.max = Math.round(values.at(-1) * round) / round;\n\n\nfor (let val of values) {\n    result.sum += val;\n}\nresult.sum = Math.round(result.sum * round) / round;\nresult.mean = Math.round((result.sum / values.length) * round) / round;\nresult.count = values.length;\n\nflow.set(\"result\", result);\n\n\nswitch (env.get('TYPE')) {\n    case \"sum\":\n        return [{ \"payload\": result.sum }, { \"payload\": result }];\n    case \"mean\":\n        return [{ \"payload\": result.mean }, { \"payload\": result }];\n    case \"min\":\n        return [{ \"payload\": result.min }, { \"payload\": result }];\n    case \"max\":\n        return [{ \"payload\": result.max }, { \"payload\": result }];\n}",
+            "outputs": 2,
+            "timeout": "",
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 210,
+            "y": 880,
+            "wires": [
+                [],
+                []
+            ]
+        },
+        {
+            "id": "9ce15d86e730ebad",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "topic",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "eq",
+                    "v": "TYPE",
+                    "vt": "env"
+                }
+            ],
+            "checkall": "true",
+            "repair": false,
+            "outputs": 1,
+            "x": 455,
+            "y": 400,
+            "wires": [
+                [
+                    "6ece06cec3b82ba1"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "ff3684ed9a1919a7",
+            "type": "link out",
+            "z": "d56a1dd582e82a09",
+            "name": "link out 20",
+            "mode": "link",
+            "links": [
+                "bf12db724db41911"
+            ],
+            "x": 695,
+            "y": 220,
+            "wires": []
+        },
+        {
+            "id": "bf12db724db41911",
+            "type": "link in",
+            "z": "d56a1dd582e82a09",
+            "name": "link in 13",
+            "links": [
+                "ff3684ed9a1919a7"
+            ],
+            "x": 795,
+            "y": 420,
+            "wires": [
+                []
+            ]
+        },
+        {
+            "id": "48310112765a11bb",
+            "type": "function",
+            "z": "d56a1dd582e82a09",
+            "name": "function 6",
+            "func": "const rate = Number(env.get('RATE'));\nvar result = flow.get('result');\nvar type = String(msg.topic).split('_')[1];\n\nif (type == \"value\"){\n    type = String(env.get('TYPE'))\n    node.send([null, { \"payload\": result[type], \"rate\": rate * 1000 }]);\n} else {\n    node.send([{ \"payload\": result[type], \"topic\": type, \"rate\": rate * 1000 }, null]);\n}\n",
+            "outputs": 2,
+            "timeout": 0,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 455,
+            "y": 280,
+            "wires": [
+                [
+                    "88e809b57c5073ce"
+                ],
+                [
+                    "9754883efc50ee74"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "88e809b57c5073ce",
+            "type": "delay",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "pauseType": "rate",
+            "timeout": "5",
+            "timeoutUnits": "seconds",
+            "rate": "1",
+            "nbRateUnits": "1",
+            "rateUnits": "second",
+            "randomFirst": "1",
+            "randomLast": "5",
+            "randomUnits": "seconds",
+            "drop": true,
+            "allowrate": true,
+            "outputs": 1,
+            "x": 535,
+            "y": 220,
+            "wires": [
+                [
+                    "8f5afa6280fee393"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "8f5afa6280fee393",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "payload",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "nnull"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 1,
+            "x": 615,
+            "y": 220,
+            "wires": [
+                [
+                    "ff3684ed9a1919a7"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "01d948dd6334c2d3",
+            "type": "switch",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "property": "topic",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "eq",
+                    "v": "get_dict",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "get_json",
+                    "vt": "str"
+                },
+                {
+                    "t": "else"
+                }
+            ],
+            "checkall": "false",
+            "repair": false,
+            "outputs": 3,
+            "x": 335,
+            "y": 280,
+            "wires": [
+                [
+                    "c9f89bf5a80fa4c7"
+                ],
+                [
+                    "11748d82a454b687"
+                ],
+                [
+                    "48310112765a11bb"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "11748d82a454b687",
+            "type": "change",
+            "z": "d56a1dd582e82a09",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "rate",
+                    "pt": "msg",
+                    "to": "$number($env('RATE')) * 1000\t",
+                    "tot": "jsonata",
+                    "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "payload",
+                    "pt": "msg",
+                    "to": "result",
+                    "tot": "flow",
+                    "dc": true
+                },
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "TOPIC",
+                    "tot": "env",
+                    "dc": true
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 455,
+            "y": 220,
+            "wires": [
+                [
+                    "e853cb9b118ff344"
+                ]
+            ],
+            "l": false
+        },
+        {
+            "id": "c9f7858f7e8e7148",
+            "type": "junction",
+            "z": "d56a1dd582e82a09",
+            "x": 840,
+            "y": 340,
+            "wires": [
+                []
+            ]
+        }
     ]
 }
