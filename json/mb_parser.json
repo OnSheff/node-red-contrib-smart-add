@@ -181,7 +181,7 @@
         }
     ],
     "meta": {
-        "version": "1.0.5",
+        "version": "1.1.1",
         "author": "Anton Shefov <a.shefov@gmail.com>",
         "desc": "Converts the MB response to the required data format",
         "keywords": "node-red",
@@ -802,26 +802,26 @@
             "l": false
         },
         {
-            "id": "f7751be88f9bca4f",
-            "type": "function",
-            "z": "5d29c8da36bd8aa6",
-            "name": "Convert 2 byte to string binary",
-            "func": "const max_min = true;\n\ntry {\n    var a = msg.payload[0].toString(2);\n    a = \"0000000000000000\".substring(a.length) + a;\n\n    var b = msg.payload[1].toString(2);\n    b = \"0000000000000000\".substring(b.length) + b;\n} catch {\n    return [null, { \"payload\": \"Convert 2 byte to string binary.The input list contains only one value.Two are expected.\"}];\n}\n\n\nif (max_min === true) { \n    msg.payload = a + b; \n} else {\n    msg.payload = b + a;\n}\n    \nreturn [msg, null];",
-            "outputs": 2,
-            "timeout": "",
-            "noerr": 0,
-            "initialize": "",
-            "finalize": "",
-            "libs": [],
-            "x": 705,
-            "y": 180,
-            "wires": [
-                [
-                    "e0b4185d7fce4870"
-                ],
-                []
+        "id": "f7751be88f9bca4f",
+        "type": "function",
+        "z": "5d29c8da36bd8aa6",
+        "name": "Convert 2 byte to string binary",
+        "func": "const max_min = Boolean(env.get('MAX_MIN'));\n\ntry {\n    var a = msg.payload[0].toString(2);\n    a = \"0000000000000000\".substring(a.length) + a;\n\n    var b = msg.payload[1].toString(2);\n    b = \"0000000000000000\".substring(b.length) + b;\n} catch {\n    return [null, { \"payload\": \"Convert 2 byte to string binary.The input list contains only one value.Two are expected.\"}];\n}\n\n\nif (max_min === true) { \n    msg.payload = a + b; \n} else {\n    msg.payload = b + a;\n}\n    \nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 705,
+        "y": 180,
+        "wires": [
+            [
+                "e0b4185d7fce4870"
             ],
-            "l": false
-        }
+            []
+        ],
+        "l": false
+    }
     ]
 }
